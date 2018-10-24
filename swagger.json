@@ -1,0 +1,2866 @@
+{
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "Official REST API for Bitrise.io",
+        "title": "Bitrise API",
+        "contact": {
+            "name": "Bitrise Support",
+            "url": "https://www.bitrise.io/contact",
+            "email": "letsconnect@bitrise.io"
+        },
+        "license": {
+            "name": "MIT"
+        },
+        "version": "0.1"
+    },
+    "host": "api.bitrise.io",
+    "basePath": "/v0.1",
+    "paths": {
+        "/apps": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the available apps",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "application"
+                ],
+                "summary": "Get list of the apps",
+                "operationId": "app-list",
+                "parameters": [
+                    {
+                        "enum": [
+                            "last_build_at",
+                            "created_at"
+                        ],
+                        "type": "string",
+                        "description": "Order of applications",
+                        "name": "sort_by",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug of the first app in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Show details of a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "application"
+                ],
+                "summary": "Get a specific app",
+                "operationId": "app-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppShowResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/android-keystore-files": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add a new Android keystore file to a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "android-keystore-file"
+                ],
+                "summary": "Create an Android keystore file",
+                "operationId": "android-keystore-file-create",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Android keystore file parameters",
+                        "name": "android-keystore-file",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProjectFileStorageUploadParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/bitrise.yml": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Show details of a specific app",
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "application"
+                ],
+                "summary": "Get bitrise.yml of a specific app",
+                "operationId": "app-config-datastore-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{the bitrise.yml in yml format}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/build-certificates": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the build certificates for a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-certificate"
+                ],
+                "summary": "Get list of the build certificates",
+                "operationId": "build-certificate-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug of the first build certificate in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildCertificateListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add a new build certificate to a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-certificate"
+                ],
+                "summary": "Create a build certificate",
+                "operationId": "build-certificate-create",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Build certificate parameters",
+                        "name": "build-certificate",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildCertificateUploadParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildCertificateResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/build-certificates/{build-certificate-slug}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Show details of a specific build certificate of a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-certificate"
+                ],
+                "summary": "Get a specific build certificate",
+                "operationId": "build-certificate-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build certificate slug",
+                        "name": "build-certificate-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildCertificateResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Remove a specific build certificate from a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-certificate"
+                ],
+                "summary": "Delete a build certificate",
+                "operationId": "build-certificate-delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build certificate slug",
+                        "name": "build-certificate-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildCertificateResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update a specific build certificate of a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-certificate"
+                ],
+                "summary": "Update a build certificate",
+                "operationId": "build-certificate-update",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build certificate slug",
+                        "name": "build-certificate-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Build certificate parameters",
+                        "name": "build-certificate",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildCertificateUpdateParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildCertificateResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/build-certificates/{build-certificate-slug}/uploaded": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Confirm the upload of a specific build certificate of a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-certificate"
+                ],
+                "summary": "Confirm a build certificate",
+                "operationId": "build-certificate-confirm",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build certificate slug",
+                        "name": "build-certificate-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildCertificateResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/builds/{build-slug}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the available build artifacts for a specific build in a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-artifact"
+                ],
+                "summary": "Get list of the build artifacts",
+                "operationId": "artifact-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build slug",
+                        "name": "build-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug of the first build artifact in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ArtifactListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Show details of a specific build artifact",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-artifact"
+                ],
+                "summary": "Get a specific build artifact",
+                "operationId": "artifact-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build slug",
+                        "name": "build-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Artifact slug",
+                        "name": "artifact-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ArtifactShowResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Remove a specific build artifact of a specific build in a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-artifact"
+                ],
+                "summary": "Delete a build artifact",
+                "operationId": "artifact-delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build slug",
+                        "name": "build-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Artifact slug",
+                        "name": "artifact-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ArtifactDeleteResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update a specific build artifact of a specific build in a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-artifact"
+                ],
+                "summary": "Update a build artifact",
+                "operationId": "artifact-update",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build slug",
+                        "name": "build-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Artifact slug",
+                        "name": "artifact-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Artifact parameters",
+                        "name": "artifact-params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ArtifactUpdateParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ArtifactShowResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/generic-project-files": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the generic project files for a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "generic-project-file"
+                ],
+                "summary": "Get list of the generic project files",
+                "operationId": "generic-project-file-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug of the first generic project file in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProjectFileStorageListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add a new generic project file to a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "generic-project-file"
+                ],
+                "summary": "Create a generic project file",
+                "operationId": "generic-project-files-create",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Generic project file parameters",
+                        "name": "generic-project-file",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProjectFileStorageUploadParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/generic-project-files/{generic-project-file-slug}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Show details of a specific generic project file of a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "generic-project-file"
+                ],
+                "summary": "Get a specific generic project file",
+                "operationId": "generic-project-file-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Generic project file slug",
+                        "name": "generic-project-file-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Remove a specific generic project file from a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "generic-project-file"
+                ],
+                "summary": "Delete a generic project file",
+                "operationId": "generic-project-file-delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Generic project file slug",
+                        "name": "generic-project-file-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update a specific generic project file of a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "generic-project-file"
+                ],
+                "summary": "Update a generic project file",
+                "operationId": "generic-project-file-update",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Generic project file slug",
+                        "name": "generic-project-file-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Generic project file parameters",
+                        "name": "generic-project-file",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProjectFileStorageDocumentUpdateParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/generic-project-files/{generic-project-file-slug}/uploaded": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Confirm the upload of a specific generic project file of a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "generic-project-file"
+                ],
+                "summary": "Confirm a generic project file",
+                "operationId": "generic-project-file-confirm",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Generic project file slug",
+                        "name": "generic-project-file-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/provisioning-profiles": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the provisioning profiles for a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "provisioning-profile"
+                ],
+                "summary": "Get list of the provisioning profiles",
+                "operationId": "provisioning-profile-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug of the first provisioning profile in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProvisionProfileListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add a new provisioning profile to a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "provisioning-profile"
+                ],
+                "summary": "Create a provisioning profile",
+                "operationId": "provisioning-profile-create",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Provisioning profile parameters",
+                        "name": "provisioning-profile",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProvisionProfileUploadParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProvisionProfileResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Show details of a specific provisioning profile of a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "provisioning-profile"
+                ],
+                "summary": "Get a specific provisioning profile",
+                "operationId": "provisioning-profile-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Provisioning profile slug",
+                        "name": "provisioning-profile-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProvisionProfileResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Remove a specific provisioning profile from a specific app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "provisioning-profile"
+                ],
+                "summary": "Delete a provisioning profile",
+                "operationId": "provisioning-profile-delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Provisioning profile slug",
+                        "name": "provisioning-profile-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProvisionProfileResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update a specific provisioning profile of a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "provisioning-profile"
+                ],
+                "summary": "Update a provisioning profile",
+                "operationId": "provisioning-profile-update",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Provisioning profile slug",
+                        "name": "provisioning-profile-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Provisioning profile parameters",
+                        "name": "provisioning-profile",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProvProfileDocumentUpdateParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProvisionProfileResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}/uploaded": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Confirm the upload of a specific provisioning profile of a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "provisioning-profile"
+                ],
+                "summary": "Confirm a provisioning profile",
+                "operationId": "provisioning-profile-confirm",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Provisioning profile slug",
+                        "name": "provisioning-profile-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ProvisionProfileResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/me": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Shows the authenticated users profile data",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get your profile data",
+                "operationId": "user-profile",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.UserProfileRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/me/activities": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the Bitrise activity events",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "activity"
+                ],
+                "summary": "Get list of Bitrise activity events",
+                "operationId": "activity-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Slug of the first activity event in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.ActivityEventListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/organizations/{org-slug}/apps": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the available apps for a specific organization",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "application"
+                ],
+                "summary": "Get list of the apps for an organization",
+                "operationId": "app-list-by-organization",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organization slug",
+                        "name": "org-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "enum": [
+                            "last_build_at",
+                            "created_at"
+                        ],
+                        "type": "string",
+                        "description": "Order of applications",
+                        "name": "sort_by",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug of the first app in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{user-slug}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Show information about a specific user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get a specific user",
+                "operationId": "user-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User slug",
+                        "name": "user-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.UserProfileRespModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{user-slug}/apps": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the available apps for a specific user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "application"
+                ],
+                "summary": "Get list of the apps for a user",
+                "operationId": "app-list-by-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User slug",
+                        "name": "user-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "enum": [
+                            "last_build_at",
+                            "created_at"
+                        ],
+                        "type": "string",
+                        "description": "Order of applications",
+                        "name": "sort_by",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug of the first app in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "service.StandardErrorRespModel": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.ActivityEventListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.ActivityEventResponseItemModel"
+                    }
+                },
+                "paging": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.PagingResponseModel"
+                }
+            }
+        },
+        "v0.ActivityEventResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "event_icon": {
+                    "type": "string"
+                },
+                "event_stype": {
+                    "type": "string"
+                },
+                "repository_avatar_icon_url": {
+                    "type": "string"
+                },
+                "repository_title": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "target_path_string": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.AppListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.AppResponseItemModel"
+                    }
+                },
+                "paging": {
+                    "description": "pagination",
+                    "type": "object",
+                    "$ref": "#/definitions/v0.PagingResponseModel"
+                }
+            }
+        },
+        "v0.AppResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "avatar_url": {
+                    "type": "string"
+                },
+                "is_disabled": {
+                    "type": "boolean"
+                },
+                "is_public": {
+                    "type": "boolean"
+                },
+                "owner": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.OwnerAccountResponseModel"
+                },
+                "project_type": {
+                    "type": "string"
+                },
+                "provider": {
+                    "type": "string"
+                },
+                "repo_owner": {
+                    "type": "string"
+                },
+                "repo_slug": {
+                    "type": "string"
+                },
+                "repo_url": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.AppShowResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.AppResponseItemModel"
+                }
+            }
+        },
+        "v0.ArtifactDeleteResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.ArtifactResponseItemModel"
+                }
+            }
+        },
+        "v0.ArtifactListElementResponseModel": {
+            "type": "object",
+            "properties": {
+                "artifact_type": {
+                    "type": "string"
+                },
+                "file_size_bytes": {
+                    "type": "string"
+                },
+                "is_public_page_enabled": {
+                    "type": "boolean"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.ArtifactListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.ArtifactListElementResponseModel"
+                    }
+                },
+                "paging": {
+                    "description": "pagination",
+                    "type": "object",
+                    "$ref": "#/definitions/v0.PagingResponseModel"
+                }
+            }
+        },
+        "v0.ArtifactResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "artifact_type": {
+                    "type": "string"
+                },
+                "expiring_download_url": {
+                    "type": "string"
+                },
+                "file_size_bytes": {
+                    "type": "string"
+                },
+                "is_public_page_enabled": {
+                    "type": "boolean"
+                },
+                "public_install_page_url": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.ArtifactShowResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.ArtifactResponseItemModel"
+                }
+            }
+        },
+        "v0.ArtifactUpdateParams": {
+            "type": "object",
+            "properties": {
+                "is_public_page_enabled": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "v0.BuildCertificateListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.BuildCertificateResponseItemModel"
+                    }
+                },
+                "paging": {
+                    "description": "pagination",
+                    "type": "object",
+                    "$ref": "#/definitions/v0.PagingResponseModel"
+                }
+            }
+        },
+        "v0.BuildCertificateResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "certificate_password": {
+                    "type": "string"
+                },
+                "download_url": {
+                    "type": "string"
+                },
+                "is_expose": {
+                    "type": "boolean"
+                },
+                "is_protected": {
+                    "type": "boolean"
+                },
+                "processed": {
+                    "type": "boolean"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "upload_file_name": {
+                    "type": "string"
+                },
+                "upload_file_size": {
+                    "type": "integer"
+                },
+                "upload_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.BuildCertificateResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.BuildCertificateResponseItemModel"
+                }
+            }
+        },
+        "v0.BuildCertificateUpdateParams": {
+            "type": "object",
+            "properties": {
+                "certificate_password": {
+                    "type": "string"
+                },
+                "is_expose": {
+                    "type": "boolean"
+                },
+                "is_protected": {
+                    "type": "boolean"
+                },
+                "processed": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "v0.BuildCertificateUploadParams": {
+            "type": "object",
+            "properties": {
+                "upload_file_name": {
+                    "type": "string"
+                },
+                "upload_file_size": {
+                    "type": "integer"
+                }
+            }
+        },
+        "v0.OwnerAccountResponseModel": {
+            "type": "object",
+            "properties": {
+                "account_type": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.PagingResponseModel": {
+            "type": "object",
+            "properties": {
+                "next": {
+                    "description": "Next is the \"anchor\" for pagination. This value should be passed to the same endpoint\nto get the next page. Empty/not included if there's no \"next\" page.\nStop paging when there's no \"Next\" item in the response!",
+                    "type": "string"
+                },
+                "page_item_limit": {
+                    "description": "PageItemLimit - per-page item count. A given page might include\nless items if there's not enough items. This value is the \"max item count per page\".",
+                    "type": "integer"
+                },
+                "total_item_count": {
+                    "description": "TotalItemCount - total item count, through \"all pages\"",
+                    "type": "integer"
+                }
+            }
+        },
+        "v0.ProjectFileStorageDocumentUpdateParams": {
+            "type": "object",
+            "properties": {
+                "exposed_meta_datastore": {
+                    "type": "string"
+                },
+                "is_expose": {
+                    "type": "boolean"
+                },
+                "is_protected": {
+                    "type": "boolean"
+                },
+                "processed": {
+                    "type": "boolean"
+                },
+                "user_env_key": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.ProjectFileStorageListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.ProjectFileStorageResponseItemModel"
+                    }
+                },
+                "paging": {
+                    "description": "pagination",
+                    "type": "object",
+                    "$ref": "#/definitions/v0.PagingResponseModel"
+                }
+            }
+        },
+        "v0.ProjectFileStorageResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "download_url": {
+                    "type": "string"
+                },
+                "exposed_meta_datastore": {
+                    "type": "string"
+                },
+                "is_expose": {
+                    "type": "boolean"
+                },
+                "is_protected": {
+                    "type": "boolean"
+                },
+                "processed": {
+                    "type": "boolean"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "upload_file_name": {
+                    "type": "string"
+                },
+                "upload_file_size": {
+                    "type": "integer"
+                },
+                "upload_url": {
+                    "type": "string"
+                },
+                "user_env_key": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.ProjectFileStorageResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.ProjectFileStorageResponseItemModel"
+                }
+            }
+        },
+        "v0.ProjectFileStorageUploadParams": {
+            "type": "object",
+            "properties": {
+                "upload_file_name": {
+                    "type": "string"
+                },
+                "upload_file_size": {
+                    "type": "integer"
+                },
+                "user_env_key": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.ProvProfileDocumentUpdateParams": {
+            "type": "object",
+            "properties": {
+                "is_expose": {
+                    "type": "boolean"
+                },
+                "is_protected": {
+                    "type": "boolean"
+                },
+                "processed": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "v0.ProvisionProfileListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.ProvisionProfileResponseItemModel"
+                    }
+                },
+                "paging": {
+                    "description": "pagination",
+                    "type": "object",
+                    "$ref": "#/definitions/v0.PagingResponseModel"
+                }
+            }
+        },
+        "v0.ProvisionProfileResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "download_url": {
+                    "type": "string"
+                },
+                "is_expose": {
+                    "type": "boolean"
+                },
+                "is_protected": {
+                    "type": "boolean"
+                },
+                "processed": {
+                    "type": "boolean"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "upload_file_name": {
+                    "type": "string"
+                },
+                "upload_file_size": {
+                    "type": "integer"
+                },
+                "upload_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.ProvisionProfileResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.ProvisionProfileResponseItemModel"
+                }
+            }
+        },
+        "v0.ProvisionProfileUploadParams": {
+            "type": "object",
+            "properties": {
+                "upload_file_name": {
+                    "type": "string"
+                },
+                "upload_file_size": {
+                    "type": "integer"
+                }
+            }
+        },
+        "v0.UserProfileDataModel": {
+            "type": "object",
+            "properties": {
+                "avatar_url": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "unconfirmed_email": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.UserProfileRespModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.UserProfileDataModel"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

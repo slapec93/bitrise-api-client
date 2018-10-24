@@ -1,0 +1,40 @@
+format_version: "5"
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: other
+app:
+  envs:
+  - GO_PROJECT_PATH: github.com/slapec93/bitrise-api-client
+trigger_map:
+- push_branch: '*'
+  workflow: primary
+- pull_request_source_branch: '*'
+  workflow: primary
+workflows:
+  primary:
+    steps:
+    - activate-ssh-key@4.0.3:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4.0.11: {}
+    - script@1.1.5:
+        title: Do anything with Script step
+    - deploy-to-bitrise-io@1.3.15: {}
+  fetch-swagger:
+    steps:
+    - script@1.1.5:
+        title: Fetch swagger.json
+        inputs:
+        - content: |
+            set -ex
+            go run main.go
+  generate-client:
+    steps:
+    - script@1.1.5:
+        title: Generate client
+        inputs:
+        - content: |
+            set -ex
+            go get -u github.com/go-swagger/go-swagger/cmd/swagger
+            go get -u github.com/go-openapi/runtime
+            go get -u golang.org/x/net/context/ctxhttp
+            swagger generate client
+

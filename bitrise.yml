@@ -4,11 +4,6 @@ project_type: other
 app:
   envs:
   - GO_PROJECT_PATH: github.com/slapec93/bitrise-api-client
-trigger_map:
-- push_branch: '*'
-  workflow: primary
-- pull_request_source_branch: '*'
-  workflow: primary
 workflows:
   fetch-swagger:
     steps:

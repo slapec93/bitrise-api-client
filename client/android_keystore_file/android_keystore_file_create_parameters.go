@@ -9,12 +9,15 @@ import (
 	"net/http"
 	"time"
 
+	"golang.org/x/net/context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+
 	strfmt "github.com/go-openapi/strfmt"
+
 	models "github.com/slapec93/bitrise-api-client/models"
-	"golang.org/x/net/context"
 )
 
 // NewAndroidKeystoreFileCreateParams creates a new AndroidKeystoreFileCreateParams object

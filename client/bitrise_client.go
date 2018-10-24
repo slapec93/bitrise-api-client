@@ -17,6 +17,20 @@ import (
 	"github.com/slapec93/bitrise-api-client/client/generic_project_file"
 	"github.com/slapec93/bitrise-api-client/client/provisioning_profile"
 	"github.com/slapec93/bitrise-api-client/client/user"
+
+	"github.com/slapec93/bitrise-api-client/client/application"
+
+	"github.com/slapec93/bitrise-api-client/client/build_artifact"
+
+	"github.com/slapec93/bitrise-api-client/client/build_artifact"
+
+	"github.com/slapec93/bitrise-api-client/client/build_certificate"
+
+	"github.com/slapec93/bitrise-api-client/client/generic_project_file"
+
+	"github.com/slapec93/bitrise-api-client/client/provisioning_profile"
+
+	"github.com/slapec93/bitrise-api-client/client/user"
 )
 
 // Default bitrise HTTP client.

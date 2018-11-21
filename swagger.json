@@ -19,6 +19,125 @@
     "host": "api.bitrise.io",
     "basePath": "/v0.1",
     "paths": {
+        "/addons": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the available Bitrise addons",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addons"
+                ],
+                "summary": "Get list of available Bitrise addons",
+                "operationId": "addons-list",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AddonsListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/addons/{addon-id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Show details of a specific Bitrise addon",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addons"
+                ],
+                "summary": "Get a specific Bitrise addon",
+                "operationId": "addons-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Addon ID",
+                        "name": "addon-id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AddonsShowResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/apps": {
             "get": {
                 "security": [
@@ -2327,6 +2446,116 @@
         }
     },
     "definitions": {
+        "addons.Addon": {
+            "type": "object",
+            "properties": {
+                "banner_image": {
+                    "type": "string"
+                },
+                "card_header_colors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "categories": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "developer_links": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/addons.DeveloperLink"
+                    }
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "plans": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/addons.Plan"
+                    }
+                },
+                "platforms": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "preview_images": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "setup_guide": {
+                    "type": "string"
+                },
+                "subtitle": {
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "addons.DeveloperLink": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "addons.Feature": {
+            "type": "object",
+            "properties": {
+                "available": {
+                    "type": "boolean"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "string"
+                }
+            }
+        },
+        "addons.Plan": {
+            "type": "object",
+            "properties": {
+                "features": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/addons.Feature"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer"
+                }
+            }
+        },
         "service.StandardErrorRespModel": {
             "type": "object",
             "properties": {
@@ -2379,6 +2608,26 @@
                 },
                 "title": {
                     "type": "string"
+                }
+            }
+        },
+        "v0.AddonsListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/addons.Addon"
+                    }
+                }
+            }
+        },
+        "v0.AddonsShowResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/addons.Addon"
                 }
             }
         },

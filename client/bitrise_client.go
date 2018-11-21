@@ -10,6 +10,7 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	strfmt "github.com/go-openapi/strfmt"
 	"github.com/slapec93/bitrise-api-client/client/activity"
+	"github.com/slapec93/bitrise-api-client/client/addons"
 	"github.com/slapec93/bitrise-api-client/client/android_keystore_file"
 	"github.com/slapec93/bitrise-api-client/client/application"
 	"github.com/slapec93/bitrise-api-client/client/build_artifact"
@@ -63,6 +64,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Bitrise {
 	cli.Transport = transport
 
 	cli.Activity = activity.New(transport, formats)
+
+	cli.Addons = addons.New(transport, formats)
 
 	cli.AndroidKeystoreFile = android_keystore_file.New(transport, formats)
 
@@ -124,6 +127,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type Bitrise struct {
 	Activity *activity.Client
 
+	Addons *addons.Client
+
 	AndroidKeystoreFile *android_keystore_file.Client
 
 	Application *application.Client
@@ -146,6 +151,8 @@ func (c *Bitrise) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 
 	c.Activity.SetTransport(transport)
+
+	c.Addons.SetTransport(transport)
 
 	c.AndroidKeystoreFile.SetTransport(transport)
 

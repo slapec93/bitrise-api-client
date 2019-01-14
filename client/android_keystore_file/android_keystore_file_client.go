@@ -27,7 +27,7 @@ type Client struct {
 /*
 AndroidKeystoreFileCreate creates an android keystore file
 
-Add a new Android keystore file to a specific app
+Add a new Android keystore file to an app
 */
 func (a *Client) AndroidKeystoreFileCreate(params *AndroidKeystoreFileCreateParams, authInfo runtime.ClientAuthInfoWriter) (*AndroidKeystoreFileCreateCreated, error) {
 	// TODO: Validate the params before sending

@@ -145,7 +145,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all the available apps",
+                "description": "List all the apps available for the authenticated account",
                 "produces": [
                     "application/json"
                 ],
@@ -161,7 +161,7 @@
                             "created_at"
                         ],
                         "type": "string",
-                        "description": "Order of applications",
+                        "description": "Order of the applications",
                         "name": "sort_by",
                         "in": "query"
                     },
@@ -288,7 +288,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Add a new Android keystore file to a specific app",
+                "description": "Add a new Android keystore file to an app",
                 "consumes": [
                     "application/json"
                 ],
@@ -315,7 +315,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/v0.ProjectFileStorageUploadParams"
+                            "$ref": "#/definitions/v0.AndroidKeystoreFileUploadParams"
                         }
                     }
                 ],
@@ -388,6 +388,70 @@
                         "description": "{the bitrise.yml in yml format}",
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/branches": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List the existing branches of the repository of a specified Bitrise app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "application"
+                ],
+                "summary": "List the branches of an app's repository",
+                "operationId": "branch-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BranchListResponseModel"
                         }
                     },
                     "400": {
@@ -868,7 +932,373 @@
                 }
             }
         },
+        "/apps/{app-slug}/build-workflows": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List the workflows that are currently available for a specified Bitrise app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "builds"
+                ],
+                "summary": "List the workflows of an app",
+                "operationId": "build-workflow-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildLogInfoResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/builds": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the builds of a specified Bitrise app. Set parameters to filter builds.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "builds"
+                ],
+                "summary": "List all builds of an app",
+                "operationId": "build-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "enum": [
+                            "running_first",
+                            "created_at"
+                        ],
+                        "type": "string",
+                        "description": "Order of builds",
+                        "name": "sort_by",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The branch which was built",
+                        "name": "branch",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The name of the workflow used for the build",
+                        "name": "workflow",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The commit message of the build",
+                        "name": "commit_message",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The event that triggered the build (push, pull-request, tag)",
+                        "name": "trigger_event_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "The id of the pull request that triggered the build",
+                        "name": "pull_request_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "The build number",
+                        "name": "build_number",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "List builds run after a given date (Unix Timestamp)",
+                        "name": "after",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "List builds run before a given date (Unix Timestamp)",
+                        "name": "before",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "The status of the build: not finished (0), successful (1), failed (2), aborted with failure (3), aborted with success (4)",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug of the first build in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/apps/{app-slug}/builds/{build-slug}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get the specified build of a specified Bitrise app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "builds"
+                ],
+                "summary": "Get a build of a given app",
+                "operationId": "build-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build slug",
+                        "name": "build-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildShowResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/builds/{build-slug}/abort": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Abort a specific build",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "builds"
+                ],
+                "summary": "Abort a specific build",
+                "operationId": "build-abort",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build slug",
+                        "name": "build-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Build abort parameters",
+                        "name": "build-abort-params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildAbortParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildAbortResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/builds/{build-slug}/artifacts": {
             "get": {
                 "security": [
                     {
@@ -907,7 +1337,7 @@
                     },
                     {
                         "type": "integer",
-                        "description": "Max number of elements per page (default: 50)",
+                        "description": "Maximum number of elements per page (default: 50)",
                         "name": "limit",
                         "in": "query"
                     }
@@ -1161,6 +1591,147 @@
                         "schema": {
                             "type": "object",
                             "$ref": "#/definitions/v0.ArtifactShowResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/builds/{build-slug}/bitrise.yml": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get the bitrise.yml file of one of the builds of a specified app",
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "builds"
+                ],
+                "summary": "Get the bitrise.yml of a build",
+                "operationId": "build-bitrise-yml-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build slug",
+                        "name": "build-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{the bitrise.yml in yml format}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/builds/{build-slug}/log": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get the build log of a specified build of a Bitrise app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "builds"
+                ],
+                "summary": "Get the build log of a build",
+                "operationId": "build-log",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build slug",
+                        "name": "build-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildLogInfoResponseModel"
                         }
                     },
                     "400": {
@@ -1641,6 +2212,515 @@
                 }
             }
         },
+        "/apps/{app-slug}/outgoing-webhooks": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the outgoing webhooks registered for a specified Bitrise app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "outgoing-webhook"
+                ],
+                "summary": "List the outgoing webhooks of an app",
+                "operationId": "outgoing-webhook-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug of the first webhook in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppWebhookListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Create an outgoing webhook for a specified Bitrise app: this can be used to send build events to a specified URL with custom headers",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "outgoing-webhook"
+                ],
+                "summary": "Create an outgoing webhook for an app",
+                "operationId": "outgoing-webhook-create",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "App webhook creation params",
+                        "name": "app-webhook-create-params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppWebhookCreateParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppWebhookResponseItemModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update an existing outgoing webhook (URL, events, secrets and headers) for a specified Bitrise app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "outgoing-webhook"
+                ],
+                "summary": "Update an outgoing webhook of an app",
+                "operationId": "outgoing-webhook-update",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "App webhook slug",
+                        "name": "app-webhook-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "App webhook update params",
+                        "name": "app-webhook-update-params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppWebhookUpdateParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppWebhookResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Delete an existing outgoing webhook for a specified Bitrise app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "outgoing-webhook"
+                ],
+                "summary": "Delete an outgoing webhook of an app",
+                "operationId": "outgoing-webhook-delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "App webhook slug",
+                        "name": "app-webhook-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppWebhookResponseItemModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the delivery items of an outgoing webhook of a Bitrise application",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "webhook-delivery-item"
+                ],
+                "summary": "List the webhook delivery items of an app",
+                "operationId": "webhook-delivery-item-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "App webhook slug",
+                        "name": "app-webhook-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug of the first delivery item in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.WebhookDeliveryItemShowResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items/{webhook-delivery-item-slug}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get the specified delivery item of an outgoing webhook of a Bitrise application",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "webhook-delivery-item"
+                ],
+                "summary": "Get a specific delivery item of a webhook",
+                "operationId": "webhook-delivery-item-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "App webhook slug",
+                        "name": "app-webhook-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Webhook delivery item slug",
+                        "name": "webhook-delivery-item-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.WebhookDeliveryItemResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items/{webhook-delivery-item-slug}/redeliver": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Re-deliver the delivery item of a specified webhook of a Bitrise application",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "webhook-delivery-item"
+                ],
+                "summary": "Re-deliver the webhook delivery items of an app",
+                "operationId": "webhook-delivery-item-redeliver",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "App webhook slug",
+                        "name": "app-webhook-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Webhook delivery item slug",
+                        "name": "webhook-delivery-item-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/apps/{app-slug}/provisioning-profiles": {
             "get": {
                 "security": [
@@ -2088,6 +3168,93 @@
                 }
             }
         },
+        "/builds": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the Bitrise builds of the authenticated account. Set parameters to filter builds.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "builds"
+                ],
+                "summary": "List all builds",
+                "operationId": "build-list-all",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "The slug of the owner of the app or apps",
+                        "name": "owner_slug",
+                        "in": "query"
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Indicates whether the build has started yet (true: the build hasn't started)",
+                        "name": "is_on_hold",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "The status of the build: not finished (0), successful (1), failed (2), aborted with failure (3), aborted with success (4)",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug of the first build in the response",
+                        "name": "next",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Max number of elements per page (default: 50)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildListAllResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/me": {
             "get": {
                 "security": [
@@ -2172,6 +3339,180 @@
                         "schema": {
                             "type": "object",
                             "$ref": "#/definitions/v0.ActivityEventListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/me/plan": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get the subscription of the user: the current plan, any pending plans, and the duration of a trial period if applicable",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "The subscription plan of the user",
+                "operationId": "user-plan",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.UserPlanRespModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/organizations": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all Bitrise organizations that the user is part of",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "organizations"
+                ],
+                "summary": "List the organizations that the user is part of",
+                "operationId": "org-list",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.OrganizationListRespModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/organizations/{org-slug}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get a specified Bitrise organization that the user is part of.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "organizations"
+                ],
+                "summary": "Get a specified organization.",
+                "operationId": "org-show",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "The organization slug",
+                        "name": "org-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.OrganizationRespModel"
                         }
                     },
                     "400": {
@@ -2631,6 +3972,26 @@
                 }
             }
         },
+        "v0.AndroidKeystoreFileUploadParams": {
+            "type": "object",
+            "properties": {
+                "alias": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "private_key_password": {
+                    "type": "string"
+                },
+                "upload_file_name": {
+                    "type": "string"
+                },
+                "upload_file_size": {
+                    "type": "integer"
+                }
+            }
+        },
         "v0.AppListResponseModel": {
             "type": "object",
             "properties": {
@@ -2695,6 +4056,85 @@
                 "data": {
                     "type": "object",
                     "$ref": "#/definitions/v0.AppResponseItemModel"
+                }
+            }
+        },
+        "v0.AppWebhookCreateParams": {
+            "type": "object",
+            "properties": {
+                "events": {
+                    "type": "string"
+                },
+                "headers": {
+                    "type": "string"
+                },
+                "secret": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.AppWebhookListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.AppWebhookResponseItemModel"
+                    }
+                },
+                "paging": {
+                    "description": "pagination",
+                    "type": "object",
+                    "$ref": "#/definitions/v0.PagingResponseModel"
+                }
+            }
+        },
+        "v0.AppWebhookResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "events": {
+                    "type": "string"
+                },
+                "headers": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.AppWebhookResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.AppWebhookResponseItemModel"
+                }
+            }
+        },
+        "v0.AppWebhookUpdateParams": {
+            "type": "object",
+            "properties": {
+                "events": {
+                    "type": "string"
+                },
+                "headers": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
                 }
             }
         },
@@ -2786,6 +4226,39 @@
                 }
             }
         },
+        "v0.BranchListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "v0.BuildAbortParams": {
+            "type": "object",
+            "properties": {
+                "abort_reason": {
+                    "type": "string"
+                },
+                "abort_with_success": {
+                    "type": "boolean"
+                },
+                "skip_notifications": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "v0.BuildAbortResponseModel": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
         "v0.BuildCertificateListResponseModel": {
             "type": "object",
             "properties": {
@@ -2871,6 +4344,290 @@
                 }
             }
         },
+        "v0.BuildListAllResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "abort_reason": {
+                    "type": "string"
+                },
+                "branch": {
+                    "type": "string"
+                },
+                "build_number": {
+                    "type": "integer"
+                },
+                "commit_hash": {
+                    "type": "string"
+                },
+                "commit_message": {
+                    "type": "string"
+                },
+                "commit_view_url": {
+                    "type": "string"
+                },
+                "environment_prepare_finished_at": {
+                    "type": "string"
+                },
+                "finished_at": {
+                    "type": "string"
+                },
+                "is_on_hold": {
+                    "type": "boolean"
+                },
+                "original_build_params": {
+                    "type": "string"
+                },
+                "pull_request_id": {
+                    "type": "string"
+                },
+                "pull_request_target_branch": {
+                    "type": "string"
+                },
+                "pull_request_view_url": {
+                    "type": "string"
+                },
+                "repository": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.AppResponseItemModel"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "stack_config_type": {
+                    "type": "string"
+                },
+                "stack_identifier": {
+                    "type": "string"
+                },
+                "started_on_worker_at": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "status_text": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "string"
+                },
+                "triggered_at": {
+                    "type": "string"
+                },
+                "triggered_by": {
+                    "type": "string"
+                },
+                "triggered_workflow": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.BuildListAllResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.BuildListAllResponseItemModel"
+                    }
+                },
+                "paging": {
+                    "description": "pagination",
+                    "type": "object",
+                    "$ref": "#/definitions/v0.PagingResponseModel"
+                }
+            }
+        },
+        "v0.BuildListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.BuildResponseItemModel"
+                    }
+                },
+                "paging": {
+                    "description": "pagination",
+                    "type": "object",
+                    "$ref": "#/definitions/v0.PagingResponseModel"
+                }
+            }
+        },
+        "v0.BuildLogChunkItemResponseModel": {
+            "type": "object",
+            "properties": {
+                "chunk": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "integer"
+                }
+            }
+        },
+        "v0.BuildLogInfoResponseModel": {
+            "type": "object",
+            "properties": {
+                "expiring_raw_log_url": {
+                    "type": "string"
+                },
+                "generated_log_chunks_num": {
+                    "type": "string"
+                },
+                "is_archived": {
+                    "type": "boolean"
+                },
+                "log_chunks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.BuildLogChunkItemResponseModel"
+                    }
+                },
+                "timestamp": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.BuildResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "abort_reason": {
+                    "type": "string"
+                },
+                "branch": {
+                    "type": "string"
+                },
+                "build_number": {
+                    "type": "integer"
+                },
+                "commit_hash": {
+                    "type": "string"
+                },
+                "commit_message": {
+                    "type": "string"
+                },
+                "commit_view_url": {
+                    "type": "string"
+                },
+                "environment_prepare_finished_at": {
+                    "type": "string"
+                },
+                "finished_at": {
+                    "type": "string"
+                },
+                "is_on_hold": {
+                    "type": "boolean"
+                },
+                "original_build_params": {
+                    "type": "string"
+                },
+                "pull_request_id": {
+                    "type": "string"
+                },
+                "pull_request_target_branch": {
+                    "type": "string"
+                },
+                "pull_request_view_url": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "stack_config_type": {
+                    "type": "string"
+                },
+                "stack_identifier": {
+                    "type": "string"
+                },
+                "started_on_worker_at": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "status_text": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "string"
+                },
+                "triggered_at": {
+                    "type": "string"
+                },
+                "triggered_by": {
+                    "type": "string"
+                },
+                "triggered_workflow": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.BuildShowResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.BuildResponseItemModel"
+                }
+            }
+        },
+        "v0.OrganizationDataModel": {
+            "type": "object",
+            "properties": {
+                "avatar_icon_url": {
+                    "type": "string"
+                },
+                "concurrency_count": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "owners": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.OrganizationOwner"
+                    }
+                },
+                "slug": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.OrganizationListRespModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.OrganizationDataModel"
+                    }
+                }
+            }
+        },
+        "v0.OrganizationOwner": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.OrganizationRespModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.OrganizationDataModel"
+                }
+            }
+        },
         "v0.OwnerAccountResponseModel": {
             "type": "object",
             "properties": {
@@ -2898,6 +4655,26 @@
                 },
                 "total_item_count": {
                     "description": "TotalItemCount - total item count, through \"all pages\"",
+                    "type": "integer"
+                }
+            }
+        },
+        "v0.PlanDataModel": {
+            "type": "object",
+            "properties": {
+                "container_count": {
+                    "type": "string"
+                },
+                "expires_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
                     "type": "integer"
                 }
             }
@@ -3075,6 +4852,31 @@
                 }
             }
         },
+        "v0.UserPlanDataModel": {
+            "type": "object",
+            "properties": {
+                "current_plan": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.PlanDataModel"
+                },
+                "pending_plan": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.PlanDataModel"
+                },
+                "trial_expires_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.UserPlanRespModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.UserPlanDataModel"
+                }
+            }
+        },
         "v0.UserProfileDataModel": {
             "type": "object",
             "properties": {
@@ -3101,6 +4903,50 @@
                 "data": {
                     "type": "object",
                     "$ref": "#/definitions/v0.UserProfileDataModel"
+                }
+            }
+        },
+        "v0.WebhookDeliveryItemResponseModel": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "request_headers": {
+                    "type": "string"
+                },
+                "request_payload": {
+                    "type": "string"
+                },
+                "request_url": {
+                    "type": "string"
+                },
+                "response_body": {
+                    "type": "string"
+                },
+                "response_headers": {
+                    "type": "string"
+                },
+                "response_http_status": {
+                    "type": "string"
+                },
+                "response_seconds": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.WebhookDeliveryItemShowResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.WebhookDeliveryItemResponseModel"
                 }
             }
         }

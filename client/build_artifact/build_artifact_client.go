@@ -69,7 +69,7 @@ func (a *Client) ArtifactList(params *ArtifactListParams, authInfo runtime.Clien
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "artifact-list",
 		Method:             "GET",
-		PathPattern:        "/apps/{app-slug}/builds/{build-slug}",
+		PathPattern:        "/apps/{app-slug}/builds/{build-slug}/artifacts",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},

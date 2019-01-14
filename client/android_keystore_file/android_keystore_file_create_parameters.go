@@ -67,7 +67,7 @@ type AndroidKeystoreFileCreateParams struct {
 	  Android keystore file parameters
 
 	*/
-	AndroidKeystoreFile *models.V0ProjectFileStorageUploadParams
+	AndroidKeystoreFile *models.V0AndroidKeystoreFileUploadParams
 	/*AppSlug
 	  App slug
 
@@ -113,13 +113,13 @@ func (o *AndroidKeystoreFileCreateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithAndroidKeystoreFile adds the androidKeystoreFile to the android keystore file create params
-func (o *AndroidKeystoreFileCreateParams) WithAndroidKeystoreFile(androidKeystoreFile *models.V0ProjectFileStorageUploadParams) *AndroidKeystoreFileCreateParams {
+func (o *AndroidKeystoreFileCreateParams) WithAndroidKeystoreFile(androidKeystoreFile *models.V0AndroidKeystoreFileUploadParams) *AndroidKeystoreFileCreateParams {
 	o.SetAndroidKeystoreFile(androidKeystoreFile)
 	return o
 }
 
 // SetAndroidKeystoreFile adds the androidKeystoreFile to the android keystore file create params
-func (o *AndroidKeystoreFileCreateParams) SetAndroidKeystoreFile(androidKeystoreFile *models.V0ProjectFileStorageUploadParams) {
+func (o *AndroidKeystoreFileCreateParams) SetAndroidKeystoreFile(androidKeystoreFile *models.V0AndroidKeystoreFileUploadParams) {
 	o.AndroidKeystoreFile = androidKeystoreFile
 }
 

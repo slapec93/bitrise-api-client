@@ -58,7 +58,7 @@ func (a *Client) AppConfigDatastoreShow(params *AppConfigDatastoreShowParams, au
 /*
 AppList gets list of the apps
 
-List all the available apps
+List all the apps available for the authenticated account
 */
 func (a *Client) AppList(params *AppListParams, authInfo runtime.ClientAuthInfoWriter) (*AppListOK, error) {
 	// TODO: Validate the params before sending
@@ -176,6 +176,37 @@ func (a *Client) AppShow(params *AppShowParams, authInfo runtime.ClientAuthInfoW
 		return nil, err
 	}
 	return result.(*AppShowOK), nil
+
+}
+
+/*
+BranchList lists the branches of an app s repository
+
+List the existing branches of the repository of a specified Bitrise app
+*/
+func (a *Client) BranchList(params *BranchListParams, authInfo runtime.ClientAuthInfoWriter) (*BranchListOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewBranchListParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "branch-list",
+		Method:             "GET",
+		PathPattern:        "/apps/{app-slug}/branches",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &BranchListReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*BranchListOK), nil
 
 }
 

@@ -73,7 +73,7 @@ type AppListParams struct {
 	*/
 	Next *string
 	/*SortBy
-	  Order of applications
+	  Order of the applications
 
 	*/
 	SortBy *string

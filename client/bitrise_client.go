@@ -15,9 +15,13 @@ import (
 	"github.com/slapec93/bitrise-api-client/client/application"
 	"github.com/slapec93/bitrise-api-client/client/build_artifact"
 	"github.com/slapec93/bitrise-api-client/client/build_certificate"
+	"github.com/slapec93/bitrise-api-client/client/builds"
 	"github.com/slapec93/bitrise-api-client/client/generic_project_file"
+	"github.com/slapec93/bitrise-api-client/client/organizations"
+	"github.com/slapec93/bitrise-api-client/client/outgoing_webhook"
 	"github.com/slapec93/bitrise-api-client/client/provisioning_profile"
 	"github.com/slapec93/bitrise-api-client/client/user"
+	"github.com/slapec93/bitrise-api-client/client/webhook_delivery_item"
 )
 
 // Default bitrise HTTP client.
@@ -75,11 +79,19 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Bitrise {
 
 	cli.BuildCertificate = build_certificate.New(transport, formats)
 
+	cli.Builds = builds.New(transport, formats)
+
 	cli.GenericProjectFile = generic_project_file.New(transport, formats)
+
+	cli.Organizations = organizations.New(transport, formats)
+
+	cli.OutgoingWebhook = outgoing_webhook.New(transport, formats)
 
 	cli.ProvisioningProfile = provisioning_profile.New(transport, formats)
 
 	cli.User = user.New(transport, formats)
+
+	cli.WebhookDeliveryItem = webhook_delivery_item.New(transport, formats)
 
 	return cli
 }
@@ -137,11 +149,19 @@ type Bitrise struct {
 
 	BuildCertificate *build_certificate.Client
 
+	Builds *builds.Client
+
 	GenericProjectFile *generic_project_file.Client
+
+	Organizations *organizations.Client
+
+	OutgoingWebhook *outgoing_webhook.Client
 
 	ProvisioningProfile *provisioning_profile.Client
 
 	User *user.Client
+
+	WebhookDeliveryItem *webhook_delivery_item.Client
 
 	Transport runtime.ClientTransport
 }
@@ -162,10 +182,18 @@ func (c *Bitrise) SetTransport(transport runtime.ClientTransport) {
 
 	c.BuildCertificate.SetTransport(transport)
 
+	c.Builds.SetTransport(transport)
+
 	c.GenericProjectFile.SetTransport(transport)
+
+	c.Organizations.SetTransport(transport)
+
+	c.OutgoingWebhook.SetTransport(transport)
 
 	c.ProvisioningProfile.SetTransport(transport)
 
 	c.User.SetTransport(transport)
+
+	c.WebhookDeliveryItem.SetTransport(transport)
 
 }

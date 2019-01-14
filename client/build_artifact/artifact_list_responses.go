@@ -79,7 +79,7 @@ type ArtifactListOK struct {
 }
 
 func (o *ArtifactListOK) Error() string {
-	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}][%d] artifactListOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/artifacts][%d] artifactListOK  %+v", 200, o.Payload)
 }
 
 func (o *ArtifactListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -108,7 +108,7 @@ type ArtifactListBadRequest struct {
 }
 
 func (o *ArtifactListBadRequest) Error() string {
-	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}][%d] artifactListBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/artifacts][%d] artifactListBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *ArtifactListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -137,7 +137,7 @@ type ArtifactListUnauthorized struct {
 }
 
 func (o *ArtifactListUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}][%d] artifactListUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/artifacts][%d] artifactListUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *ArtifactListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -166,7 +166,7 @@ type ArtifactListNotFound struct {
 }
 
 func (o *ArtifactListNotFound) Error() string {
-	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}][%d] artifactListNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/artifacts][%d] artifactListNotFound  %+v", 404, o.Payload)
 }
 
 func (o *ArtifactListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -195,7 +195,7 @@ type ArtifactListInternalServerError struct {
 }
 
 func (o *ArtifactListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}][%d] artifactListInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/artifacts][%d] artifactListInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *ArtifactListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -25,6 +25,37 @@ type Client struct {
 }
 
 /*
+UserPlan thes subscription plan of the user
+
+Get the subscription of the user: the current plan, any pending plans, and the duration of a trial period if applicable
+*/
+func (a *Client) UserPlan(params *UserPlanParams, authInfo runtime.ClientAuthInfoWriter) (*UserPlanOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserPlanParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "user-plan",
+		Method:             "GET",
+		PathPattern:        "/me/plan",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &UserPlanReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*UserPlanOK), nil
+
+}
+
+/*
 UserProfile gets your profile data
 
 Shows the authenticated users profile data

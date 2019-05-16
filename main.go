@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	request, err := http.NewRequest("GET", "https://bitrise-team.github.io/bitrise-api/docs/swagger/swagger.json", nil)
+	request, err := http.NewRequest("GET", "https://api-docs.bitrise.io/docs/swagger.json", nil)
 	if err != nil {
 		log.Errorf("Failed to initialize a new request: %s", err.Error())
 	}

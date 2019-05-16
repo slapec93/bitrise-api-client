@@ -68,7 +68,7 @@ type GenericProjectFileListParams struct {
 	*/
 	AppSlug string
 	/*Limit
-	  Max number of elements per page (default: 50)
+	  Max number of build certificates per page is 50.
 
 	*/
 	Limit *int64

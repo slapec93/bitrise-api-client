@@ -27,11 +27,17 @@ type AddonsAddon struct {
 	// categories
 	Categories []string `json:"categories"`
 
+	// dashboard url
+	DashboardURL string `json:"dashboard_url,omitempty"`
+
 	// description
 	Description string `json:"description,omitempty"`
 
 	// developer links
 	DeveloperLinks []*AddonsDeveloperLink `json:"developer_links"`
+
+	// documentation url
+	DocumentationURL string `json:"documentation_url,omitempty"`
 
 	// icon
 	Icon string `json:"icon,omitempty"`

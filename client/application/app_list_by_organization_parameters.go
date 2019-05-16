@@ -78,7 +78,7 @@ type AppListByOrganizationParams struct {
 	*/
 	OrgSlug string
 	/*SortBy
-	  Order of applications
+	  Order of applications: sort them based on when they were created or the time of their last build
 
 	*/
 	SortBy *string

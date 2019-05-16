@@ -145,7 +145,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all the apps available for the authenticated account",
+                "description": "List all the apps available for the authenticated account, including those that are owned by other users or Organizations.",
                 "produces": [
                     "application/json"
                 ],
@@ -161,7 +161,7 @@
                             "created_at"
                         ],
                         "type": "string",
-                        "description": "Order of the applications",
+                        "description": "Order of the applications: sort them based on when they were created or the time of their last build",
                         "name": "sort_by",
                         "in": "query"
                     },
@@ -217,6 +217,76 @@
                 }
             }
         },
+        "/apps/register": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add a new app to Bitrise. This is the first step of the app registration process. To successfully set it up, you need to provide the required app parameters: your git provider, the repository URL, the slug of the repository as it appears at the provider, and the slug of the owner of the repository. Read more about the app creation process in our [detailed guide](https://devcenter.bitrise.io/api/adding-and-managing-apps/#adding-a-new-app).",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "app-setup"
+                ],
+                "summary": "Add a new app",
+                "operationId": "app-create",
+                "parameters": [
+                    {
+                        "description": "App parameters",
+                        "name": "app",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppUploadParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppRespModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/apps/{app-slug}": {
             "get": {
                 "security": [
@@ -224,7 +294,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Show details of a specific app",
+                "description": "Get the details of a specific app by providing the app slug. You can get the app slug by calling the [/apps](https://api-docs.bitrise.io/#/application/app-list) endpoint or by opening the app on bitrise.io and copying the slug from the URL.",
                 "produces": [
                     "application/json"
                 ],
@@ -358,6 +428,167 @@
                 }
             }
         },
+        "/apps/{app-slug}/avatar-candidates": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add new avatar candidates to a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "avatar-candidate"
+                ],
+                "summary": "Create avatar candidates",
+                "operationId": "avatar-candidate-create",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Avatar candidate parameters",
+                        "name": "avatar-candidate",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AvatarCandidateCreateBulkParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AvatarCandidateCreateResponseItems"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/avatar-candidates/{avatar-slug}": {
+            "patch": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Promotes an avatar candidate for an app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "avatar-candidate"
+                ],
+                "summary": "Promote an avatar candidate",
+                "operationId": "avatar-candidate-promote",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Avatar candidate slug",
+                        "name": "avatar-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Avatar promote parameters",
+                        "name": "avatar-promote-params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AvatarPromoteParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AvatarPromoteResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/apps/{app-slug}/bitrise.yml": {
             "get": {
                 "security": [
@@ -365,7 +596,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Show details of a specific app",
+                "description": "Get the full `bitrise.yml` configuration of an application, by providing the app slug. It returns the current `bitrise.yml` that is stored on bitrise.io in full, including the trigger map, the different workflows and the Steps.",
                 "produces": [
                     "text/plain"
                 ],
@@ -419,6 +650,80 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Upload a new bitrise.yml for your application.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "app-setup"
+                ],
+                "summary": "Upload a new bitrise.yml for your application.",
+                "operationId": "app-config-create",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "App config parameters",
+                        "name": "app",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppConfigRespModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
             }
         },
         "/apps/{app-slug}/branches": {
@@ -428,7 +733,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List the existing branches of the repository of a specified Bitrise app",
+                "description": "List the existing branches of the repository of a specified Bitrise app.",
                 "produces": [
                     "application/json"
                 ],
@@ -492,14 +797,14 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all the build certificates for a specific app",
+                "description": "List all the build certificates that have been uploaded to a specific app. Read more in our [Listing the uploaded iOS code signing files of an app](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#listing-the-uploaded-ios-code-signing-files-of-an-app) guide.",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "build-certificate"
                 ],
-                "summary": "Get list of the build certificates",
+                "summary": "Get a list of the build certificates",
                 "operationId": "build-certificate-list",
                 "parameters": [
                     {
@@ -517,7 +822,7 @@
                     },
                     {
                         "type": "integer",
-                        "description": "Max number of elements per page (default: 50)",
+                        "description": "Max number of build certificates per page is 50.",
                         "name": "limit",
                         "in": "query"
                     }
@@ -566,7 +871,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Add a new build certificate to a specific app",
+                "description": "Create a temporary pre-signed upload URL for the build certificate and upload the file to AWS with a simple `curl` request. To complete the uploading process and view your files on the Code Signing tab of your app, continue with the [POST /apps/{app-slug}/build-certificates/{build-certificate-slug}/uploaded](https://api-docs.bitrise.io/#/build-certificate/build-certificate-confirm) endpoint. Read more in our [Creating and uploading an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#creating--uploading-an-ios-code-signing-file) guide.",
                 "consumes": [
                     "application/json"
                 ],
@@ -587,7 +892,7 @@
                         "required": true
                     },
                     {
-                        "description": "Build certificate parameters",
+                        "description": "Build certificate parameters such as file name and its file size",
                         "name": "build-certificate",
                         "in": "body",
                         "required": true,
@@ -643,7 +948,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Show details of a specific build certificate of a specific app",
+                "description": "Retrieve data of a specific build certificate. You can fetch the build certificate slug for this endpoint if you first call the [GET /apps/{app-slug}/build-certificates](https://api-docs.bitrise.io/#/build-certificate/build-certificate-list) endpoint to list all available build certificates of an app. Read more in our [Getting a specific iOS code signing file's data](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#getting-a-specific-ios-code-signing-files-data) guide.",
                 "produces": [
                     "application/json"
                 ],
@@ -712,7 +1017,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Remove a specific build certificate from a specific app",
+                "description": "Delete an app's build certificate. You can fetch the build certificate slug for this endpoint if you first call the [GET /apps/{app-slug}/build-certificates](https://api-docs.bitrise.io/#/build-certificate/build-certificate-list) endpoint to list all available build certificates of an app. Read more in our [Deleting an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#deleting-an-ios-code-signing-file) guide.",
                 "produces": [
                     "application/json"
                 ],
@@ -781,7 +1086,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Update a specific build certificate of a specific app",
+                "description": "Update an uploaded build certificate's attributes. You can fetch the build certificate slug for this endpoint if you first call the [GET /apps/{app-slug}/build-certificates](https://api-docs.bitrise.io/#/build-certificate/build-certificate-list) endpoint. Read more in our [Updating an uploaded iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.",
                 "consumes": [
                     "application/json"
                 ],
@@ -865,7 +1170,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Confirm the upload of a specific build certificate of a specific app",
+                "description": "This is the last step of uploading a build certificate to Bitrise. Confirm the build certificate upload and view the file on the Code Signing tab of a specific app. Read more in our [Confirming the iOS code signing file upload](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.",
                 "consumes": [
                     "application/json"
                 ],
@@ -875,7 +1180,7 @@
                 "tags": [
                     "build-certificate"
                 ],
-                "summary": "Confirm a build certificate",
+                "summary": "Confirm a build certificate upload",
                 "operationId": "build-certificate-confirm",
                 "parameters": [
                     {
@@ -932,6 +1237,154 @@
                 }
             }
         },
+        "/apps/{app-slug}/build-requests": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List the existing open build requests of a specified Bitrise app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-request"
+                ],
+                "summary": "List the open build requests for an app",
+                "operationId": "build-request-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildRequestListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/build-requests/{build-request-slug}": {
+            "patch": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update a specific build request of a specific app",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "build-request"
+                ],
+                "summary": "Update a build request",
+                "operationId": "build-request-update",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Build request slug",
+                        "name": "build-request-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Build request parameters",
+                        "name": "build-request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildRequestUpdateParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildRequestUpdateResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/apps/{app-slug}/build-workflows": {
             "get": {
                 "security": [
@@ -939,7 +1392,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List the workflows that are currently available for a specified Bitrise app",
+                "description": "List the workflows that were triggered at any time for a given Bitrise app. Note that it might list workflows that are currently not defined in the app's `bitrise.yml` configuration - and conversely, workflows that were never triggered will not be listed even if they are defined in the `bitrise.yml` file.",
                 "produces": [
                     "application/json"
                 ],
@@ -962,7 +1415,7 @@
                         "description": "OK",
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/v0.BuildLogInfoResponseModel"
+                            "$ref": "#/definitions/v0.BuildWorkflowListResponseModel"
                         }
                     },
                     "400": {
@@ -1003,7 +1456,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all the builds of a specified Bitrise app. Set parameters to filter builds.",
+                "description": "List all the builds of a specified Bitrise app. Set parameters to filter builds: for example, you can search for builds run with a given workflow or all builds that were triggered by Pull Requests. It returns all the relevant data of the build.",
                 "produces": [
                     "application/json"
                 ],
@@ -1026,7 +1479,7 @@
                             "created_at"
                         ],
                         "type": "string",
-                        "description": "Order of builds",
+                        "description": "Order of builds: sort them based on when they were created or the time when they were triggered",
                         "name": "sort_by",
                         "in": "query"
                     },
@@ -1134,6 +1587,81 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Trigger a new build. Specify an app slug and at least one parameter out of three: a git tag or git commit hash, a branch, or a workflow ID. You can also set specific parameters for Pull Request builds and define additional environment variables for your build. [Check out our detailed guide](https://devcenter.bitrise.io/api/build-trigger/).",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "builds"
+                ],
+                "summary": "Trigger a new build",
+                "operationId": "build-trigger",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Build trigger parameters",
+                        "name": "ssh-key",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildTriggerParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.BuildTriggerRespModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
             }
         },
         "/apps/{app-slug}/builds/{build-slug}": {
@@ -1143,7 +1671,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Get the specified build of a specified Bitrise app",
+                "description": "Get the specified build of a given Bitrise app. You need to provide both an app slug and a build slug. You can get the build slug either by calling the [/builds](https://api-docs.bitrise.io/#/builds/build-list) endpoint or by clicking on the build on bitrise.io and copying the slug from the URL. The endpoint returns all the relevant data of the build.",
                 "produces": [
                     "application/json"
                 ],
@@ -1214,7 +1742,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Abort a specific build",
+                "description": "Abort a specific build. Set an abort reason with the `abort_reason` parameter. Use the `abort_with_success` parameter to abort a build but still count it as a successful one.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1305,14 +1833,14 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all the available build artifacts for a specific build in a specific app",
+                "description": "List all build artifacts that have been generated for an app's build. You can use the created build artifact slugs from the response output to retrieve data of a specific build artifact with the [GET/apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-show) endpoint or update a build artifact with the [PATCH/apps](https://api-docs.bitrise.io/#/build-artifact/artifact-update) endpoint.",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "build-artifact"
                 ],
-                "summary": "Get list of the build artifacts",
+                "summary": "Get a list of all build artifacts",
                 "operationId": "artifact-list",
                 "parameters": [
                     {
@@ -1337,7 +1865,7 @@
                     },
                     {
                         "type": "integer",
-                        "description": "Maximum number of elements per page (default: 50)",
+                        "description": "Max number of build artifacts per page is 50.",
                         "name": "limit",
                         "in": "query"
                     }
@@ -1388,7 +1916,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Show details of a specific build artifact",
+                "description": "Retrieve data of a specific build artifact. The response output contains a time-limited download url (expires in 10 minutes) and a public install page URL. You can view the build artifact with both URLs, but the public install page url will not work unless you [enable it](https://devcenter.bitrise.io/tutorials/deploy/bitrise-app-deployment/#enabling-public-page-for-the-app).",
                 "produces": [
                     "application/json"
                 ],
@@ -1464,7 +1992,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Remove a specific build artifact of a specific build in a specific app",
+                "description": "Delete a build artifact of an app's build. The required parameters are app slug, build slug and artifact slug. You can fetch the build artifact slug if you first list all build artifacts of an app with the [/apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-list) endpoint.",
                 "produces": [
                     "application/json"
                 ],
@@ -1540,7 +2068,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Update a specific build artifact of a specific build in a specific app",
+                "description": "Update the `is_public_page_enabled` attribute of your app's build. The required parameters are app slug, build slug and artifact slug. You can fetch the build artifact slug if you first list all build artifacts of an app with the [GET /apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-list) endpoint.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1631,7 +2159,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Get the bitrise.yml file of one of the builds of a specified app",
+                "description": "Get the bitrise.yml file of one of the builds of a given app. This will return the `bitrise.yml` configuration with which the build ran. You can compare it to [the current bitrise.yml configuration](https://api-docs.bitrise.io/#/application/app-config-datastore-show) of the app.",
                 "produces": [
                     "text/plain"
                 ],
@@ -1701,7 +2229,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Get the build log of a specified build of a Bitrise app",
+                "description": "Get the build log of a specified build of a Bitrise app. You can get the build slug either by calling the [/builds](https://api-docs.bitrise.io/#/builds/build-list) endpoint or by clicking on the build on bitrise.io and copying the slug from the URL.",
                 "produces": [
                     "application/json"
                 ],
@@ -1765,6 +2293,83 @@
                 }
             }
         },
+        "/apps/{app-slug}/finish": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Save the application after registering it on Bitrise and registering an SSH key (and, optionally, adding a webhook). With this endpoint you can define the initial configuration, define application-level environment variables, determine the project type, and set an Organization to be the owner of the app. Read more about the app registration process in our [detailed guide](https://devcenter.bitrise.io/api/adding-and-managing-apps/#adding-a-new-app).",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "app-setup"
+                ],
+                "summary": "Save the application at the end of the app registration process",
+                "operationId": "app-finish",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "App finish parameters",
+                        "name": "app",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppFinishParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppFinishRespModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/apps/{app-slug}/generic-project-files": {
             "get": {
                 "security": [
@@ -1772,14 +2377,14 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all the generic project files for a specific app",
+                "description": "List all the generic project files that have been uploaded to a specific app. Read more in our [Listing the uploaded files of an app](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#listing-the-uploaded-files-of-an-app) guide.",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "generic-project-file"
                 ],
-                "summary": "Get list of the generic project files",
+                "summary": "Get a list of the generic project files",
                 "operationId": "generic-project-file-list",
                 "parameters": [
                     {
@@ -1797,7 +2402,7 @@
                     },
                     {
                         "type": "integer",
-                        "description": "Max number of elements per page (default: 50)",
+                        "description": "Max number of build certificates per page is 50.",
                         "name": "limit",
                         "in": "query"
                     }
@@ -1846,7 +2451,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Add a new generic project file to a specific app",
+                "description": "Create a temporary pre-signed upload URL (expires in 10 minutes) for the generic project file and upload it to AWS with a simple `curl` request. To complete the uploading process and view your files on the Code Signing tab of your app, continue with the [POST /apps/{app-slug}/generic-project-files/{generic-project-file-slug}/uploaded](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-confirm) endpoint. Read more in our [Creating and uploading files to Generic File Storage](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#creating-and-uploading-files-to-generic-file-storage) guide.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1923,7 +2528,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Show details of a specific generic project file of a specific app",
+                "description": "Retrieve data of a specific generic project file to check its attributes and optionally modify them with the [PATCH /apps/](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-update) endpoint. Read more in our [Retrieving a specific file's data](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#retrieving-a-specific-files-data) guide.",
                 "produces": [
                     "application/json"
                 ],
@@ -1992,7 +2597,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Remove a specific generic project file from a specific app",
+                "description": "Delete an app's generic project file. You can fetch an app's generic project file slug if you first list all the uploaded files with the [GET /apps/{app-slug}/generic-project-files](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-list) endpoint. Read more in our [Deleting a file](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#deleting-a-file) guide.",
                 "produces": [
                     "application/json"
                 ],
@@ -2061,7 +2666,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Update a specific generic project file of a specific app",
+                "description": "Update a generic project file's attributes. You can fetch an app's generic project file slug if you first list all the uploaded files with the [GET /apps/{app-slug}/generic-project-files](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-list) endpoint. Read more in our [Updating an uploaded file](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#updating-an-uploaded-file) guide.",
                 "consumes": [
                     "application/json"
                 ],
@@ -2145,7 +2750,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Confirm the upload of a specific generic project file of a specific app",
+                "description": "This is the last step of uploading a generic project file to Bitrise. Confirm the generic project file upload and view the file on the Code Signing tab of a specific app. Read more in our [Confirming the upload](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#confirming-the-file-upload) guide.",
                 "consumes": [
                     "application/json"
                 ],
@@ -2155,7 +2760,7 @@
                 "tags": [
                     "generic-project-file"
                 ],
-                "summary": "Confirm a generic project file",
+                "summary": "Confirm a generic project file upload",
                 "operationId": "generic-project-file-confirm",
                 "parameters": [
                     {
@@ -2219,7 +2824,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all the outgoing webhooks registered for a specified Bitrise app",
+                "description": "List all the outgoing webhooks registered for a specified Bitrise app. This returns all the relevant data of the webhook, including the slug of the webhook and its URL.",
                 "produces": [
                     "application/json"
                 ],
@@ -2286,7 +2891,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Create an outgoing webhook for a specified Bitrise app: this can be used to send build events to a specified URL with custom headers",
+                "description": "Create an outgoing webhook for a specified Bitrise app: this can be used to send build events to a specified URL with custom headers. Currently, only build events can trigger outgoing webhooks.",
                 "produces": [
                     "application/json"
                 ],
@@ -2360,7 +2965,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Update an existing outgoing webhook (URL, events, secrets and headers) for a specified Bitrise app",
+                "description": "Update an existing outgoing webhook (URL, events, secrets and headers) for a specified Bitrise app. Even if you do not want to change one of the parameters, you still have to provide that parameter as well: simply use its existing value.",
                 "produces": [
                     "application/json"
                 ],
@@ -2439,7 +3044,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Delete an existing outgoing webhook for a specified Bitrise app",
+                "description": "Delete an existing outgoing webhook for a specified Bitrise app.",
                 "produces": [
                     "application/json"
                 ],
@@ -2728,14 +3333,14 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all the provisioning profiles for a specific app",
+                "description": "List all the provisioning profiles that have been uploaded to a specific app. Read more in our [Listing the uploaded iOS code signing files of an app](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#listing-the-uploaded-ios-code-signing-files-of-an-app) guide.",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "provisioning-profile"
                 ],
-                "summary": "Get list of the provisioning profiles",
+                "summary": "Get a list of the provisioning profiles",
                 "operationId": "provisioning-profile-list",
                 "parameters": [
                     {
@@ -2802,7 +3407,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Add a new provisioning profile to a specific app",
+                "description": "Create a temporary pre-signed upload URL (expires in 10 minutes) for the provisioning profile and upload it to AWS with a simple `curl` request. To complete the upload process, continue with the [POST /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}/uploaded](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-confirm) endpoint. Read more in our [Creating and uploading an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#creating--uploading-an-ios-code-signing-file) guide.",
                 "consumes": [
                     "application/json"
                 ],
@@ -2823,7 +3428,7 @@
                         "required": true
                     },
                     {
-                        "description": "Provisioning profile parameters",
+                        "description": "Provisioning profile parameters such as file name and file size",
                         "name": "provisioning-profile",
                         "in": "body",
                         "required": true,
@@ -2879,7 +3484,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Show details of a specific provisioning profile of a specific app",
+                "description": "Retrieve data of a specific provisioning profile. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Getting a specific iOS code signing file's data](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#getting-a-specific-ios-code-signing-files-data) guide.",
                 "produces": [
                     "application/json"
                 ],
@@ -2948,7 +3553,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Remove a specific provisioning profile from a specific app",
+                "description": "Delete an app's provisioning profile. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Deleting an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#deleting-an-ios-code-signing-file) guide.",
                 "produces": [
                     "application/json"
                 ],
@@ -3017,7 +3622,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Update a specific provisioning profile of a specific app",
+                "description": "Update an uploaded provisioning profile's attributes. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Updating an uploaded iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.",
                 "consumes": [
                     "application/json"
                 ],
@@ -3101,7 +3706,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Confirm the upload of a specific provisioning profile of a specific app",
+                "description": "This is the last step of the upload process. Confirm the provisioning profile upload and view the file on the Code Signing tab of a specific app. Read more in our [Confirming the iOS code signing file upload](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.",
                 "consumes": [
                     "application/json"
                 ],
@@ -3111,7 +3716,7 @@
                 "tags": [
                     "provisioning-profile"
                 ],
-                "summary": "Confirm a provisioning profile",
+                "summary": "Confirm a provisioning profile upload",
                 "operationId": "provisioning-profile-confirm",
                 "parameters": [
                     {
@@ -3168,6 +3773,214 @@
                 }
             }
         },
+        "/apps/{app-slug}/register-ssh-key": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add an SSH-key to a specific app. After creating an app, you need to register the SSH key so that Bitrise will be able to access and clone your repository during the build process. This requires the app slug of your newly created app.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "app-setup"
+                ],
+                "summary": "Add an SSH-key to a specific app",
+                "operationId": "ssh-key-create",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "SSH key parameters",
+                        "name": "ssh-key",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.SSHKeyUploadParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.SSHKeyRespModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/register-webhook": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "[Register an incoming webhook](https://devcenter.bitrise.io/api/incoming-and-outgoing-webhooks/#incoming-webhooks) for a specific application. You can do this during the app registration process or at any other time in an app's life. When calling this endpoint, a webhook is registered at your git provider: this is necessary to automatically trigger builds on Bitrise.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "app-setup"
+                ],
+                "summary": "Register an incoming webhook for a specific application",
+                "operationId": "app-webhook-create",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.WebhookRespModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/apps/{app-slug}/test-devices": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List registered test devices of all members of a specified Bitrise app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "test-devices"
+                ],
+                "summary": "List the test devices for an app",
+                "operationId": "test-device-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.TestDeviceListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/builds": {
             "get": {
                 "security": [
@@ -3175,7 +3988,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all the Bitrise builds of the authenticated account. Set parameters to filter builds.",
+                "description": "List all the Bitrise builds that can be accessed with the authenticated account. Filter builds based on their owner, using the owner slug, or the status of the build.",
                 "produces": [
                     "application/json"
                 ],
@@ -3553,7 +4366,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all the available apps for a specific organization",
+                "description": "List all the available apps owned by a given organization. [Find the organization URL](https://devcenter.bitrise.io/team-management/organizations/org-url/) of the organisations you are part of; be aware that the endpoint will not return any apps if the authenticated account is not a member of the given organisation.",
                 "consumes": [
                     "application/json"
                 ],
@@ -3579,7 +4392,7 @@
                             "created_at"
                         ],
                         "type": "string",
-                        "description": "Order of applications",
+                        "description": "Order of applications: sort them based on when they were created or the time of their last build",
                         "name": "sort_by",
                         "in": "query"
                     },
@@ -3602,6 +4415,70 @@
                         "schema": {
                             "type": "object",
                             "$ref": "#/definitions/v0.AppListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/organizations/{organization-slug}/addons": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the provisioned addons for organization",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addons"
+                ],
+                "summary": "Get list of the addons for organization",
+                "operationId": "addon-list-by-organization",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organization slug",
+                        "name": "organization-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.OwnerAddOnsListResponseModel"
                         }
                     },
                     "400": {
@@ -3699,6 +4576,70 @@
                 }
             }
         },
+        "/users/{user-slug}/addons": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all the provisioned addons for the authenticated user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addons"
+                ],
+                "summary": "Get list of the addons for user",
+                "operationId": "addon-list-by-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User slug",
+                        "name": "user-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.OwnerAddOnsListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/users/{user-slug}/apps": {
             "get": {
                 "security": [
@@ -3706,7 +4647,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all the available apps for a specific user",
+                "description": "List all the available apps for the given user.  It needs the user slug that you can get from the [GET /me](https://api-docs.bitrise.io/#/user/user-profile) endpoint.",
                 "produces": [
                     "application/json"
                 ],
@@ -3784,6 +4725,73 @@
                     }
                 }
             }
+        },
+        "/v0.1/apps/{app-slug}/avatar-candidates": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all available avatar candidates for an application",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "avatar-candidate"
+                ],
+                "summary": "Get list of the avatar candidates",
+                "operationId": "avatar-candidate-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.FindAvatarCandidateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -3805,6 +4813,9 @@
                         "type": "string"
                     }
                 },
+                "dashboard_url": {
+                    "type": "string"
+                },
                 "description": {
                     "type": "string"
                 },
@@ -3813,6 +4824,9 @@
                     "items": {
                         "$ref": "#/definitions/addons.DeveloperLink"
                     }
+                },
+                "documentation_url": {
+                    "type": "string"
                 },
                 "icon": {
                     "type": "string"
@@ -3952,6 +4966,27 @@
                 }
             }
         },
+        "v0.AddOnAppResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "icon": {
+                    "type": "string"
+                },
+                "plan": {
+                    "type": "object",
+                    "$ref": "#/definitions/addons.Plan"
+                },
+                "plan_started_at": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
         "v0.AddonsListResponseModel": {
             "type": "object",
             "properties": {
@@ -3992,6 +5027,49 @@
                 }
             }
         },
+        "v0.AppConfigRespModel": {
+            "type": "object"
+        },
+        "v0.AppFinishParams": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "type": "string"
+                },
+                "envs": {
+                    "type": "object"
+                },
+                "mode": {
+                    "type": "string"
+                },
+                "organization_slug": {
+                    "type": "string"
+                },
+                "project_type": {
+                    "type": "string"
+                },
+                "stack_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.AppFinishRespModel": {
+            "type": "object",
+            "properties": {
+                "branch_name": {
+                    "type": "string"
+                },
+                "build_trigger_token": {
+                    "type": "string"
+                },
+                "is_webhook_auto_reg_supported": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
         "v0.AppListResponseModel": {
             "type": "object",
             "properties": {
@@ -4005,6 +5083,17 @@
                     "description": "pagination",
                     "type": "object",
                     "$ref": "#/definitions/v0.PagingResponseModel"
+                }
+            }
+        },
+        "v0.AppRespModel": {
+            "type": "object",
+            "properties": {
+                "slug": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
                 }
             }
         },
@@ -4056,6 +5145,29 @@
                 "data": {
                     "type": "object",
                     "$ref": "#/definitions/v0.AppResponseItemModel"
+                }
+            }
+        },
+        "v0.AppUploadParams": {
+            "type": "object",
+            "properties": {
+                "git_owner": {
+                    "type": "string"
+                },
+                "git_repo_slug": {
+                    "type": "string"
+                },
+                "is_public": {
+                    "type": "boolean"
+                },
+                "provider": {
+                    "type": "string"
+                },
+                "repo_url": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
                 }
             }
         },
@@ -4154,7 +5266,7 @@
                     "type": "string"
                 },
                 "file_size_bytes": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "is_public_page_enabled": {
                     "type": "boolean"
@@ -4193,7 +5305,7 @@
                     "type": "string"
                 },
                 "file_size_bytes": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "is_public_page_enabled": {
                     "type": "boolean"
@@ -4223,6 +5335,37 @@
             "properties": {
                 "is_public_page_enabled": {
                     "type": "boolean"
+                }
+            }
+        },
+        "v0.AvatarCandidateCreateBulkParams": {
+            "type": "object"
+        },
+        "v0.AvatarCandidateCreateResponseItems": {
+            "type": "object"
+        },
+        "v0.AvatarPromoteParams": {
+            "type": "object",
+            "properties": {
+                "is_promoted": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "v0.AvatarPromoteResponseModel": {
+            "type": "object",
+            "properties": {
+                "is_candidate": {
+                    "type": "boolean"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "upload_file_name": {
+                    "type": "string"
+                },
+                "upload_file_size": {
+                    "type": "integer"
                 }
             }
         },
@@ -4378,7 +5521,7 @@
                     "type": "string"
                 },
                 "pull_request_id": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "pull_request_target_branch": {
                     "type": "string"
@@ -4472,7 +5615,7 @@
                     "type": "string"
                 },
                 "generated_log_chunks_num": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "is_archived": {
                     "type": "boolean"
@@ -4485,6 +5628,65 @@
                 },
                 "timestamp": {
                     "type": "string"
+                }
+            }
+        },
+        "v0.BuildParamsEnvironment": {
+            "type": "object",
+            "properties": {
+                "is_expand": {
+                    "type": "boolean"
+                },
+                "mapped_to": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.BuildRequestListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.BuildRequestResponseItemModel"
+                    }
+                }
+            }
+        },
+        "v0.BuildRequestResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "build_params": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "pull_request_url": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.BuildRequestUpdateParams": {
+            "type": "object",
+            "properties": {
+                "is_approved": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "v0.BuildRequestUpdateResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.BuildRequestResponseItemModel"
                 }
             }
         },
@@ -4522,7 +5724,7 @@
                     "type": "string"
                 },
                 "pull_request_id": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "pull_request_target_branch": {
                     "type": "string"
@@ -4571,6 +5773,158 @@
                 }
             }
         },
+        "v0.BuildTriggerParams": {
+            "type": "object",
+            "properties": {
+                "build_params": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.BuildTriggerParamsBuildParams"
+                },
+                "hook_info": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.BuildTriggerParamsHookInfo"
+                }
+            }
+        },
+        "v0.BuildTriggerParamsBuildParams": {
+            "type": "object",
+            "properties": {
+                "branch": {
+                    "type": "string"
+                },
+                "branch_dest": {
+                    "type": "string"
+                },
+                "branch_dest_repo_owner": {
+                    "type": "string"
+                },
+                "branch_repo_owner": {
+                    "type": "string"
+                },
+                "build_request_slug": {
+                    "type": "string"
+                },
+                "commit_hash": {
+                    "type": "string"
+                },
+                "commit_message": {
+                    "type": "string"
+                },
+                "commit_paths": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "diff_url": {
+                    "type": "string"
+                },
+                "environments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.BuildParamsEnvironment"
+                    }
+                },
+                "pull_request_author": {
+                    "type": "string"
+                },
+                "pull_request_head_branch": {
+                    "type": "string"
+                },
+                "pull_request_id": {
+                    "type": "integer"
+                },
+                "pull_request_merge_branch": {
+                    "type": "string"
+                },
+                "pull_request_repository_url": {
+                    "type": "string"
+                },
+                "skip_git_status_report": {
+                    "type": "boolean"
+                },
+                "tag": {
+                    "type": "string"
+                },
+                "workflow_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.BuildTriggerParamsHookInfo": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "example": "bitrise"
+                }
+            }
+        },
+        "v0.BuildTriggerRespModel": {
+            "type": "object",
+            "properties": {
+                "build_number": {
+                    "type": "integer"
+                },
+                "build_slug": {
+                    "type": "string"
+                },
+                "build_url": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "service": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "triggered_workflow": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.BuildWorkflowListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "v0.FindAvatarCandidateResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.FindAvatarCandidateResponseItem"
+                    }
+                }
+            }
+        },
+        "v0.FindAvatarCandidateResponseItem": {
+            "type": "object",
+            "properties": {
+                "download_url": {
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                }
+            }
+        },
         "v0.OrganizationDataModel": {
             "type": "object",
             "properties": {
@@ -4578,7 +5932,7 @@
                     "type": "string"
                 },
                 "concurrency_count": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "name": {
                     "type": "string"
@@ -4642,6 +5996,46 @@
                 }
             }
         },
+        "v0.OwnerAddOnResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "apps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.AddOnAppResponseItemModel"
+                    }
+                },
+                "dashboard_url": {
+                    "type": "string"
+                },
+                "documentation_url": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.OwnerAddOnsListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.OwnerAddOnResponseItemModel"
+                    }
+                }
+            }
+        },
         "v0.PagingResponseModel": {
             "type": "object",
             "properties": {
@@ -4663,7 +6057,7 @@
             "type": "object",
             "properties": {
                 "container_count": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "expires_at": {
                     "type": "string"
@@ -4852,6 +6246,53 @@
                 }
             }
         },
+        "v0.SSHKeyRespModel": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.SSHKeyUploadParams": {
+            "type": "object",
+            "properties": {
+                "auth_ssh_private_key": {
+                    "type": "string"
+                },
+                "auth_ssh_public_key": {
+                    "type": "string"
+                },
+                "is_register_key_into_provider_service": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "v0.TestDeviceListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.TestDeviceResponseItemModel"
+                    }
+                }
+            }
+        },
+        "v0.TestDeviceResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "device_id": {
+                    "type": "string"
+                },
+                "device_type": {
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                }
+            }
+        },
         "v0.UserPlanDataModel": {
             "type": "object",
             "properties": {
@@ -4947,6 +6388,14 @@
                 "data": {
                     "type": "object",
                     "$ref": "#/definitions/v0.WebhookDeliveryItemResponseModel"
+                }
+            }
+        },
+        "v0.WebhookRespModel": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string"
                 }
             }
         }

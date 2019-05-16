@@ -22,7 +22,7 @@ type V0BuildLogInfoResponseModel struct {
 	ExpiringRawLogURL string `json:"expiring_raw_log_url,omitempty"`
 
 	// generated log chunks num
-	GeneratedLogChunksNum string `json:"generated_log_chunks_num,omitempty"`
+	GeneratedLogChunksNum int64 `json:"generated_log_chunks_num,omitempty"`
 
 	// is archived
 	IsArchived bool `json:"is_archived,omitempty"`

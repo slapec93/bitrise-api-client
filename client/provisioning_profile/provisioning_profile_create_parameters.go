@@ -69,7 +69,7 @@ type ProvisioningProfileCreateParams struct {
 	*/
 	AppSlug string
 	/*ProvisioningProfile
-	  Provisioning profile parameters
+	  Provisioning profile parameters such as file name and file size
 
 	*/
 	ProvisioningProfile *models.V0ProvisionProfileUploadParams

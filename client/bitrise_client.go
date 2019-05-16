@@ -12,14 +12,18 @@ import (
 	"github.com/slapec93/bitrise-api-client/client/activity"
 	"github.com/slapec93/bitrise-api-client/client/addons"
 	"github.com/slapec93/bitrise-api-client/client/android_keystore_file"
+	"github.com/slapec93/bitrise-api-client/client/app_setup"
 	"github.com/slapec93/bitrise-api-client/client/application"
+	"github.com/slapec93/bitrise-api-client/client/avatar_candidate"
 	"github.com/slapec93/bitrise-api-client/client/build_artifact"
 	"github.com/slapec93/bitrise-api-client/client/build_certificate"
+	"github.com/slapec93/bitrise-api-client/client/build_request"
 	"github.com/slapec93/bitrise-api-client/client/builds"
 	"github.com/slapec93/bitrise-api-client/client/generic_project_file"
 	"github.com/slapec93/bitrise-api-client/client/organizations"
 	"github.com/slapec93/bitrise-api-client/client/outgoing_webhook"
 	"github.com/slapec93/bitrise-api-client/client/provisioning_profile"
+	"github.com/slapec93/bitrise-api-client/client/test_devices"
 	"github.com/slapec93/bitrise-api-client/client/user"
 	"github.com/slapec93/bitrise-api-client/client/webhook_delivery_item"
 )
@@ -73,11 +77,17 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Bitrise {
 
 	cli.AndroidKeystoreFile = android_keystore_file.New(transport, formats)
 
+	cli.AppSetup = app_setup.New(transport, formats)
+
 	cli.Application = application.New(transport, formats)
+
+	cli.AvatarCandidate = avatar_candidate.New(transport, formats)
 
 	cli.BuildArtifact = build_artifact.New(transport, formats)
 
 	cli.BuildCertificate = build_certificate.New(transport, formats)
+
+	cli.BuildRequest = build_request.New(transport, formats)
 
 	cli.Builds = builds.New(transport, formats)
 
@@ -88,6 +98,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Bitrise {
 	cli.OutgoingWebhook = outgoing_webhook.New(transport, formats)
 
 	cli.ProvisioningProfile = provisioning_profile.New(transport, formats)
+
+	cli.TestDevices = test_devices.New(transport, formats)
 
 	cli.User = user.New(transport, formats)
 
@@ -143,11 +155,17 @@ type Bitrise struct {
 
 	AndroidKeystoreFile *android_keystore_file.Client
 
+	AppSetup *app_setup.Client
+
 	Application *application.Client
+
+	AvatarCandidate *avatar_candidate.Client
 
 	BuildArtifact *build_artifact.Client
 
 	BuildCertificate *build_certificate.Client
+
+	BuildRequest *build_request.Client
 
 	Builds *builds.Client
 
@@ -158,6 +176,8 @@ type Bitrise struct {
 	OutgoingWebhook *outgoing_webhook.Client
 
 	ProvisioningProfile *provisioning_profile.Client
+
+	TestDevices *test_devices.Client
 
 	User *user.Client
 
@@ -176,11 +196,17 @@ func (c *Bitrise) SetTransport(transport runtime.ClientTransport) {
 
 	c.AndroidKeystoreFile.SetTransport(transport)
 
+	c.AppSetup.SetTransport(transport)
+
 	c.Application.SetTransport(transport)
+
+	c.AvatarCandidate.SetTransport(transport)
 
 	c.BuildArtifact.SetTransport(transport)
 
 	c.BuildCertificate.SetTransport(transport)
+
+	c.BuildRequest.SetTransport(transport)
 
 	c.Builds.SetTransport(transport)
 
@@ -191,6 +217,8 @@ func (c *Bitrise) SetTransport(transport runtime.ClientTransport) {
 	c.OutgoingWebhook.SetTransport(transport)
 
 	c.ProvisioningProfile.SetTransport(transport)
+
+	c.TestDevices.SetTransport(transport)
 
 	c.User.SetTransport(transport)
 

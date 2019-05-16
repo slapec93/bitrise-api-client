@@ -22,7 +22,7 @@ type V0OrganizationDataModel struct {
 	AvatarIconURL string `json:"avatar_icon_url,omitempty"`
 
 	// concurrency count
-	ConcurrencyCount string `json:"concurrency_count,omitempty"`
+	ConcurrencyCount int64 `json:"concurrency_count,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`

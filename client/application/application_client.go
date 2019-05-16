@@ -27,7 +27,7 @@ type Client struct {
 /*
 AppConfigDatastoreShow gets bitrise yml of a specific app
 
-Show details of a specific app
+Get the full `bitrise.yml` configuration of an application, by providing the app slug. It returns the current `bitrise.yml` that is stored on bitrise.io in full, including the trigger map, the different workflows and the Steps.
 */
 func (a *Client) AppConfigDatastoreShow(params *AppConfigDatastoreShowParams, authInfo runtime.ClientAuthInfoWriter) (*AppConfigDatastoreShowOK, error) {
 	// TODO: Validate the params before sending
@@ -58,7 +58,7 @@ func (a *Client) AppConfigDatastoreShow(params *AppConfigDatastoreShowParams, au
 /*
 AppList gets list of the apps
 
-List all the apps available for the authenticated account
+List all the apps available for the authenticated account, including those that are owned by other users or Organizations.
 */
 func (a *Client) AppList(params *AppListParams, authInfo runtime.ClientAuthInfoWriter) (*AppListOK, error) {
 	// TODO: Validate the params before sending
@@ -89,7 +89,7 @@ func (a *Client) AppList(params *AppListParams, authInfo runtime.ClientAuthInfoW
 /*
 AppListByOrganization gets list of the apps for an organization
 
-List all the available apps for a specific organization
+List all the available apps owned by a given organization. [Find the organization URL](https://devcenter.bitrise.io/team-management/organizations/org-url/) of the organisations you are part of; be aware that the endpoint will not return any apps if the authenticated account is not a member of the given organisation.
 */
 func (a *Client) AppListByOrganization(params *AppListByOrganizationParams, authInfo runtime.ClientAuthInfoWriter) (*AppListByOrganizationOK, error) {
 	// TODO: Validate the params before sending
@@ -120,7 +120,7 @@ func (a *Client) AppListByOrganization(params *AppListByOrganizationParams, auth
 /*
 AppListByUser gets list of the apps for a user
 
-List all the available apps for a specific user
+List all the available apps for the given user.  It needs the user slug that you can get from the [GET /me](https://api-docs.bitrise.io/#/user/user-profile) endpoint.
 */
 func (a *Client) AppListByUser(params *AppListByUserParams, authInfo runtime.ClientAuthInfoWriter) (*AppListByUserOK, error) {
 	// TODO: Validate the params before sending
@@ -151,7 +151,7 @@ func (a *Client) AppListByUser(params *AppListByUserParams, authInfo runtime.Cli
 /*
 AppShow gets a specific app
 
-Show details of a specific app
+Get the details of a specific app by providing the app slug. You can get the app slug by calling the [/apps](https://api-docs.bitrise.io/#/application/app-list) endpoint or by opening the app on bitrise.io and copying the slug from the URL.
 */
 func (a *Client) AppShow(params *AppShowParams, authInfo runtime.ClientAuthInfoWriter) (*AppShowOK, error) {
 	// TODO: Validate the params before sending
@@ -182,7 +182,7 @@ func (a *Client) AppShow(params *AppShowParams, authInfo runtime.ClientAuthInfoW
 /*
 BranchList lists the branches of an app s repository
 
-List the existing branches of the repository of a specified Bitrise app
+List the existing branches of the repository of a specified Bitrise app.
 */
 func (a *Client) BranchList(params *BranchListParams, authInfo runtime.ClientAuthInfoWriter) (*BranchListOK, error) {
 	// TODO: Validate the params before sending

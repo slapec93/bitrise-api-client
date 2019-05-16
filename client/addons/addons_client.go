@@ -25,6 +25,68 @@ type Client struct {
 }
 
 /*
+AddonListByOrganization gets list of the addons for organization
+
+List all the provisioned addons for organization
+*/
+func (a *Client) AddonListByOrganization(params *AddonListByOrganizationParams, authInfo runtime.ClientAuthInfoWriter) (*AddonListByOrganizationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAddonListByOrganizationParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "addon-list-by-organization",
+		Method:             "GET",
+		PathPattern:        "/organizations/{organization-slug}/addons",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &AddonListByOrganizationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*AddonListByOrganizationOK), nil
+
+}
+
+/*
+AddonListByUser gets list of the addons for user
+
+List all the provisioned addons for the authenticated user
+*/
+func (a *Client) AddonListByUser(params *AddonListByUserParams, authInfo runtime.ClientAuthInfoWriter) (*AddonListByUserOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAddonListByUserParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "addon-list-by-user",
+		Method:             "GET",
+		PathPattern:        "/users/{user-slug}/addons",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &AddonListByUserReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*AddonListByUserOK), nil
+
+}
+
+/*
 AddonsList gets list of available bitrise addons
 
 List all the available Bitrise addons

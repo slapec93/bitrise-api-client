@@ -16,7 +16,7 @@ import (
 type V0PlanDataModel struct {
 
 	// container count
-	ContainerCount string `json:"container_count,omitempty"`
+	ContainerCount int64 `json:"container_count,omitempty"`
 
 	// expires at
 	ExpiresAt string `json:"expires_at,omitempty"`

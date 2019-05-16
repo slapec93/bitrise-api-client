@@ -22,7 +22,7 @@ type V0ArtifactResponseItemModel struct {
 	ExpiringDownloadURL string `json:"expiring_download_url,omitempty"`
 
 	// file size bytes
-	FileSizeBytes string `json:"file_size_bytes,omitempty"`
+	FileSizeBytes int64 `json:"file_size_bytes,omitempty"`
 
 	// is public page enabled
 	IsPublicPageEnabled bool `json:"is_public_page_enabled,omitempty"`

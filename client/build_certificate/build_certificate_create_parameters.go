@@ -69,7 +69,7 @@ type BuildCertificateCreateParams struct {
 	*/
 	AppSlug string
 	/*BuildCertificate
-	  Build certificate parameters
+	  Build certificate parameters such as file name and its file size
 
 	*/
 	BuildCertificate *models.V0BuildCertificateUploadParams

@@ -108,7 +108,7 @@ type BuildListParams struct {
 	*/
 	PullRequestID *int64
 	/*SortBy
-	  Order of builds
+	  Order of builds: sort them based on when they were created or the time when they were triggered
 
 	*/
 	SortBy *string

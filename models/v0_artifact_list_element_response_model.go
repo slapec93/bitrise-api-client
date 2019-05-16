@@ -19,7 +19,7 @@ type V0ArtifactListElementResponseModel struct {
 	ArtifactType string `json:"artifact_type,omitempty"`
 
 	// file size bytes
-	FileSizeBytes string `json:"file_size_bytes,omitempty"`
+	FileSizeBytes int64 `json:"file_size_bytes,omitempty"`
 
 	// is public page enabled
 	IsPublicPageEnabled bool `json:"is_public_page_enabled,omitempty"`

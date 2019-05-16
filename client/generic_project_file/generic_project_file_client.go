@@ -25,9 +25,9 @@ type Client struct {
 }
 
 /*
-GenericProjectFileConfirm confirms a generic project file
+GenericProjectFileConfirm confirms a generic project file upload
 
-Confirm the upload of a specific generic project file of a specific app
+This is the last step of uploading a generic project file to Bitrise. Confirm the generic project file upload and view the file on the Code Signing tab of a specific app. Read more in our [Confirming the upload](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#confirming-the-file-upload) guide.
 */
 func (a *Client) GenericProjectFileConfirm(params *GenericProjectFileConfirmParams, authInfo runtime.ClientAuthInfoWriter) (*GenericProjectFileConfirmOK, error) {
 	// TODO: Validate the params before sending
@@ -58,7 +58,7 @@ func (a *Client) GenericProjectFileConfirm(params *GenericProjectFileConfirmPara
 /*
 GenericProjectFileDelete deletes a generic project file
 
-Remove a specific generic project file from a specific app
+Delete an app's generic project file. You can fetch an app's generic project file slug if you first list all the uploaded files with the [GET /apps/{app-slug}/generic-project-files](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-list) endpoint. Read more in our [Deleting a file](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#deleting-a-file) guide.
 */
 func (a *Client) GenericProjectFileDelete(params *GenericProjectFileDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*GenericProjectFileDeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -87,9 +87,9 @@ func (a *Client) GenericProjectFileDelete(params *GenericProjectFileDeleteParams
 }
 
 /*
-GenericProjectFileList gets list of the generic project files
+GenericProjectFileList gets a list of the generic project files
 
-List all the generic project files for a specific app
+List all the generic project files that have been uploaded to a specific app. Read more in our [Listing the uploaded files of an app](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#listing-the-uploaded-files-of-an-app) guide.
 */
 func (a *Client) GenericProjectFileList(params *GenericProjectFileListParams, authInfo runtime.ClientAuthInfoWriter) (*GenericProjectFileListOK, error) {
 	// TODO: Validate the params before sending
@@ -120,7 +120,7 @@ func (a *Client) GenericProjectFileList(params *GenericProjectFileListParams, au
 /*
 GenericProjectFileShow gets a specific generic project file
 
-Show details of a specific generic project file of a specific app
+Retrieve data of a specific generic project file to check its attributes and optionally modify them with the [PATCH /apps/](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-update) endpoint. Read more in our [Retrieving a specific file's data](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#retrieving-a-specific-files-data) guide.
 */
 func (a *Client) GenericProjectFileShow(params *GenericProjectFileShowParams, authInfo runtime.ClientAuthInfoWriter) (*GenericProjectFileShowOK, error) {
 	// TODO: Validate the params before sending
@@ -151,7 +151,7 @@ func (a *Client) GenericProjectFileShow(params *GenericProjectFileShowParams, au
 /*
 GenericProjectFileUpdate updates a generic project file
 
-Update a specific generic project file of a specific app
+Update a generic project file's attributes. You can fetch an app's generic project file slug if you first list all the uploaded files with the [GET /apps/{app-slug}/generic-project-files](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-list) endpoint. Read more in our [Updating an uploaded file](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#updating-an-uploaded-file) guide.
 */
 func (a *Client) GenericProjectFileUpdate(params *GenericProjectFileUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*GenericProjectFileUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -182,7 +182,7 @@ func (a *Client) GenericProjectFileUpdate(params *GenericProjectFileUpdateParams
 /*
 GenericProjectFilesCreate creates a generic project file
 
-Add a new generic project file to a specific app
+Create a temporary pre-signed upload URL (expires in 10 minutes) for the generic project file and upload it to AWS with a simple `curl` request. To complete the uploading process and view your files on the Code Signing tab of your app, continue with the [POST /apps/{app-slug}/generic-project-files/{generic-project-file-slug}/uploaded](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-confirm) endpoint. Read more in our [Creating and uploading files to Generic File Storage](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#creating-and-uploading-files-to-generic-file-storage) guide.
 */
 func (a *Client) GenericProjectFilesCreate(params *GenericProjectFilesCreateParams, authInfo runtime.ClientAuthInfoWriter) (*GenericProjectFilesCreateCreated, error) {
 	// TODO: Validate the params before sending

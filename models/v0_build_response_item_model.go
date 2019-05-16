@@ -46,7 +46,7 @@ type V0BuildResponseItemModel struct {
 	OriginalBuildParams string `json:"original_build_params,omitempty"`
 
 	// pull request id
-	PullRequestID string `json:"pull_request_id,omitempty"`
+	PullRequestID int64 `json:"pull_request_id,omitempty"`
 
 	// pull request target branch
 	PullRequestTargetBranch string `json:"pull_request_target_branch,omitempty"`

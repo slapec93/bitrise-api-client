@@ -75,7 +75,7 @@ func NewBuildWorkflowListOK() *BuildWorkflowListOK {
 OK
 */
 type BuildWorkflowListOK struct {
-	Payload *models.V0BuildLogInfoResponseModel
+	Payload *models.V0BuildWorkflowListResponseModel
 }
 
 func (o *BuildWorkflowListOK) Error() string {
@@ -84,7 +84,7 @@ func (o *BuildWorkflowListOK) Error() string {
 
 func (o *BuildWorkflowListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.V0BuildLogInfoResponseModel)
+	o.Payload = new(models.V0BuildWorkflowListResponseModel)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -27,7 +27,7 @@ type Client struct {
 /*
 OutgoingWebhookCreate creates an outgoing webhook for an app
 
-Create an outgoing webhook for a specified Bitrise app: this can be used to send build events to a specified URL with custom headers
+Create an outgoing webhook for a specified Bitrise app: this can be used to send build events to a specified URL with custom headers. Currently, only build events can trigger outgoing webhooks.
 */
 func (a *Client) OutgoingWebhookCreate(params *OutgoingWebhookCreateParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -58,7 +58,7 @@ func (a *Client) OutgoingWebhookCreate(params *OutgoingWebhookCreateParams, auth
 /*
 OutgoingWebhookDelete deletes an outgoing webhook of an app
 
-Delete an existing outgoing webhook for a specified Bitrise app
+Delete an existing outgoing webhook for a specified Bitrise app.
 */
 func (a *Client) OutgoingWebhookDelete(params *OutgoingWebhookDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookDeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -89,7 +89,7 @@ func (a *Client) OutgoingWebhookDelete(params *OutgoingWebhookDeleteParams, auth
 /*
 OutgoingWebhookList lists the outgoing webhooks of an app
 
-List all the outgoing webhooks registered for a specified Bitrise app
+List all the outgoing webhooks registered for a specified Bitrise app. This returns all the relevant data of the webhook, including the slug of the webhook and its URL.
 */
 func (a *Client) OutgoingWebhookList(params *OutgoingWebhookListParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookListOK, error) {
 	// TODO: Validate the params before sending
@@ -120,7 +120,7 @@ func (a *Client) OutgoingWebhookList(params *OutgoingWebhookListParams, authInfo
 /*
 OutgoingWebhookUpdate updates an outgoing webhook of an app
 
-Update an existing outgoing webhook (URL, events, secrets and headers) for a specified Bitrise app
+Update an existing outgoing webhook (URL, events, secrets and headers) for a specified Bitrise app. Even if you do not want to change one of the parameters, you still have to provide that parameter as well: simply use its existing value.
 */
 func (a *Client) OutgoingWebhookUpdate(params *OutgoingWebhookUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookUpdateOK, error) {
 	// TODO: Validate the params before sending

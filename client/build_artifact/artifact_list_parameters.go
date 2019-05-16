@@ -73,7 +73,7 @@ type ArtifactListParams struct {
 	*/
 	BuildSlug string
 	/*Limit
-	  Maximum number of elements per page (default: 50)
+	  Max number of build artifacts per page is 50.
 
 	*/
 	Limit *int64

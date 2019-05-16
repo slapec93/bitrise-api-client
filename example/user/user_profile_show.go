@@ -3,8 +3,8 @@ package user
 import (
 	"github.com/bitrise-io/go-utils/log"
 
+	apiclient "github.com/bitrise-io/bitrise-api-client/client"
 	"github.com/go-openapi/runtime"
-	apiclient "github.com/slapec93/bitrise-api-client/client"
 )
 
 // ProfileShow ...

@@ -4,9 +4,9 @@ import (
 	"fmt"
 
 	httptransport "github.com/go-openapi/runtime/client"
-	apiclient "github.com/slapec93/bitrise-api-client/client"
-	"github.com/slapec93/bitrise-api-client/example/activity"
-	"github.com/slapec93/bitrise-api-client/example/user"
+	apiclient "github.com/bitrise-io/bitrise-api-client/client"
+	"github.com/bitrise-io/bitrise-api-client/example/activity"
+	"github.com/bitrise-io/bitrise-api-client/example/user"
 )
 
 func main() {

@@ -6,8 +6,8 @@ import (
 	"github.com/bitrise-io/go-utils/log"
 
 	"github.com/go-openapi/runtime"
-	apiclient "github.com/slapec93/bitrise-api-client/client"
-	"github.com/slapec93/bitrise-api-client/client/activity"
+	apiclient "github.com/bitrise-io/bitrise-api-client/client"
+	"github.com/bitrise-io/bitrise-api-client/client/activity"
 )
 
 // List ...

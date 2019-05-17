@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	httptransport "github.com/go-openapi/runtime/client"
 	apiclient "github.com/bitrise-io/bitrise-api-client/client"
 	"github.com/bitrise-io/bitrise-api-client/example/activity"
 	"github.com/bitrise-io/bitrise-api-client/example/user"
+	httptransport "github.com/go-openapi/runtime/client"
 )
 
 func main() {

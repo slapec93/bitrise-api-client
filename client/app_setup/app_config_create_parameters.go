@@ -15,6 +15,8 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
+
+	models "github.com/slapec93/bitrise-api-client/models"
 )
 
 // NewAppConfigCreateParams creates a new AppConfigCreateParams object
@@ -61,11 +63,11 @@ for the app config create operation typically these are written to a http.Reques
 */
 type AppConfigCreateParams struct {
 
-	/*App
+	/*AppConfig
 	  App config parameters
 
 	*/
-	App interface{}
+	AppConfig *models.V0AppConfigRequestParam
 	/*AppSlug
 	  App slug
 
@@ -110,15 +112,15 @@ func (o *AppConfigCreateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithApp adds the app to the app config create params
-func (o *AppConfigCreateParams) WithApp(app interface{}) *AppConfigCreateParams {
-	o.SetApp(app)
+// WithAppConfig adds the appConfig to the app config create params
+func (o *AppConfigCreateParams) WithAppConfig(appConfig *models.V0AppConfigRequestParam) *AppConfigCreateParams {
+	o.SetAppConfig(appConfig)
 	return o
 }
 
-// SetApp adds the app to the app config create params
-func (o *AppConfigCreateParams) SetApp(app interface{}) {
-	o.App = app
+// SetAppConfig adds the appConfig to the app config create params
+func (o *AppConfigCreateParams) SetAppConfig(appConfig *models.V0AppConfigRequestParam) {
+	o.AppConfig = appConfig
 }
 
 // WithAppSlug adds the appSlug to the app config create params
@@ -140,8 +142,8 @@ func (o *AppConfigCreateParams) WriteToRequest(r runtime.ClientRequest, reg strf
 	}
 	var res []error
 
-	if o.App != nil {
-		if err := r.SetBodyParam(o.App); err != nil {
+	if o.AppConfig != nil {
+		if err := r.SetBodyParam(o.AppConfig); err != nil {
 			return err
 		}
 	}

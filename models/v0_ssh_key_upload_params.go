@@ -15,13 +15,13 @@ import (
 // swagger:model v0.SSHKeyUploadParams
 type V0SSHKeyUploadParams struct {
 
-	// auth ssh private key
+	// The private part of the SSH key you would like to use
 	AuthSSHPrivateKey string `json:"auth_ssh_private_key,omitempty"`
 
-	// auth ssh public key
+	// The public part of the SSH key you would like to use
 	AuthSSHPublicKey string `json:"auth_ssh_public_key,omitempty"`
 
-	// is register key into provider service
+	// If it's set to true, the provided SSH key will be registered at the provider of the application
 	IsRegisterKeyIntoProviderService bool `json:"is_register_key_into_provider_service,omitempty"`
 }
 

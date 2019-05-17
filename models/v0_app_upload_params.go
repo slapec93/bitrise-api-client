@@ -15,22 +15,22 @@ import (
 // swagger:model v0.AppUploadParams
 type V0AppUploadParams struct {
 
-	// git owner
+	// The slug of the owner of the repository at the git provider
 	GitOwner string `json:"git_owner,omitempty"`
 
-	// git repo slug
+	// The slug of the repository at the git provider
 	GitRepoSlug string `json:"git_repo_slug,omitempty"`
 
-	// is public
+	// If `true` then the repository visibility setting will be public, in case of `false` it will be private
 	IsPublic bool `json:"is_public,omitempty"`
 
-	// provider
+	// The git provider you are using, it can be `github`, `bitbucket`, `gitlab`, `gitlab-self-hosted` or `custom`
 	Provider string `json:"provider,omitempty"`
 
-	// repo url
+	// The URL of your repository
 	RepoURL string `json:"repo_url,omitempty"`
 
-	// type
+	// It has to be provided by legacy reasons and has to have the `git` value
 	Type string `json:"type,omitempty"`
 }
 

@@ -679,11 +679,12 @@
                     },
                     {
                         "description": "App config parameters",
-                        "name": "app",
+                        "name": "app-config",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object"
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppConfigRequestParam"
                         }
                     }
                 ],
@@ -5027,28 +5028,43 @@
                 }
             }
         },
+        "v0.AppConfigRequestParam": {
+            "type": "object",
+            "properties": {
+                "app_config_datastore_yaml": {
+                    "type": "string"
+                }
+            }
+        },
         "v0.AppConfigRespModel": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": {}
         },
         "v0.AppFinishParams": {
             "type": "object",
             "properties": {
                 "config": {
+                    "description": "Which config to use `default-android-config`, `default-cordova-config`, `default-fastlane-config`, `default-ionic-config`, `default-ios-config`,`default-macos-config`, `default-react-native-config`, `default-xamarin-config`, `other-config` (default if parameter is not speficied)",
                     "type": "string"
                 },
                 "envs": {
+                    "description": "Environment variables for the application workflows, e.g. {\"env1\":\"val1\",\"env2\":\"val2\"}",
                     "type": "object"
                 },
                 "mode": {
+                    "description": "config specification mode, has to be specified with `manual` value",
                     "type": "string"
                 },
                 "organization_slug": {
+                    "description": "The slug of the organization, who will be the owner of the application, if it's not specified, then the authenticated user will be the owner",
                     "type": "string"
                 },
                 "project_type": {
+                    "description": "The type of your project (`android`, `ios`, `cordova`, `other`, `xamarin`, `macos`, `ionic`, `react-native`, `fastlane`, null)",
                     "type": "string"
                 },
                 "stack_id": {
+                    "description": "The id of the stack the application will be built (these can be found in the [system report](https://github.com/bitrise-io/bitrise.io/tree/master/system_reports) file names)",
                     "type": "string"
                 }
             }
@@ -5152,21 +5168,27 @@
             "type": "object",
             "properties": {
                 "git_owner": {
+                    "description": "The slug of the owner of the repository at the git provider",
                     "type": "string"
                 },
                 "git_repo_slug": {
+                    "description": "The slug of the repository at the git provider",
                     "type": "string"
                 },
                 "is_public": {
+                    "description": "If `true` then the repository visibility setting will be public, in case of `false` it will be private",
                     "type": "boolean"
                 },
                 "provider": {
+                    "description": "The git provider you are using, it can be `github`, `bitbucket`, `gitlab`, `gitlab-self-hosted` or `custom`",
                     "type": "string"
                 },
                 "repo_url": {
+                    "description": "The URL of your repository",
                     "type": "string"
                 },
                 "type": {
+                    "description": "It has to be provided by legacy reasons and has to have the `git` value",
                     "type": "string"
                 }
             }
@@ -5339,10 +5361,66 @@
             }
         },
         "v0.AvatarCandidateCreateBulkParams": {
-            "type": "object"
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "filename": {
+                        "type": "string"
+                    },
+                    "filesize": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "v0.AvatarCandidateCreateParams": {
+            "type": "object",
+            "properties": {
+                "filename": {
+                    "type": "string"
+                },
+                "filesize": {
+                    "type": "integer"
+                }
+            }
+        },
+        "v0.AvatarCandidateCreateResponseItem": {
+            "type": "object",
+            "properties": {
+                "filename": {
+                    "type": "string"
+                },
+                "filesize": {
+                    "type": "integer"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "upload_url": {
+                    "type": "string"
+                }
+            }
         },
         "v0.AvatarCandidateCreateResponseItems": {
-            "type": "object"
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "filename": {
+                        "type": "string"
+                    },
+                    "filesize": {
+                        "type": "integer"
+                    },
+                    "slug": {
+                        "type": "string"
+                    },
+                    "upload_url": {
+                        "type": "string"
+                    }
+                }
+            }
         },
         "v0.AvatarPromoteParams": {
             "type": "object",
@@ -5777,6 +5855,7 @@
             "type": "object",
             "properties": {
                 "build_params": {
+                    "description": "The public part of the SSH key you would like to use",
                     "type": "object",
                     "$ref": "#/definitions/v0.BuildTriggerParamsBuildParams"
                 },
@@ -5855,6 +5934,7 @@
             "type": "object",
             "properties": {
                 "type": {
+                    "description": "Should be \"bitrise\"",
                     "type": "string",
                     "example": "bitrise"
                 }
@@ -6258,12 +6338,15 @@
             "type": "object",
             "properties": {
                 "auth_ssh_private_key": {
+                    "description": "The private part of the SSH key you would like to use",
                     "type": "string"
                 },
                 "auth_ssh_public_key": {
+                    "description": "The public part of the SSH key you would like to use",
                     "type": "string"
                 },
                 "is_register_key_into_provider_service": {
+                    "description": "If it's set to true, the provided SSH key will be registered at the provider of the application",
                     "type": "boolean"
                 }
             }

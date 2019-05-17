@@ -15,7 +15,7 @@ import (
 // swagger:model v0.BuildTriggerParamsHookInfo
 type V0BuildTriggerParamsHookInfo struct {
 
-	// type
+	// Should be "bitrise"
 	Type string `json:"type,omitempty"`
 }
 

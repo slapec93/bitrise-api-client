@@ -23,7 +23,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "List all the available Bitrise addons",
@@ -78,7 +78,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Show details of a specific Bitrise addon",
@@ -142,7 +142,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "List all the apps available for the authenticated account, including those that are owned by other users or Organizations.",
@@ -221,7 +221,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Add a new app to Bitrise. This is the first step of the app registration process. To successfully set it up, you need to provide the required app parameters: your git provider, the repository URL, the slug of the repository as it appears at the provider, and the slug of the owner of the repository. Read more about the app creation process in our [detailed guide](https://devcenter.bitrise.io/api/adding-and-managing-apps/#adding-a-new-app).",
@@ -291,7 +291,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "Get the details of a specific app by providing the app slug. You can get the app slug by calling the [/apps](https://api-docs.bitrise.io/#/application/app-list) endpoint or by opening the app on bitrise.io and copying the slug from the URL.",
@@ -351,11 +354,78 @@
                 }
             }
         },
+        "/apps/{app-slug}/addons": {
+            "get": {
+                "security": [
+                    {
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
+                    }
+                ],
+                "description": "List all the provisioned addons for the authorized apps",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addons"
+                ],
+                "summary": "Get list of the addons for apps",
+                "operationId": "addon-list-by-app",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App slug",
+                        "name": "app-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/v0.AppAddOnsListResponseModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/apps/{app-slug}/android-keystore-files": {
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Add a new Android keystore file to an app",
@@ -432,7 +502,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Add new avatar candidates to a specific app",
@@ -509,7 +579,7 @@
             "patch": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Promotes an avatar candidate for an app",
@@ -593,7 +663,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "Get the full `bitrise.yml` configuration of an application, by providing the app slug. It returns the current `bitrise.yml` that is stored on bitrise.io in full, including the trigger map, the different workflows and the Steps.",
@@ -654,7 +727,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Upload a new bitrise.yml for your application.",
@@ -731,7 +804,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "List the existing branches of the repository of a specified Bitrise app.",
@@ -795,7 +871,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "List all the build certificates that have been uploaded to a specific app. Read more in our [Listing the uploaded iOS code signing files of an app](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#listing-the-uploaded-ios-code-signing-files-of-an-app) guide.",
@@ -869,7 +948,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Create a temporary pre-signed upload URL for the build certificate and upload the file to AWS with a simple `curl` request. To complete the uploading process and view your files on the Code Signing tab of your app, continue with the [POST /apps/{app-slug}/build-certificates/{build-certificate-slug}/uploaded](https://api-docs.bitrise.io/#/build-certificate/build-certificate-confirm) endpoint. Read more in our [Creating and uploading an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#creating--uploading-an-ios-code-signing-file) guide.",
@@ -946,7 +1025,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Retrieve data of a specific build certificate. You can fetch the build certificate slug for this endpoint if you first call the [GET /apps/{app-slug}/build-certificates](https://api-docs.bitrise.io/#/build-certificate/build-certificate-list) endpoint to list all available build certificates of an app. Read more in our [Getting a specific iOS code signing file's data](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#getting-a-specific-ios-code-signing-files-data) guide.",
@@ -1015,7 +1094,7 @@
             "delete": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Delete an app's build certificate. You can fetch the build certificate slug for this endpoint if you first call the [GET /apps/{app-slug}/build-certificates](https://api-docs.bitrise.io/#/build-certificate/build-certificate-list) endpoint to list all available build certificates of an app. Read more in our [Deleting an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#deleting-an-ios-code-signing-file) guide.",
@@ -1084,7 +1163,7 @@
             "patch": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Update an uploaded build certificate's attributes. You can fetch the build certificate slug for this endpoint if you first call the [GET /apps/{app-slug}/build-certificates](https://api-docs.bitrise.io/#/build-certificate/build-certificate-list) endpoint. Read more in our [Updating an uploaded iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.",
@@ -1168,7 +1247,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "This is the last step of uploading a build certificate to Bitrise. Confirm the build certificate upload and view the file on the Code Signing tab of a specific app. Read more in our [Confirming the iOS code signing file upload](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.",
@@ -1242,7 +1321,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "List the existing open build requests of a specified Bitrise app",
@@ -1306,7 +1388,7 @@
             "patch": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Update a specific build request of a specific app",
@@ -1390,7 +1472,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "List the workflows that were triggered at any time for a given Bitrise app. Note that it might list workflows that are currently not defined in the app's `bitrise.yml` configuration - and conversely, workflows that were never triggered will not be listed even if they are defined in the `bitrise.yml` file.",
@@ -1454,7 +1539,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "List all the builds of a specified Bitrise app. Set parameters to filter builds: for example, you can search for builds run with a given workflow or all builds that were triggered by Pull Requests. It returns all the relevant data of the build.",
@@ -1592,7 +1680,10 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "Trigger a new build. Specify an app slug and at least one parameter out of three: a git tag or git commit hash, a branch, or a workflow ID. You can also set specific parameters for Pull Request builds and define additional environment variables for your build. [Check out our detailed guide](https://devcenter.bitrise.io/api/build-trigger/).",
@@ -1669,7 +1760,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "Get the specified build of a given Bitrise app. You need to provide both an app slug and a build slug. You can get the build slug either by calling the [/builds](https://api-docs.bitrise.io/#/builds/build-list) endpoint or by clicking on the build on bitrise.io and copying the slug from the URL. The endpoint returns all the relevant data of the build.",
@@ -1740,7 +1834,10 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "Abort a specific build. Set an abort reason with the `abort_reason` parameter. Use the `abort_with_success` parameter to abort a build but still count it as a successful one.",
@@ -1831,7 +1928,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "List all build artifacts that have been generated for an app's build. You can use the created build artifact slugs from the response output to retrieve data of a specific build artifact with the [GET/apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-show) endpoint or update a build artifact with the [PATCH/apps](https://api-docs.bitrise.io/#/build-artifact/artifact-update) endpoint.",
@@ -1914,7 +2014,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "Retrieve data of a specific build artifact. The response output contains a time-limited download url (expires in 10 minutes) and a public install page URL. You can view the build artifact with both URLs, but the public install page url will not work unless you [enable it](https://devcenter.bitrise.io/tutorials/deploy/bitrise-app-deployment/#enabling-public-page-for-the-app).",
@@ -1990,7 +2093,7 @@
             "delete": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Delete a build artifact of an app's build. The required parameters are app slug, build slug and artifact slug. You can fetch the build artifact slug if you first list all build artifacts of an app with the [/apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-list) endpoint.",
@@ -2066,7 +2169,7 @@
             "patch": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Update the `is_public_page_enabled` attribute of your app's build. The required parameters are app slug, build slug and artifact slug. You can fetch the build artifact slug if you first list all build artifacts of an app with the [GET /apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-list) endpoint.",
@@ -2157,7 +2260,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "Get the bitrise.yml file of one of the builds of a given app. This will return the `bitrise.yml` configuration with which the build ran. You can compare it to [the current bitrise.yml configuration](https://api-docs.bitrise.io/#/application/app-config-datastore-show) of the app.",
@@ -2227,7 +2333,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "Get the build log of a specified build of a Bitrise app. You can get the build slug either by calling the [/builds](https://api-docs.bitrise.io/#/builds/build-list) endpoint or by clicking on the build on bitrise.io and copying the slug from the URL.",
@@ -2298,7 +2407,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Save the application after registering it on Bitrise and registering an SSH key (and, optionally, adding a webhook). With this endpoint you can define the initial configuration, define application-level environment variables, determine the project type, and set an Organization to be the owner of the app. Read more about the app registration process in our [detailed guide](https://devcenter.bitrise.io/api/adding-and-managing-apps/#adding-a-new-app).",
@@ -2375,7 +2484,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "List all the generic project files that have been uploaded to a specific app. Read more in our [Listing the uploaded files of an app](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#listing-the-uploaded-files-of-an-app) guide.",
@@ -2449,7 +2561,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Create a temporary pre-signed upload URL (expires in 10 minutes) for the generic project file and upload it to AWS with a simple `curl` request. To complete the uploading process and view your files on the Code Signing tab of your app, continue with the [POST /apps/{app-slug}/generic-project-files/{generic-project-file-slug}/uploaded](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-confirm) endpoint. Read more in our [Creating and uploading files to Generic File Storage](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#creating-and-uploading-files-to-generic-file-storage) guide.",
@@ -2526,7 +2638,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Retrieve data of a specific generic project file to check its attributes and optionally modify them with the [PATCH /apps/](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-update) endpoint. Read more in our [Retrieving a specific file's data](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#retrieving-a-specific-files-data) guide.",
@@ -2595,7 +2707,7 @@
             "delete": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Delete an app's generic project file. You can fetch an app's generic project file slug if you first list all the uploaded files with the [GET /apps/{app-slug}/generic-project-files](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-list) endpoint. Read more in our [Deleting a file](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#deleting-a-file) guide.",
@@ -2664,7 +2776,7 @@
             "patch": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Update a generic project file's attributes. You can fetch an app's generic project file slug if you first list all the uploaded files with the [GET /apps/{app-slug}/generic-project-files](https://api-docs.bitrise.io/#/generic-project-file/generic-project-file-list) endpoint. Read more in our [Updating an uploaded file](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#updating-an-uploaded-file) guide.",
@@ -2748,7 +2860,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "This is the last step of uploading a generic project file to Bitrise. Confirm the generic project file upload and view the file on the Code Signing tab of a specific app. Read more in our [Confirming the upload](https://devcenter.bitrise.io/api/managing-files-in-generic-file-storage/#confirming-the-file-upload) guide.",
@@ -2822,7 +2934,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "List all the outgoing webhooks registered for a specified Bitrise app. This returns all the relevant data of the webhook, including the slug of the webhook and its URL.",
@@ -2889,7 +3004,10 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "Create an outgoing webhook for a specified Bitrise app: this can be used to send build events to a specified URL with custom headers. Currently, only build events can trigger outgoing webhooks.",
@@ -2963,7 +3081,7 @@
             "put": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Update an existing outgoing webhook (URL, events, secrets and headers) for a specified Bitrise app. Even if you do not want to change one of the parameters, you still have to provide that parameter as well: simply use its existing value.",
@@ -3042,7 +3160,7 @@
             "delete": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Delete an existing outgoing webhook for a specified Bitrise app.",
@@ -3113,7 +3231,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "List all the delivery items of an outgoing webhook of a Bitrise application",
@@ -3189,7 +3307,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Get the specified delivery item of an outgoing webhook of a Bitrise application",
@@ -3260,7 +3378,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Re-deliver the delivery item of a specified webhook of a Bitrise application",
@@ -3331,7 +3449,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "List all the provisioning profiles that have been uploaded to a specific app. Read more in our [Listing the uploaded iOS code signing files of an app](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#listing-the-uploaded-ios-code-signing-files-of-an-app) guide.",
@@ -3405,7 +3526,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Create a temporary pre-signed upload URL (expires in 10 minutes) for the provisioning profile and upload it to AWS with a simple `curl` request. To complete the upload process, continue with the [POST /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}/uploaded](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-confirm) endpoint. Read more in our [Creating and uploading an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#creating--uploading-an-ios-code-signing-file) guide.",
@@ -3482,7 +3603,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Retrieve data of a specific provisioning profile. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Getting a specific iOS code signing file's data](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#getting-a-specific-ios-code-signing-files-data) guide.",
@@ -3551,7 +3672,7 @@
             "delete": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Delete an app's provisioning profile. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Deleting an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#deleting-an-ios-code-signing-file) guide.",
@@ -3620,7 +3741,7 @@
             "patch": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Update an uploaded provisioning profile's attributes. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Updating an uploaded iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.",
@@ -3704,7 +3825,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "This is the last step of the upload process. Confirm the provisioning profile upload and view the file on the Code Signing tab of a specific app. Read more in our [Confirming the iOS code signing file upload](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.",
@@ -3778,7 +3899,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Add an SSH-key to a specific app. After creating an app, you need to register the SSH key so that Bitrise will be able to access and clone your repository during the build process. This requires the app slug of your newly created app.",
@@ -3855,7 +3976,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "[Register an incoming webhook](https://devcenter.bitrise.io/api/incoming-and-outgoing-webhooks/#incoming-webhooks) for a specific application. You can do this during the app registration process or at any other time in an app's life. When calling this endpoint, a webhook is registered at your git provider: this is necessary to automatically trigger builds on Bitrise.",
@@ -3922,7 +4043,10 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
+                    },
+                    {
+                        "AddonAuthToken": []
                     }
                 ],
                 "description": "List registered test devices of all members of a specified Bitrise app",
@@ -3986,7 +4110,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "List all the Bitrise builds that can be accessed with the authenticated account. Filter builds based on their owner, using the owner slug, or the status of the build.",
@@ -4073,7 +4197,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Shows the authenticated users profile data",
@@ -4121,7 +4245,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "List all the Bitrise activity events",
@@ -4190,7 +4314,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Get the subscription of the user: the current plan, any pending plans, and the duration of a trial period if applicable",
@@ -4245,7 +4369,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "List all Bitrise organizations that the user is part of",
@@ -4300,7 +4424,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Get a specified Bitrise organization that the user is part of.",
@@ -4364,7 +4488,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "List all the available apps owned by a given organization. [Find the organization URL](https://devcenter.bitrise.io/team-management/organizations/org-url/) of the organisations you are part of; be aware that the endpoint will not return any apps if the authenticated account is not a member of the given organisation.",
@@ -4453,7 +4577,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "List all the provisioned addons for organization",
@@ -4517,7 +4641,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "Show information about a specific user",
@@ -4581,7 +4705,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "List all the provisioned addons for the authenticated user",
@@ -4645,7 +4769,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "List all the available apps for the given user.  It needs the user slug that you can get from the [GET /me](https://api-docs.bitrise.io/#/user/user-profile) endpoint.",
@@ -4731,7 +4855,7 @@
             "get": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "PersonalAccessToken": []
                     }
                 ],
                 "description": "List all available avatar candidates for an application",
@@ -5025,6 +5149,44 @@
                 },
                 "upload_file_size": {
                     "type": "integer"
+                }
+            }
+        },
+        "v0.AppAddOnResponseItemModel": {
+            "type": "object",
+            "properties": {
+                "dashboard_url": {
+                    "type": "string"
+                },
+                "documentation_url": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "plan": {
+                    "type": "object",
+                    "$ref": "#/definitions/addons.Plan"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.AppAddOnsListResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.AppAddOnResponseItemModel"
+                    }
                 }
             }
         },
@@ -6484,7 +6646,12 @@
         }
     },
     "securityDefinitions": {
-        "ApiKeyAuth": {
+        "AddonAuthToken": {
+            "type": "apiKey",
+            "name": "Bitrise-Addon-Auth-Token",
+            "in": "header"
+        },
+        "PersonalAccessToken": {
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"

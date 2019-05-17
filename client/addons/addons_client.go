@@ -25,6 +25,37 @@ type Client struct {
 }
 
 /*
+AddonListByApp gets list of the addons for apps
+
+List all the provisioned addons for the authorized apps
+*/
+func (a *Client) AddonListByApp(params *AddonListByAppParams, authInfo runtime.ClientAuthInfoWriter) (*AddonListByAppOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAddonListByAppParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "addon-list-by-app",
+		Method:             "GET",
+		PathPattern:        "/apps/{app-slug}/addons",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &AddonListByAppReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*AddonListByAppOK), nil
+
+}
+
+/*
 AddonListByOrganization gets list of the addons for organization
 
 List all the provisioned addons for organization

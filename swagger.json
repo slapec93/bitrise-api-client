@@ -5482,6 +5482,9 @@
         "v0.ArtifactResponseItemModel": {
             "type": "object",
             "properties": {
+                "artifact_meta": {
+                    "type": "string"
+                },
                 "artifact_type": {
                     "type": "string"
                 },

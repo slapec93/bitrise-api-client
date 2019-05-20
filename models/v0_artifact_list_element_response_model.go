@@ -15,6 +15,9 @@ import (
 // swagger:model v0.ArtifactListElementResponseModel
 type V0ArtifactListElementResponseModel struct {
 
+	// artifact meta
+	ArtifactMeta string `json:"artifact_meta,omitempty"`
+
 	// artifact type
 	ArtifactType string `json:"artifact_type,omitempty"`
 

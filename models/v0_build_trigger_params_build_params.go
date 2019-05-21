@@ -55,7 +55,7 @@ type V0BuildTriggerParamsBuildParams struct {
 	PullRequestHeadBranch string `json:"pull_request_head_branch,omitempty"`
 
 	// pull request id
-	PullRequestID int64 `json:"pull_request_id,omitempty"`
+	PullRequestID interface{} `json:"pull_request_id,omitempty"`
 
 	// pull request merge branch
 	PullRequestMergeBranch string `json:"pull_request_merge_branch,omitempty"`

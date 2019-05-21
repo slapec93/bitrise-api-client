@@ -5400,6 +5400,9 @@
                 "headers": {
                     "type": "string"
                 },
+                "registered_by_addon": {
+                    "type": "boolean"
+                },
                 "slug": {
                     "type": "string"
                 },
@@ -6079,7 +6082,7 @@
                     "type": "string"
                 },
                 "pull_request_id": {
-                    "type": "integer"
+                    "type": "object"
                 },
                 "pull_request_merge_branch": {
                     "type": "string"

@@ -24,6 +24,9 @@ type V0AppWebhookResponseItemModel struct {
 	// headers
 	Headers string `json:"headers,omitempty"`
 
+	// registered by addon
+	RegisteredByAddon bool `json:"registered_by_addon,omitempty"`
+
 	// slug
 	Slug string `json:"slug,omitempty"`
 

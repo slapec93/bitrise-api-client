@@ -1708,7 +1708,7 @@
                     },
                     {
                         "description": "Build trigger parameters",
-                        "name": "ssh-key",
+                        "name": "build_params",
                         "in": "body",
                         "required": true,
                         "schema": {

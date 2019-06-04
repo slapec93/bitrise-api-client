@@ -68,11 +68,11 @@ type BuildTriggerParams struct {
 
 	*/
 	AppSlug string
-	/*SSHKey
+	/*BuildParams
 	  Build trigger parameters
 
 	*/
-	SSHKey *models.V0BuildTriggerParams
+	BuildParams *models.V0BuildTriggerParams
 
 	timeout    time.Duration
 	Context    context.Context
@@ -123,15 +123,15 @@ func (o *BuildTriggerParams) SetAppSlug(appSlug string) {
 	o.AppSlug = appSlug
 }
 
-// WithSSHKey adds the sSHKey to the build trigger params
-func (o *BuildTriggerParams) WithSSHKey(sSHKey *models.V0BuildTriggerParams) *BuildTriggerParams {
-	o.SetSSHKey(sSHKey)
+// WithBuildParams adds the buildParams to the build trigger params
+func (o *BuildTriggerParams) WithBuildParams(buildParams *models.V0BuildTriggerParams) *BuildTriggerParams {
+	o.SetBuildParams(buildParams)
 	return o
 }
 
-// SetSSHKey adds the sshKey to the build trigger params
-func (o *BuildTriggerParams) SetSSHKey(sSHKey *models.V0BuildTriggerParams) {
-	o.SSHKey = sSHKey
+// SetBuildParams adds the buildParams to the build trigger params
+func (o *BuildTriggerParams) SetBuildParams(buildParams *models.V0BuildTriggerParams) {
+	o.BuildParams = buildParams
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -147,8 +147,8 @@ func (o *BuildTriggerParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 
-	if o.SSHKey != nil {
-		if err := r.SetBodyParam(o.SSHKey); err != nil {
+	if o.BuildParams != nil {
+		if err := r.SetBodyParam(o.BuildParams); err != nil {
 			return err
 		}
 	}

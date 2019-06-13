@@ -3043,7 +3043,7 @@
                         "description": "OK",
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/v0.AppWebhookResponseItemModel"
+                            "$ref": "#/definitions/v0.AppWebhookCreatedResponseModel"
                         }
                     },
                     "400": {
@@ -3193,7 +3193,7 @@
                         "description": "OK",
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/v0.AppWebhookResponseItemModel"
+                            "$ref": "#/definitions/v0.AppWebhookDeletedResponseModel"
                         }
                     },
                     "400": {
@@ -5372,6 +5372,24 @@
                 }
             }
         },
+        "v0.AppWebhookCreatedResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.AppWebhookResponseItemModel"
+                }
+            }
+        },
+        "v0.AppWebhookDeletedResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.AppWebhookResponseItemModel"
+                }
+            }
+        },
         "v0.AppWebhookListResponseModel": {
             "type": "object",
             "properties": {
@@ -5601,7 +5619,7 @@
                 }
             }
         },
-        "v0.AvatarPromoteResponseModel": {
+        "v0.AvatarPromoteResponseItemModel": {
             "type": "object",
             "properties": {
                 "is_candidate": {
@@ -5615,6 +5633,15 @@
                 },
                 "upload_file_size": {
                     "type": "integer"
+                }
+            }
+        },
+        "v0.AvatarPromoteResponseModel": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/v0.AvatarPromoteResponseItemModel"
                 }
             }
         },

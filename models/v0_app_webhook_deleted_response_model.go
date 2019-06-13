@@ -12,16 +12,16 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// V0AvatarPromoteResponseModel v0 avatar promote response model
-// swagger:model v0.AvatarPromoteResponseModel
-type V0AvatarPromoteResponseModel struct {
+// V0AppWebhookDeletedResponseModel v0 app webhook deleted response model
+// swagger:model v0.AppWebhookDeletedResponseModel
+type V0AppWebhookDeletedResponseModel struct {
 
 	// data
-	Data *V0AvatarPromoteResponseItemModel `json:"data,omitempty"`
+	Data *V0AppWebhookResponseItemModel `json:"data,omitempty"`
 }
 
-// Validate validates this v0 avatar promote response model
-func (m *V0AvatarPromoteResponseModel) Validate(formats strfmt.Registry) error {
+// Validate validates this v0 app webhook deleted response model
+func (m *V0AppWebhookDeletedResponseModel) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -34,7 +34,7 @@ func (m *V0AvatarPromoteResponseModel) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V0AvatarPromoteResponseModel) validateData(formats strfmt.Registry) error {
+func (m *V0AppWebhookDeletedResponseModel) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -53,7 +53,7 @@ func (m *V0AvatarPromoteResponseModel) validateData(formats strfmt.Registry) err
 }
 
 // MarshalBinary interface implementation
-func (m *V0AvatarPromoteResponseModel) MarshalBinary() ([]byte, error) {
+func (m *V0AppWebhookDeletedResponseModel) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -61,8 +61,8 @@ func (m *V0AvatarPromoteResponseModel) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V0AvatarPromoteResponseModel) UnmarshalBinary(b []byte) error {
-	var res V0AvatarPromoteResponseModel
+func (m *V0AppWebhookDeletedResponseModel) UnmarshalBinary(b []byte) error {
+	var res V0AppWebhookDeletedResponseModel
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

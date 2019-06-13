@@ -75,7 +75,7 @@ func NewOutgoingWebhookCreateOK() *OutgoingWebhookCreateOK {
 OK
 */
 type OutgoingWebhookCreateOK struct {
-	Payload *models.V0AppWebhookResponseItemModel
+	Payload *models.V0AppWebhookCreatedResponseModel
 }
 
 func (o *OutgoingWebhookCreateOK) Error() string {
@@ -84,7 +84,7 @@ func (o *OutgoingWebhookCreateOK) Error() string {
 
 func (o *OutgoingWebhookCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.V0AppWebhookResponseItemModel)
+	o.Payload = new(models.V0AppWebhookCreatedResponseModel)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

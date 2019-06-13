@@ -75,7 +75,7 @@ func NewOutgoingWebhookDeleteOK() *OutgoingWebhookDeleteOK {
 OK
 */
 type OutgoingWebhookDeleteOK struct {
-	Payload *models.V0AppWebhookResponseItemModel
+	Payload *models.V0AppWebhookDeletedResponseModel
 }
 
 func (o *OutgoingWebhookDeleteOK) Error() string {
@@ -84,7 +84,7 @@ func (o *OutgoingWebhookDeleteOK) Error() string {
 
 func (o *OutgoingWebhookDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.V0AppWebhookResponseItemModel)
+	o.Payload = new(models.V0AppWebhookDeletedResponseModel)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

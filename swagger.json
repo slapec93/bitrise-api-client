@@ -6090,7 +6090,7 @@
                 "commit_paths": {
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/v0.CommitPaths"
                     }
                 },
                 "diff_url": {
@@ -6171,6 +6171,29 @@
             "type": "object",
             "properties": {
                 "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "v0.CommitPaths": {
+            "type": "object",
+            "properties": {
+                "added": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "modified": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "removed": {
                     "type": "array",
                     "items": {
                         "type": "string"

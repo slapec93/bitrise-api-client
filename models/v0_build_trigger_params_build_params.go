@@ -40,7 +40,7 @@ type V0BuildTriggerParamsBuildParams struct {
 	CommitMessage string `json:"commit_message,omitempty"`
 
 	// commit paths
-	CommitPaths []string `json:"commit_paths"`
+	CommitPaths []*V0CommitPaths `json:"commit_paths"`
 
 	// diff url
 	DiffURL string `json:"diff_url,omitempty"`
@@ -77,6 +77,10 @@ type V0BuildTriggerParamsBuildParams struct {
 func (m *V0BuildTriggerParamsBuildParams) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCommitPaths(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEnvironments(formats); err != nil {
 		res = append(res, err)
 	}
@@ -84,6 +88,31 @@ func (m *V0BuildTriggerParamsBuildParams) Validate(formats strfmt.Registry) erro
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V0BuildTriggerParamsBuildParams) validateCommitPaths(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CommitPaths) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.CommitPaths); i++ {
+		if swag.IsZero(m.CommitPaths[i]) { // not required
+			continue
+		}
+
+		if m.CommitPaths[i] != nil {
+			if err := m.CommitPaths[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("commit_paths" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

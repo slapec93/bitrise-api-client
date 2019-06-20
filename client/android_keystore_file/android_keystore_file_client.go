@@ -55,6 +55,37 @@ func (a *Client) AndroidKeystoreFileCreate(params *AndroidKeystoreFileCreatePara
 
 }
 
+/*
+AndroidKeystoreFileList gets a list of the android keystore files
+
+List all the android keystore files that have been uploaded to a specific app.
+*/
+func (a *Client) AndroidKeystoreFileList(params *AndroidKeystoreFileListParams, authInfo runtime.ClientAuthInfoWriter) (*AndroidKeystoreFileListOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAndroidKeystoreFileListParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "android-keystore-file-list",
+		Method:             "GET",
+		PathPattern:        "/apps/{app-slug}/android-keystore-files",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &AndroidKeystoreFileListReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*AndroidKeystoreFileListOK), nil
+
+}
+
 // SetTransport changes the transport on the client
 func (a *Client) SetTransport(transport runtime.ClientTransport) {
 	a.transport = transport

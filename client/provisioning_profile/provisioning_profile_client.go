@@ -6,6 +6,8 @@ package provisioning_profile
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
@@ -51,8 +53,14 @@ func (a *Client) ProvisioningProfileConfirm(params *ProvisioningProfileConfirmPa
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ProvisioningProfileConfirmOK), nil
-
+	success, ok := result.(*ProvisioningProfileConfirmOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for provisioning-profile-confirm: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -82,8 +90,14 @@ func (a *Client) ProvisioningProfileCreate(params *ProvisioningProfileCreatePara
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ProvisioningProfileCreateCreated), nil
-
+	success, ok := result.(*ProvisioningProfileCreateCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for provisioning-profile-create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -113,8 +127,14 @@ func (a *Client) ProvisioningProfileDelete(params *ProvisioningProfileDeletePara
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ProvisioningProfileDeleteOK), nil
-
+	success, ok := result.(*ProvisioningProfileDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for provisioning-profile-delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -144,8 +164,14 @@ func (a *Client) ProvisioningProfileList(params *ProvisioningProfileListParams, 
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ProvisioningProfileListOK), nil
-
+	success, ok := result.(*ProvisioningProfileListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for provisioning-profile-list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -175,8 +201,14 @@ func (a *Client) ProvisioningProfileShow(params *ProvisioningProfileShowParams, 
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ProvisioningProfileShowOK), nil
-
+	success, ok := result.(*ProvisioningProfileShowOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for provisioning-profile-show: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -206,8 +238,14 @@ func (a *Client) ProvisioningProfileUpdate(params *ProvisioningProfileUpdatePara
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ProvisioningProfileUpdateOK), nil
-
+	success, ok := result.(*ProvisioningProfileUpdateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for provisioning-profile-update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

@@ -24,35 +24,30 @@ type GenericProjectFileDeleteReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *GenericProjectFileDeleteReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewGenericProjectFileDeleteOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	case 400:
 		result := NewGenericProjectFileDeleteBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 401:
 		result := NewGenericProjectFileDeleteUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 404:
 		result := NewGenericProjectFileDeleteNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 500:
 		result := NewGenericProjectFileDeleteInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {

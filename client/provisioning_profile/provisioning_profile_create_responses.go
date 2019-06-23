@@ -24,35 +24,30 @@ type ProvisioningProfileCreateReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *ProvisioningProfileCreateReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 201:
 		result := NewProvisioningProfileCreateCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	case 400:
 		result := NewProvisioningProfileCreateBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 401:
 		result := NewProvisioningProfileCreateUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 404:
 		result := NewProvisioningProfileCreateNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 500:
 		result := NewProvisioningProfileCreateInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {

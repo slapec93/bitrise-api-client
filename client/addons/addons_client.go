@@ -6,6 +6,8 @@ package addons
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
@@ -51,8 +53,14 @@ func (a *Client) AddonListByApp(params *AddonListByAppParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AddonListByAppOK), nil
-
+	success, ok := result.(*AddonListByAppOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for addon-list-by-app: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -82,8 +90,14 @@ func (a *Client) AddonListByOrganization(params *AddonListByOrganizationParams, 
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AddonListByOrganizationOK), nil
-
+	success, ok := result.(*AddonListByOrganizationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for addon-list-by-organization: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -113,8 +127,14 @@ func (a *Client) AddonListByUser(params *AddonListByUserParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AddonListByUserOK), nil
-
+	success, ok := result.(*AddonListByUserOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for addon-list-by-user: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -144,8 +164,14 @@ func (a *Client) AddonsList(params *AddonsListParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AddonsListOK), nil
-
+	success, ok := result.(*AddonsListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for addons-list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -175,8 +201,14 @@ func (a *Client) AddonsShow(params *AddonsShowParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AddonsShowOK), nil
-
+	success, ok := result.(*AddonsShowOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for addons-show: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

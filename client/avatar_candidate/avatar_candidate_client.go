@@ -6,6 +6,8 @@ package avatar_candidate
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
@@ -51,8 +53,14 @@ func (a *Client) AvatarCandidateCreate(params *AvatarCandidateCreateParams, auth
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AvatarCandidateCreateCreated), nil
-
+	success, ok := result.(*AvatarCandidateCreateCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for avatar-candidate-create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -82,8 +90,14 @@ func (a *Client) AvatarCandidateList(params *AvatarCandidateListParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AvatarCandidateListOK), nil
-
+	success, ok := result.(*AvatarCandidateListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for avatar-candidate-list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -113,8 +127,14 @@ func (a *Client) AvatarCandidatePromote(params *AvatarCandidatePromoteParams, au
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AvatarCandidatePromoteOK), nil
-
+	success, ok := result.(*AvatarCandidatePromoteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for avatar-candidate-promote: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

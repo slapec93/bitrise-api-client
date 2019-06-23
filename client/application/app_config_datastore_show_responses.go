@@ -24,35 +24,30 @@ type AppConfigDatastoreShowReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *AppConfigDatastoreShowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewAppConfigDatastoreShowOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	case 400:
 		result := NewAppConfigDatastoreShowBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 401:
 		result := NewAppConfigDatastoreShowUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 404:
 		result := NewAppConfigDatastoreShowNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 500:
 		result := NewAppConfigDatastoreShowInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {

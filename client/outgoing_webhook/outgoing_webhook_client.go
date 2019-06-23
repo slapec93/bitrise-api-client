@@ -6,6 +6,8 @@ package outgoing_webhook
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
@@ -51,8 +53,14 @@ func (a *Client) OutgoingWebhookCreate(params *OutgoingWebhookCreateParams, auth
 	if err != nil {
 		return nil, err
 	}
-	return result.(*OutgoingWebhookCreateOK), nil
-
+	success, ok := result.(*OutgoingWebhookCreateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for outgoing-webhook-create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -82,8 +90,14 @@ func (a *Client) OutgoingWebhookDelete(params *OutgoingWebhookDeleteParams, auth
 	if err != nil {
 		return nil, err
 	}
-	return result.(*OutgoingWebhookDeleteOK), nil
-
+	success, ok := result.(*OutgoingWebhookDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for outgoing-webhook-delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -113,8 +127,14 @@ func (a *Client) OutgoingWebhookList(params *OutgoingWebhookListParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	return result.(*OutgoingWebhookListOK), nil
-
+	success, ok := result.(*OutgoingWebhookListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for outgoing-webhook-list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -144,8 +164,14 @@ func (a *Client) OutgoingWebhookUpdate(params *OutgoingWebhookUpdateParams, auth
 	if err != nil {
 		return nil, err
 	}
-	return result.(*OutgoingWebhookUpdateOK), nil
-
+	success, ok := result.(*OutgoingWebhookUpdateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for outgoing-webhook-update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

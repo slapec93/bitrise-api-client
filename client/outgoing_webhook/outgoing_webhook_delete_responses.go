@@ -24,35 +24,30 @@ type OutgoingWebhookDeleteReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *OutgoingWebhookDeleteReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewOutgoingWebhookDeleteOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	case 400:
 		result := NewOutgoingWebhookDeleteBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 401:
 		result := NewOutgoingWebhookDeleteUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 404:
 		result := NewOutgoingWebhookDeleteNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 500:
 		result := NewOutgoingWebhookDeleteInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {

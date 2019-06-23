@@ -6,6 +6,8 @@ package android_keystore_file
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
@@ -51,8 +53,14 @@ func (a *Client) AndroidKeystoreFileCreate(params *AndroidKeystoreFileCreatePara
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AndroidKeystoreFileCreateCreated), nil
-
+	success, ok := result.(*AndroidKeystoreFileCreateCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for android-keystore-file-create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -82,8 +90,14 @@ func (a *Client) AndroidKeystoreFileList(params *AndroidKeystoreFileListParams, 
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AndroidKeystoreFileListOK), nil
-
+	success, ok := result.(*AndroidKeystoreFileListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for android-keystore-file-list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

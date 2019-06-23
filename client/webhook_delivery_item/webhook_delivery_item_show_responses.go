@@ -24,28 +24,24 @@ type WebhookDeliveryItemShowReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *WebhookDeliveryItemShowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewWebhookDeliveryItemShowOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	case 400:
 		result := NewWebhookDeliveryItemShowBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 401:
 		result := NewWebhookDeliveryItemShowUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 500:
 		result := NewWebhookDeliveryItemShowInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {

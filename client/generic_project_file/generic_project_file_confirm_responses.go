@@ -24,35 +24,30 @@ type GenericProjectFileConfirmReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *GenericProjectFileConfirmReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewGenericProjectFileConfirmOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	case 400:
 		result := NewGenericProjectFileConfirmBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 401:
 		result := NewGenericProjectFileConfirmUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 404:
 		result := NewGenericProjectFileConfirmNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 500:
 		result := NewGenericProjectFileConfirmInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {

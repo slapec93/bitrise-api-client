@@ -6,6 +6,8 @@ package generic_project_file
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
@@ -51,8 +53,14 @@ func (a *Client) GenericProjectFileConfirm(params *GenericProjectFileConfirmPara
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GenericProjectFileConfirmOK), nil
-
+	success, ok := result.(*GenericProjectFileConfirmOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for generic-project-file-confirm: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -82,8 +90,14 @@ func (a *Client) GenericProjectFileDelete(params *GenericProjectFileDeleteParams
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GenericProjectFileDeleteOK), nil
-
+	success, ok := result.(*GenericProjectFileDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for generic-project-file-delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -113,8 +127,14 @@ func (a *Client) GenericProjectFileList(params *GenericProjectFileListParams, au
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GenericProjectFileListOK), nil
-
+	success, ok := result.(*GenericProjectFileListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for generic-project-file-list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -144,8 +164,14 @@ func (a *Client) GenericProjectFileShow(params *GenericProjectFileShowParams, au
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GenericProjectFileShowOK), nil
-
+	success, ok := result.(*GenericProjectFileShowOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for generic-project-file-show: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -175,8 +201,14 @@ func (a *Client) GenericProjectFileUpdate(params *GenericProjectFileUpdateParams
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GenericProjectFileUpdateOK), nil
-
+	success, ok := result.(*GenericProjectFileUpdateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for generic-project-file-update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -206,8 +238,14 @@ func (a *Client) GenericProjectFilesCreate(params *GenericProjectFilesCreatePara
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GenericProjectFilesCreateCreated), nil
-
+	success, ok := result.(*GenericProjectFilesCreateCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for generic-project-files-create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

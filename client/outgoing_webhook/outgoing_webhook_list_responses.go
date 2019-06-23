@@ -24,28 +24,24 @@ type OutgoingWebhookListReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *OutgoingWebhookListReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewOutgoingWebhookListOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	case 400:
 		result := NewOutgoingWebhookListBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 401:
 		result := NewOutgoingWebhookListUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	case 500:
 		result := NewOutgoingWebhookListInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {

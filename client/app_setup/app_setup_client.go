@@ -6,6 +6,8 @@ package app_setup
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
@@ -51,8 +53,14 @@ func (a *Client) AppConfigCreate(params *AppConfigCreateParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AppConfigCreateOK), nil
-
+	success, ok := result.(*AppConfigCreateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for app-config-create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -82,8 +90,14 @@ func (a *Client) AppCreate(params *AppCreateParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AppCreateOK), nil
-
+	success, ok := result.(*AppCreateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for app-create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -113,8 +127,14 @@ func (a *Client) AppFinish(params *AppFinishParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AppFinishOK), nil
-
+	success, ok := result.(*AppFinishOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for app-finish: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -144,8 +164,14 @@ func (a *Client) AppWebhookCreate(params *AppWebhookCreateParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AppWebhookCreateOK), nil
-
+	success, ok := result.(*AppWebhookCreateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for app-webhook-create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -175,8 +201,14 @@ func (a *Client) SSHKeyCreate(params *SSHKeyCreateParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	return result.(*SSHKeyCreateOK), nil
-
+	success, ok := result.(*SSHKeyCreateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ssh-key-create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

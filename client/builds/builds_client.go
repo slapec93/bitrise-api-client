@@ -6,6 +6,8 @@ package builds
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
@@ -51,8 +53,14 @@ func (a *Client) BuildAbort(params *BuildAbortParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	return result.(*BuildAbortOK), nil
-
+	success, ok := result.(*BuildAbortOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for build-abort: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -82,8 +90,14 @@ func (a *Client) BuildBitriseYmlShow(params *BuildBitriseYmlShowParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	return result.(*BuildBitriseYmlShowOK), nil
-
+	success, ok := result.(*BuildBitriseYmlShowOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for build-bitrise-yml-show: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -113,8 +127,14 @@ func (a *Client) BuildList(params *BuildListParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	return result.(*BuildListOK), nil
-
+	success, ok := result.(*BuildListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for build-list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -144,8 +164,14 @@ func (a *Client) BuildListAll(params *BuildListAllParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	return result.(*BuildListAllOK), nil
-
+	success, ok := result.(*BuildListAllOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for build-list-all: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -175,8 +201,14 @@ func (a *Client) BuildLog(params *BuildLogParams, authInfo runtime.ClientAuthInf
 	if err != nil {
 		return nil, err
 	}
-	return result.(*BuildLogOK), nil
-
+	success, ok := result.(*BuildLogOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for build-log: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -206,8 +238,14 @@ func (a *Client) BuildShow(params *BuildShowParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	return result.(*BuildShowOK), nil
-
+	success, ok := result.(*BuildShowOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for build-show: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -237,8 +275,14 @@ func (a *Client) BuildTrigger(params *BuildTriggerParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	return result.(*BuildTriggerOK), nil
-
+	success, ok := result.(*BuildTriggerOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for build-trigger: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -268,8 +312,14 @@ func (a *Client) BuildWorkflowList(params *BuildWorkflowListParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	return result.(*BuildWorkflowListOK), nil
-
+	success, ok := result.(*BuildWorkflowListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for build-workflow-list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

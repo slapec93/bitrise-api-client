@@ -21,16 +21,16 @@ type V0AppUploadParams struct {
 	// The slug of the repository at the git provider
 	GitRepoSlug string `json:"git_repo_slug,omitempty"`
 
-	// If `true` then the repository visibility setting will be public, in case of `false` it will be private
+	// If true then the repository visibility setting will be public, in case of false it will be private
 	IsPublic bool `json:"is_public,omitempty"`
 
-	// The git provider you are using, it can be `github`, `bitbucket`, `gitlab`, `gitlab-self-hosted` or `custom`
+	// The git provider you are using, it can be github, bitbucket, gitlab, gitlab-self-hosted or custom
 	Provider string `json:"provider,omitempty"`
 
 	// The URL of your repository
 	RepoURL string `json:"repo_url,omitempty"`
 
-	// It has to be provided by legacy reasons and has to have the `git` value
+	// It has to be provided by legacy reasons and has to have the git value
 	Type string `json:"type,omitempty"`
 }
 

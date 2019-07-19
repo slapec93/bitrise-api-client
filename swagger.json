@@ -39,35 +39,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AddonsListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -103,35 +98,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AddonsShowResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -182,35 +172,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -252,35 +237,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppRespModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -319,35 +299,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppShowResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -386,35 +361,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppAddOnsListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -465,35 +435,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProjectFileStorageListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -540,35 +505,30 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -617,35 +577,30 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AvatarCandidateCreateResponseItems"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -701,35 +656,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AvatarPromoteResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -774,28 +724,24 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -842,35 +788,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppConfigRespModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -909,35 +850,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BranchListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -988,35 +924,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildCertificateListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1063,35 +994,30 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildCertificateResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1134,35 +1060,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildCertificateResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1203,35 +1124,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildCertificateResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1285,35 +1201,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildCertificateResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1359,35 +1270,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildCertificateResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1426,35 +1332,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildRequestListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1510,35 +1411,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildRequestUpdateResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1577,35 +1473,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildWorkflowListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1720,35 +1611,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1798,35 +1684,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildTriggerRespModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1872,35 +1753,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildShowResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -1959,42 +1835,36 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildAbortResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "429": {
                         "description": "Too Many Requests",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2052,35 +1922,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ArtifactListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2133,35 +1998,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ArtifactShowResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2209,35 +2069,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ArtifactDeleteResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2298,35 +2153,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ArtifactShowResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2378,28 +2228,24 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2445,35 +2291,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildLogInfoResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2522,35 +2363,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppFinishRespModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2601,35 +2437,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProjectFileStorageListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2676,35 +2507,30 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2747,35 +2573,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2816,35 +2637,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2898,35 +2714,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -2972,35 +2783,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProjectFileStorageResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3051,28 +2857,24 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppWebhookListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3119,35 +2921,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppWebhookCreatedResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3200,35 +2997,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppWebhookResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3269,35 +3061,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppWebhookDeletedResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3352,28 +3139,24 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.WebhookDeliveryItemShowResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3423,28 +3206,24 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.WebhookDeliveryItemResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3494,28 +3273,24 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3566,35 +3341,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProvisionProfileListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3641,35 +3411,30 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProvisionProfileResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3712,35 +3477,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProvisionProfileResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3781,35 +3541,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProvisionProfileResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3863,35 +3618,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProvisionProfileResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -3937,35 +3687,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProvisionProfileResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4014,35 +3759,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.SSHKeyRespModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4081,35 +3821,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.WebhookRespModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4148,35 +3883,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.TestDeviceListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4235,35 +3965,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildListAllResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4290,28 +4015,24 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.UserProfileRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4352,35 +4073,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ActivityEventListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4407,35 +4123,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.UserPlanRespModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4462,35 +4173,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.OrganizationListRespModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4526,35 +4232,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.OrganizationRespModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4615,35 +4316,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4679,35 +4375,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.OwnerAddOnsListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4743,35 +4434,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.UserProfileRespModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4807,35 +4493,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.OwnerAddOnsListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4893,35 +4574,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppListResponseModel"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -4960,35 +4636,30 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.FindAvatarCandidateResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/service.StandardErrorRespModel"
                         }
                     }
@@ -5015,9 +4686,6 @@
                         "type": "string"
                     }
                 },
-                "dashboard_url": {
-                    "type": "string"
-                },
                 "description": {
                     "type": "string"
                 },
@@ -5029,6 +4697,9 @@
                 },
                 "documentation_url": {
                     "type": "string"
+                },
+                "has_ui": {
+                    "type": "boolean"
                 },
                 "icon": {
                     "type": "string"
@@ -5232,11 +4903,11 @@
         "v0.AppAddOnResponseItemModel": {
             "type": "object",
             "properties": {
-                "dashboard_url": {
-                    "type": "string"
-                },
                 "documentation_url": {
                     "type": "string"
+                },
+                "has_ui": {
+                    "type": "boolean"
                 },
                 "icon": {
                     "type": "string"
@@ -5283,7 +4954,7 @@
             "type": "object",
             "properties": {
                 "config": {
-                    "description": "Which config to use `default-android-config`, `default-cordova-config`, `default-fastlane-config`, `default-ionic-config`, `default-ios-config`,`default-macos-config`, `default-react-native-config`, `default-xamarin-config`, `other-config` (default if parameter is not speficied)",
+                    "description": "Which config to use default-android-config, default-cordova-config, default-fastlane-config, default-ionic-config, default-ios-config,default-macos-config, default-react-native-config, default-xamarin-config, other-config (default if parameter is not speficied)",
                     "type": "string"
                 },
                 "envs": {
@@ -5291,7 +4962,7 @@
                     "type": "object"
                 },
                 "mode": {
-                    "description": "config specification mode, has to be specified with `manual` value",
+                    "description": "config specification mode, has to be specified with manual value",
                     "type": "string"
                 },
                 "organization_slug": {
@@ -5299,7 +4970,7 @@
                     "type": "string"
                 },
                 "project_type": {
-                    "description": "The type of your project (`android`, `ios`, `cordova`, `other`, `xamarin`, `macos`, `ionic`, `react-native`, `fastlane`, null)",
+                    "description": "The type of your project (android, ios, cordova, other, xamarin, macos, ionic, react-native, fastlane, null)",
                     "type": "string"
                 },
                 "stack_id": {
@@ -5415,11 +5086,11 @@
                     "type": "string"
                 },
                 "is_public": {
-                    "description": "If `true` then the repository visibility setting will be public, in case of `false` it will be private",
+                    "description": "If true then the repository visibility setting will be public, in case of false it will be private",
                     "type": "boolean"
                 },
                 "provider": {
-                    "description": "The git provider you are using, it can be `github`, `bitbucket`, `gitlab`, `gitlab-self-hosted` or `custom`",
+                    "description": "The git provider you are using, it can be github, bitbucket, gitlab, gitlab-self-hosted or custom",
                     "type": "string"
                 },
                 "repo_url": {
@@ -5427,7 +5098,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "It has to be provided by legacy reasons and has to have the `git` value",
+                    "description": "It has to be provided by legacy reasons and has to have the git value",
                     "type": "string"
                 }
             }
@@ -6383,11 +6054,11 @@
                         "$ref": "#/definitions/v0.AddOnAppResponseItemModel"
                     }
                 },
-                "dashboard_url": {
-                    "type": "string"
-                },
                 "documentation_url": {
                     "type": "string"
+                },
+                "has_ui": {
+                    "type": "boolean"
                 },
                 "icon": {
                     "type": "string"

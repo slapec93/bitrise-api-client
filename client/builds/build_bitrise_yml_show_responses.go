@@ -77,6 +77,10 @@ func (o *BuildBitriseYmlShowOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/bitrise.yml][%d] buildBitriseYmlShowOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildBitriseYmlShowOK) GetPayload() string {
+	return o.Payload
+}
+
 func (o *BuildBitriseYmlShowOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
@@ -102,6 +106,10 @@ type BuildBitriseYmlShowBadRequest struct {
 
 func (o *BuildBitriseYmlShowBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/bitrise.yml][%d] buildBitriseYmlShowBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildBitriseYmlShowBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildBitriseYmlShowBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -133,6 +141,10 @@ func (o *BuildBitriseYmlShowUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/bitrise.yml][%d] buildBitriseYmlShowUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildBitriseYmlShowUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildBitriseYmlShowUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -162,6 +174,10 @@ func (o *BuildBitriseYmlShowNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/bitrise.yml][%d] buildBitriseYmlShowNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildBitriseYmlShowNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildBitriseYmlShowNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -189,6 +205,10 @@ type BuildBitriseYmlShowInternalServerError struct {
 
 func (o *BuildBitriseYmlShowInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/bitrise.yml][%d] buildBitriseYmlShowInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildBitriseYmlShowInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildBitriseYmlShowInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

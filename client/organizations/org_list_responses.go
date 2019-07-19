@@ -77,6 +77,10 @@ func (o *OrgListOK) Error() string {
 	return fmt.Sprintf("[GET /organizations][%d] orgListOK  %+v", 200, o.Payload)
 }
 
+func (o *OrgListOK) GetPayload() *models.V0OrganizationListRespModel {
+	return o.Payload
+}
+
 func (o *OrgListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0OrganizationListRespModel)
@@ -104,6 +108,10 @@ type OrgListBadRequest struct {
 
 func (o *OrgListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /organizations][%d] orgListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *OrgListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *OrgListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *OrgListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /organizations][%d] orgListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *OrgListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *OrgListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *OrgListNotFound) Error() string {
 	return fmt.Sprintf("[GET /organizations][%d] orgListNotFound  %+v", 404, o.Payload)
 }
 
+func (o *OrgListNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *OrgListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type OrgListInternalServerError struct {
 
 func (o *OrgListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /organizations][%d] orgListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *OrgListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *OrgListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

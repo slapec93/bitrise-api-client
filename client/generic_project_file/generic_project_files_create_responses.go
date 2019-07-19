@@ -77,6 +77,10 @@ func (o *GenericProjectFilesCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/generic-project-files][%d] genericProjectFilesCreateCreated  %+v", 201, o.Payload)
 }
 
+func (o *GenericProjectFilesCreateCreated) GetPayload() *models.V0ProjectFileStorageResponseModel {
+	return o.Payload
+}
+
 func (o *GenericProjectFilesCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ProjectFileStorageResponseModel)
@@ -104,6 +108,10 @@ type GenericProjectFilesCreateBadRequest struct {
 
 func (o *GenericProjectFilesCreateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/generic-project-files][%d] genericProjectFilesCreateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GenericProjectFilesCreateBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *GenericProjectFilesCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *GenericProjectFilesCreateUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/generic-project-files][%d] genericProjectFilesCreateUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *GenericProjectFilesCreateUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *GenericProjectFilesCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *GenericProjectFilesCreateNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/generic-project-files][%d] genericProjectFilesCreateNotFound  %+v", 404, o.Payload)
 }
 
+func (o *GenericProjectFilesCreateNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *GenericProjectFilesCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type GenericProjectFilesCreateInternalServerError struct {
 
 func (o *GenericProjectFilesCreateInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/generic-project-files][%d] genericProjectFilesCreateInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GenericProjectFilesCreateInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *GenericProjectFilesCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

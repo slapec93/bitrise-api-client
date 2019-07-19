@@ -77,6 +77,10 @@ func (o *BuildCertificateListOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-certificates][%d] buildCertificateListOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildCertificateListOK) GetPayload() *models.V0BuildCertificateListResponseModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildCertificateListResponseModel)
@@ -104,6 +108,10 @@ type BuildCertificateListBadRequest struct {
 
 func (o *BuildCertificateListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-certificates][%d] buildCertificateListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildCertificateListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildCertificateListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BuildCertificateListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-certificates][%d] buildCertificateListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildCertificateListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BuildCertificateListNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-certificates][%d] buildCertificateListNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildCertificateListNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BuildCertificateListInternalServerError struct {
 
 func (o *BuildCertificateListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-certificates][%d] buildCertificateListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildCertificateListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildCertificateListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

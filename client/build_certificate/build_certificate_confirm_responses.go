@@ -77,6 +77,10 @@ func (o *BuildCertificateConfirmOK) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/build-certificates/{build-certificate-slug}/uploaded][%d] buildCertificateConfirmOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildCertificateConfirmOK) GetPayload() *models.V0BuildCertificateResponseModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateConfirmOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildCertificateResponseModel)
@@ -104,6 +108,10 @@ type BuildCertificateConfirmBadRequest struct {
 
 func (o *BuildCertificateConfirmBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/build-certificates/{build-certificate-slug}/uploaded][%d] buildCertificateConfirmBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildCertificateConfirmBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildCertificateConfirmBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BuildCertificateConfirmUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/build-certificates/{build-certificate-slug}/uploaded][%d] buildCertificateConfirmUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildCertificateConfirmUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateConfirmUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BuildCertificateConfirmNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/build-certificates/{build-certificate-slug}/uploaded][%d] buildCertificateConfirmNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildCertificateConfirmNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateConfirmNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BuildCertificateConfirmInternalServerError struct {
 
 func (o *BuildCertificateConfirmInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/build-certificates/{build-certificate-slug}/uploaded][%d] buildCertificateConfirmInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildCertificateConfirmInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildCertificateConfirmInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

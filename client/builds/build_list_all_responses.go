@@ -77,6 +77,10 @@ func (o *BuildListAllOK) Error() string {
 	return fmt.Sprintf("[GET /builds][%d] buildListAllOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildListAllOK) GetPayload() *models.V0BuildListAllResponseModel {
+	return o.Payload
+}
+
 func (o *BuildListAllOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildListAllResponseModel)
@@ -104,6 +108,10 @@ type BuildListAllBadRequest struct {
 
 func (o *BuildListAllBadRequest) Error() string {
 	return fmt.Sprintf("[GET /builds][%d] buildListAllBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildListAllBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildListAllBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BuildListAllUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /builds][%d] buildListAllUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildListAllUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildListAllUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BuildListAllNotFound) Error() string {
 	return fmt.Sprintf("[GET /builds][%d] buildListAllNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildListAllNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildListAllNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BuildListAllInternalServerError struct {
 
 func (o *BuildListAllInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /builds][%d] buildListAllInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildListAllInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildListAllInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -77,6 +77,10 @@ func (o *AddonListByUserOK) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}/addons][%d] addonListByUserOK  %+v", 200, o.Payload)
 }
 
+func (o *AddonListByUserOK) GetPayload() *models.V0OwnerAddOnsListResponseModel {
+	return o.Payload
+}
+
 func (o *AddonListByUserOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0OwnerAddOnsListResponseModel)
@@ -104,6 +108,10 @@ type AddonListByUserBadRequest struct {
 
 func (o *AddonListByUserBadRequest) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}/addons][%d] addonListByUserBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AddonListByUserBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AddonListByUserBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AddonListByUserUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}/addons][%d] addonListByUserUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AddonListByUserUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AddonListByUserUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AddonListByUserNotFound) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}/addons][%d] addonListByUserNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AddonListByUserNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AddonListByUserNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AddonListByUserInternalServerError struct {
 
 func (o *AddonListByUserInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}/addons][%d] addonListByUserInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AddonListByUserInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AddonListByUserInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

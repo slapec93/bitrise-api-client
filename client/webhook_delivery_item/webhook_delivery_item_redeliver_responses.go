@@ -71,6 +71,10 @@ func (o *WebhookDeliveryItemRedeliverOK) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items/{webhook-delivery-item-slug}/redeliver][%d] webhookDeliveryItemRedeliverOK  %+v", 200, o.Payload)
 }
 
+func (o *WebhookDeliveryItemRedeliverOK) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *WebhookDeliveryItemRedeliverOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -98,6 +102,10 @@ type WebhookDeliveryItemRedeliverBadRequest struct {
 
 func (o *WebhookDeliveryItemRedeliverBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items/{webhook-delivery-item-slug}/redeliver][%d] webhookDeliveryItemRedeliverBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *WebhookDeliveryItemRedeliverBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *WebhookDeliveryItemRedeliverBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -129,6 +137,10 @@ func (o *WebhookDeliveryItemRedeliverUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items/{webhook-delivery-item-slug}/redeliver][%d] webhookDeliveryItemRedeliverUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *WebhookDeliveryItemRedeliverUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *WebhookDeliveryItemRedeliverUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -156,6 +168,10 @@ type WebhookDeliveryItemRedeliverInternalServerError struct {
 
 func (o *WebhookDeliveryItemRedeliverInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items/{webhook-delivery-item-slug}/redeliver][%d] webhookDeliveryItemRedeliverInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *WebhookDeliveryItemRedeliverInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *WebhookDeliveryItemRedeliverInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

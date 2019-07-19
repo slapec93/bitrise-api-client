@@ -71,6 +71,10 @@ func (o *WebhookDeliveryItemListOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items][%d] webhookDeliveryItemListOK  %+v", 200, o.Payload)
 }
 
+func (o *WebhookDeliveryItemListOK) GetPayload() *models.V0WebhookDeliveryItemShowResponseModel {
+	return o.Payload
+}
+
 func (o *WebhookDeliveryItemListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0WebhookDeliveryItemShowResponseModel)
@@ -98,6 +102,10 @@ type WebhookDeliveryItemListBadRequest struct {
 
 func (o *WebhookDeliveryItemListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items][%d] webhookDeliveryItemListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *WebhookDeliveryItemListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *WebhookDeliveryItemListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -129,6 +137,10 @@ func (o *WebhookDeliveryItemListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items][%d] webhookDeliveryItemListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *WebhookDeliveryItemListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *WebhookDeliveryItemListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -156,6 +168,10 @@ type WebhookDeliveryItemListInternalServerError struct {
 
 func (o *WebhookDeliveryItemListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items][%d] webhookDeliveryItemListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *WebhookDeliveryItemListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *WebhookDeliveryItemListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -77,6 +77,10 @@ func (o *BuildRequestListOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-requests][%d] buildRequestListOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildRequestListOK) GetPayload() *models.V0BuildRequestListResponseModel {
+	return o.Payload
+}
+
 func (o *BuildRequestListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildRequestListResponseModel)
@@ -104,6 +108,10 @@ type BuildRequestListBadRequest struct {
 
 func (o *BuildRequestListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-requests][%d] buildRequestListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildRequestListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildRequestListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BuildRequestListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-requests][%d] buildRequestListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildRequestListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildRequestListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BuildRequestListNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-requests][%d] buildRequestListNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildRequestListNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildRequestListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BuildRequestListInternalServerError struct {
 
 func (o *BuildRequestListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-requests][%d] buildRequestListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildRequestListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildRequestListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

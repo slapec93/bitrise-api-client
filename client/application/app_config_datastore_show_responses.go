@@ -77,6 +77,10 @@ func (o *AppConfigDatastoreShowOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/bitrise.yml][%d] appConfigDatastoreShowOK  %+v", 200, o.Payload)
 }
 
+func (o *AppConfigDatastoreShowOK) GetPayload() string {
+	return o.Payload
+}
+
 func (o *AppConfigDatastoreShowOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
@@ -102,6 +106,10 @@ type AppConfigDatastoreShowBadRequest struct {
 
 func (o *AppConfigDatastoreShowBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/bitrise.yml][%d] appConfigDatastoreShowBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AppConfigDatastoreShowBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppConfigDatastoreShowBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -133,6 +141,10 @@ func (o *AppConfigDatastoreShowUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/bitrise.yml][%d] appConfigDatastoreShowUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AppConfigDatastoreShowUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppConfigDatastoreShowUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -162,6 +174,10 @@ func (o *AppConfigDatastoreShowNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/bitrise.yml][%d] appConfigDatastoreShowNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AppConfigDatastoreShowNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppConfigDatastoreShowNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -189,6 +205,10 @@ type AppConfigDatastoreShowInternalServerError struct {
 
 func (o *AppConfigDatastoreShowInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/bitrise.yml][%d] appConfigDatastoreShowInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AppConfigDatastoreShowInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppConfigDatastoreShowInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

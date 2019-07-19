@@ -77,6 +77,10 @@ func (o *OutgoingWebhookDeleteOK) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}][%d] outgoingWebhookDeleteOK  %+v", 200, o.Payload)
 }
 
+func (o *OutgoingWebhookDeleteOK) GetPayload() *models.V0AppWebhookDeletedResponseModel {
+	return o.Payload
+}
+
 func (o *OutgoingWebhookDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0AppWebhookDeletedResponseModel)
@@ -104,6 +108,10 @@ type OutgoingWebhookDeleteBadRequest struct {
 
 func (o *OutgoingWebhookDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}][%d] outgoingWebhookDeleteBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *OutgoingWebhookDeleteBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *OutgoingWebhookDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *OutgoingWebhookDeleteUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}][%d] outgoingWebhookDeleteUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *OutgoingWebhookDeleteUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *OutgoingWebhookDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *OutgoingWebhookDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}][%d] outgoingWebhookDeleteNotFound  %+v", 404, o.Payload)
 }
 
+func (o *OutgoingWebhookDeleteNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *OutgoingWebhookDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type OutgoingWebhookDeleteInternalServerError struct {
 
 func (o *OutgoingWebhookDeleteInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}][%d] outgoingWebhookDeleteInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *OutgoingWebhookDeleteInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *OutgoingWebhookDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

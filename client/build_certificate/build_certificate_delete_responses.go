@@ -77,6 +77,10 @@ func (o *BuildCertificateDeleteOK) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/build-certificates/{build-certificate-slug}][%d] buildCertificateDeleteOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildCertificateDeleteOK) GetPayload() *models.V0BuildCertificateResponseModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildCertificateResponseModel)
@@ -104,6 +108,10 @@ type BuildCertificateDeleteBadRequest struct {
 
 func (o *BuildCertificateDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/build-certificates/{build-certificate-slug}][%d] buildCertificateDeleteBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildCertificateDeleteBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildCertificateDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BuildCertificateDeleteUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/build-certificates/{build-certificate-slug}][%d] buildCertificateDeleteUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildCertificateDeleteUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BuildCertificateDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/build-certificates/{build-certificate-slug}][%d] buildCertificateDeleteNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildCertificateDeleteNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BuildCertificateDeleteInternalServerError struct {
 
 func (o *BuildCertificateDeleteInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/build-certificates/{build-certificate-slug}][%d] buildCertificateDeleteInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildCertificateDeleteInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildCertificateDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

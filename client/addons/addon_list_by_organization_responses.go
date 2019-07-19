@@ -77,6 +77,10 @@ func (o *AddonListByOrganizationOK) Error() string {
 	return fmt.Sprintf("[GET /organizations/{organization-slug}/addons][%d] addonListByOrganizationOK  %+v", 200, o.Payload)
 }
 
+func (o *AddonListByOrganizationOK) GetPayload() *models.V0OwnerAddOnsListResponseModel {
+	return o.Payload
+}
+
 func (o *AddonListByOrganizationOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0OwnerAddOnsListResponseModel)
@@ -104,6 +108,10 @@ type AddonListByOrganizationBadRequest struct {
 
 func (o *AddonListByOrganizationBadRequest) Error() string {
 	return fmt.Sprintf("[GET /organizations/{organization-slug}/addons][%d] addonListByOrganizationBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AddonListByOrganizationBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AddonListByOrganizationBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AddonListByOrganizationUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /organizations/{organization-slug}/addons][%d] addonListByOrganizationUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AddonListByOrganizationUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AddonListByOrganizationUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AddonListByOrganizationNotFound) Error() string {
 	return fmt.Sprintf("[GET /organizations/{organization-slug}/addons][%d] addonListByOrganizationNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AddonListByOrganizationNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AddonListByOrganizationNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AddonListByOrganizationInternalServerError struct {
 
 func (o *AddonListByOrganizationInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /organizations/{organization-slug}/addons][%d] addonListByOrganizationInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AddonListByOrganizationInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AddonListByOrganizationInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

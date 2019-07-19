@@ -77,6 +77,10 @@ func (o *TestDeviceListOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/test-devices][%d] testDeviceListOK  %+v", 200, o.Payload)
 }
 
+func (o *TestDeviceListOK) GetPayload() *models.V0TestDeviceListResponseModel {
+	return o.Payload
+}
+
 func (o *TestDeviceListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0TestDeviceListResponseModel)
@@ -104,6 +108,10 @@ type TestDeviceListBadRequest struct {
 
 func (o *TestDeviceListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/test-devices][%d] testDeviceListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *TestDeviceListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *TestDeviceListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *TestDeviceListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/test-devices][%d] testDeviceListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *TestDeviceListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *TestDeviceListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *TestDeviceListNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/test-devices][%d] testDeviceListNotFound  %+v", 404, o.Payload)
 }
 
+func (o *TestDeviceListNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *TestDeviceListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type TestDeviceListInternalServerError struct {
 
 func (o *TestDeviceListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/test-devices][%d] testDeviceListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *TestDeviceListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *TestDeviceListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

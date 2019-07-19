@@ -77,6 +77,10 @@ func (o *UserPlanOK) Error() string {
 	return fmt.Sprintf("[GET /me/plan][%d] userPlanOK  %+v", 200, o.Payload)
 }
 
+func (o *UserPlanOK) GetPayload() *models.V0UserPlanRespModel {
+	return o.Payload
+}
+
 func (o *UserPlanOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0UserPlanRespModel)
@@ -104,6 +108,10 @@ type UserPlanBadRequest struct {
 
 func (o *UserPlanBadRequest) Error() string {
 	return fmt.Sprintf("[GET /me/plan][%d] userPlanBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *UserPlanBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *UserPlanBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *UserPlanUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /me/plan][%d] userPlanUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *UserPlanUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *UserPlanUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *UserPlanNotFound) Error() string {
 	return fmt.Sprintf("[GET /me/plan][%d] userPlanNotFound  %+v", 404, o.Payload)
 }
 
+func (o *UserPlanNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *UserPlanNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type UserPlanInternalServerError struct {
 
 func (o *UserPlanInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /me/plan][%d] userPlanInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *UserPlanInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *UserPlanInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

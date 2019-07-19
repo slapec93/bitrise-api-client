@@ -77,6 +77,10 @@ func (o *BuildLogOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/log][%d] buildLogOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildLogOK) GetPayload() *models.V0BuildLogInfoResponseModel {
+	return o.Payload
+}
+
 func (o *BuildLogOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildLogInfoResponseModel)
@@ -104,6 +108,10 @@ type BuildLogBadRequest struct {
 
 func (o *BuildLogBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/log][%d] buildLogBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildLogBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildLogBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BuildLogUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/log][%d] buildLogUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildLogUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildLogUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BuildLogNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/log][%d] buildLogNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildLogNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildLogNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BuildLogInternalServerError struct {
 
 func (o *BuildLogInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/log][%d] buildLogInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildLogInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildLogInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

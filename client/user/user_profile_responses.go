@@ -71,6 +71,10 @@ func (o *UserProfileOK) Error() string {
 	return fmt.Sprintf("[GET /me][%d] userProfileOK  %+v", 200, o.Payload)
 }
 
+func (o *UserProfileOK) GetPayload() *models.V0UserProfileRespModel {
+	return o.Payload
+}
+
 func (o *UserProfileOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0UserProfileRespModel)
@@ -98,6 +102,10 @@ type UserProfileUnauthorized struct {
 
 func (o *UserProfileUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /me][%d] userProfileUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *UserProfileUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *UserProfileUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -129,6 +137,10 @@ func (o *UserProfileNotFound) Error() string {
 	return fmt.Sprintf("[GET /me][%d] userProfileNotFound  %+v", 404, o.Payload)
 }
 
+func (o *UserProfileNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *UserProfileNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -156,6 +168,10 @@ type UserProfileInternalServerError struct {
 
 func (o *UserProfileInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /me][%d] userProfileInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *UserProfileInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *UserProfileInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

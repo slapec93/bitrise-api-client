@@ -77,6 +77,10 @@ func (o *ArtifactDeleteOK) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactDeleteOK  %+v", 200, o.Payload)
 }
 
+func (o *ArtifactDeleteOK) GetPayload() *models.V0ArtifactDeleteResponseModel {
+	return o.Payload
+}
+
 func (o *ArtifactDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ArtifactDeleteResponseModel)
@@ -104,6 +108,10 @@ type ArtifactDeleteBadRequest struct {
 
 func (o *ArtifactDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactDeleteBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ArtifactDeleteBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ArtifactDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *ArtifactDeleteUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactDeleteUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *ArtifactDeleteUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ArtifactDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *ArtifactDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactDeleteNotFound  %+v", 404, o.Payload)
 }
 
+func (o *ArtifactDeleteNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ArtifactDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type ArtifactDeleteInternalServerError struct {
 
 func (o *ArtifactDeleteInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactDeleteInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ArtifactDeleteInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ArtifactDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

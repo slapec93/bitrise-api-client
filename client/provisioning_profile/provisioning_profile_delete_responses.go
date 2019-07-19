@@ -77,6 +77,10 @@ func (o *ProvisioningProfileDeleteOK) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileDeleteOK  %+v", 200, o.Payload)
 }
 
+func (o *ProvisioningProfileDeleteOK) GetPayload() *models.V0ProvisionProfileResponseModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ProvisionProfileResponseModel)
@@ -104,6 +108,10 @@ type ProvisioningProfileDeleteBadRequest struct {
 
 func (o *ProvisioningProfileDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileDeleteBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ProvisioningProfileDeleteBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ProvisioningProfileDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *ProvisioningProfileDeleteUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileDeleteUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *ProvisioningProfileDeleteUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *ProvisioningProfileDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileDeleteNotFound  %+v", 404, o.Payload)
 }
 
+func (o *ProvisioningProfileDeleteNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type ProvisioningProfileDeleteInternalServerError struct {
 
 func (o *ProvisioningProfileDeleteInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileDeleteInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ProvisioningProfileDeleteInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ProvisioningProfileDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

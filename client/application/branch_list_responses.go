@@ -77,6 +77,10 @@ func (o *BranchListOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/branches][%d] branchListOK  %+v", 200, o.Payload)
 }
 
+func (o *BranchListOK) GetPayload() *models.V0BranchListResponseModel {
+	return o.Payload
+}
+
 func (o *BranchListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BranchListResponseModel)
@@ -104,6 +108,10 @@ type BranchListBadRequest struct {
 
 func (o *BranchListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/branches][%d] branchListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BranchListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BranchListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BranchListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/branches][%d] branchListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BranchListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BranchListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BranchListNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/branches][%d] branchListNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BranchListNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BranchListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BranchListInternalServerError struct {
 
 func (o *BranchListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/branches][%d] branchListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BranchListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BranchListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

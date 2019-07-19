@@ -77,6 +77,10 @@ func (o *ActivityListOK) Error() string {
 	return fmt.Sprintf("[GET /me/activities][%d] activityListOK  %+v", 200, o.Payload)
 }
 
+func (o *ActivityListOK) GetPayload() *models.V0ActivityEventListResponseModel {
+	return o.Payload
+}
+
 func (o *ActivityListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ActivityEventListResponseModel)
@@ -104,6 +108,10 @@ type ActivityListBadRequest struct {
 
 func (o *ActivityListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /me/activities][%d] activityListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ActivityListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ActivityListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *ActivityListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /me/activities][%d] activityListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *ActivityListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ActivityListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *ActivityListNotFound) Error() string {
 	return fmt.Sprintf("[GET /me/activities][%d] activityListNotFound  %+v", 404, o.Payload)
 }
 
+func (o *ActivityListNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ActivityListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type ActivityListInternalServerError struct {
 
 func (o *ActivityListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /me/activities][%d] activityListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ActivityListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ActivityListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -83,6 +83,10 @@ func (o *BuildAbortOK) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/builds/{build-slug}/abort][%d] buildAbortOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildAbortOK) GetPayload() *models.V0BuildAbortResponseModel {
+	return o.Payload
+}
+
 func (o *BuildAbortOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildAbortResponseModel)
@@ -110,6 +114,10 @@ type BuildAbortBadRequest struct {
 
 func (o *BuildAbortBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/builds/{build-slug}/abort][%d] buildAbortBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildAbortBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildAbortBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -141,6 +149,10 @@ func (o *BuildAbortUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/builds/{build-slug}/abort][%d] buildAbortUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildAbortUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildAbortUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -168,6 +180,10 @@ type BuildAbortNotFound struct {
 
 func (o *BuildAbortNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/builds/{build-slug}/abort][%d] buildAbortNotFound  %+v", 404, o.Payload)
+}
+
+func (o *BuildAbortNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildAbortNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,6 +215,10 @@ func (o *BuildAbortTooManyRequests) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/builds/{build-slug}/abort][%d] buildAbortTooManyRequests  %+v", 429, o.Payload)
 }
 
+func (o *BuildAbortTooManyRequests) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildAbortTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -226,6 +246,10 @@ type BuildAbortInternalServerError struct {
 
 func (o *BuildAbortInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/builds/{build-slug}/abort][%d] buildAbortInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildAbortInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildAbortInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

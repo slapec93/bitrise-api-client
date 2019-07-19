@@ -77,6 +77,10 @@ func (o *AppListByUserOK) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}/apps][%d] appListByUserOK  %+v", 200, o.Payload)
 }
 
+func (o *AppListByUserOK) GetPayload() *models.V0AppListResponseModel {
+	return o.Payload
+}
+
 func (o *AppListByUserOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0AppListResponseModel)
@@ -104,6 +108,10 @@ type AppListByUserBadRequest struct {
 
 func (o *AppListByUserBadRequest) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}/apps][%d] appListByUserBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AppListByUserBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppListByUserBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AppListByUserUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}/apps][%d] appListByUserUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AppListByUserUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppListByUserUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AppListByUserNotFound) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}/apps][%d] appListByUserNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AppListByUserNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppListByUserNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AppListByUserInternalServerError struct {
 
 func (o *AppListByUserInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}/apps][%d] appListByUserInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AppListByUserInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppListByUserInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

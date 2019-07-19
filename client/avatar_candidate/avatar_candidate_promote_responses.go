@@ -77,6 +77,10 @@ func (o *AvatarCandidatePromoteOK) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/avatar-candidates/{avatar-slug}][%d] avatarCandidatePromoteOK  %+v", 200, o.Payload)
 }
 
+func (o *AvatarCandidatePromoteOK) GetPayload() *models.V0AvatarPromoteResponseModel {
+	return o.Payload
+}
+
 func (o *AvatarCandidatePromoteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0AvatarPromoteResponseModel)
@@ -104,6 +108,10 @@ type AvatarCandidatePromoteBadRequest struct {
 
 func (o *AvatarCandidatePromoteBadRequest) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/avatar-candidates/{avatar-slug}][%d] avatarCandidatePromoteBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AvatarCandidatePromoteBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AvatarCandidatePromoteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AvatarCandidatePromoteUnauthorized) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/avatar-candidates/{avatar-slug}][%d] avatarCandidatePromoteUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AvatarCandidatePromoteUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AvatarCandidatePromoteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AvatarCandidatePromoteNotFound) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/avatar-candidates/{avatar-slug}][%d] avatarCandidatePromoteNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AvatarCandidatePromoteNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AvatarCandidatePromoteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AvatarCandidatePromoteInternalServerError struct {
 
 func (o *AvatarCandidatePromoteInternalServerError) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/avatar-candidates/{avatar-slug}][%d] avatarCandidatePromoteInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AvatarCandidatePromoteInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AvatarCandidatePromoteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

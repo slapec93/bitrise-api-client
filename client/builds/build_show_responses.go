@@ -77,6 +77,10 @@ func (o *BuildShowOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}][%d] buildShowOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildShowOK) GetPayload() *models.V0BuildShowResponseModel {
+	return o.Payload
+}
+
 func (o *BuildShowOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildShowResponseModel)
@@ -104,6 +108,10 @@ type BuildShowBadRequest struct {
 
 func (o *BuildShowBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}][%d] buildShowBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildShowBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildShowBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BuildShowUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}][%d] buildShowUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildShowUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildShowUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BuildShowNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}][%d] buildShowNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildShowNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildShowNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BuildShowInternalServerError struct {
 
 func (o *BuildShowInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}][%d] buildShowInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildShowInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildShowInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -16,11 +16,11 @@ import (
 // swagger:model v0.AppAddOnResponseItemModel
 type V0AppAddOnResponseItemModel struct {
 
-	// dashboard url
-	DashboardURL string `json:"dashboard_url,omitempty"`
-
 	// documentation url
 	DocumentationURL string `json:"documentation_url,omitempty"`
+
+	// has ui
+	HasUI bool `json:"has_ui,omitempty"`
 
 	// icon
 	Icon string `json:"icon,omitempty"`

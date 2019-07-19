@@ -77,6 +77,10 @@ func (o *AppWebhookCreateOK) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/register-webhook][%d] appWebhookCreateOK  %+v", 200, o.Payload)
 }
 
+func (o *AppWebhookCreateOK) GetPayload() *models.V0WebhookRespModel {
+	return o.Payload
+}
+
 func (o *AppWebhookCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0WebhookRespModel)
@@ -104,6 +108,10 @@ type AppWebhookCreateBadRequest struct {
 
 func (o *AppWebhookCreateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/register-webhook][%d] appWebhookCreateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AppWebhookCreateBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppWebhookCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AppWebhookCreateUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/register-webhook][%d] appWebhookCreateUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AppWebhookCreateUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppWebhookCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AppWebhookCreateNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/register-webhook][%d] appWebhookCreateNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AppWebhookCreateNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppWebhookCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AppWebhookCreateInternalServerError struct {
 
 func (o *AppWebhookCreateInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/register-webhook][%d] appWebhookCreateInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AppWebhookCreateInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppWebhookCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

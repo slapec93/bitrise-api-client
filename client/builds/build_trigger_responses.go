@@ -77,6 +77,10 @@ func (o *BuildTriggerOK) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/builds][%d] buildTriggerOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildTriggerOK) GetPayload() *models.V0BuildTriggerRespModel {
+	return o.Payload
+}
+
 func (o *BuildTriggerOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildTriggerRespModel)
@@ -104,6 +108,10 @@ type BuildTriggerBadRequest struct {
 
 func (o *BuildTriggerBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/builds][%d] buildTriggerBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildTriggerBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildTriggerBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BuildTriggerUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/builds][%d] buildTriggerUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildTriggerUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildTriggerUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BuildTriggerNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/builds][%d] buildTriggerNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildTriggerNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildTriggerNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BuildTriggerInternalServerError struct {
 
 func (o *BuildTriggerInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/builds][%d] buildTriggerInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildTriggerInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildTriggerInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

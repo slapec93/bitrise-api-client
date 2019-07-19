@@ -77,6 +77,10 @@ func (o *AppListOK) Error() string {
 	return fmt.Sprintf("[GET /apps][%d] appListOK  %+v", 200, o.Payload)
 }
 
+func (o *AppListOK) GetPayload() *models.V0AppListResponseModel {
+	return o.Payload
+}
+
 func (o *AppListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0AppListResponseModel)
@@ -104,6 +108,10 @@ type AppListBadRequest struct {
 
 func (o *AppListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps][%d] appListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AppListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AppListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps][%d] appListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AppListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AppListNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps][%d] appListNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AppListNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AppListInternalServerError struct {
 
 func (o *AppListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps][%d] appListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AppListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

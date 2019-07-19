@@ -77,6 +77,10 @@ func (o *GenericProjectFileConfirmOK) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/generic-project-files/{generic-project-file-slug}/uploaded][%d] genericProjectFileConfirmOK  %+v", 200, o.Payload)
 }
 
+func (o *GenericProjectFileConfirmOK) GetPayload() *models.V0ProjectFileStorageResponseModel {
+	return o.Payload
+}
+
 func (o *GenericProjectFileConfirmOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ProjectFileStorageResponseModel)
@@ -104,6 +108,10 @@ type GenericProjectFileConfirmBadRequest struct {
 
 func (o *GenericProjectFileConfirmBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/generic-project-files/{generic-project-file-slug}/uploaded][%d] genericProjectFileConfirmBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GenericProjectFileConfirmBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *GenericProjectFileConfirmBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *GenericProjectFileConfirmUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/generic-project-files/{generic-project-file-slug}/uploaded][%d] genericProjectFileConfirmUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *GenericProjectFileConfirmUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *GenericProjectFileConfirmUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *GenericProjectFileConfirmNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/generic-project-files/{generic-project-file-slug}/uploaded][%d] genericProjectFileConfirmNotFound  %+v", 404, o.Payload)
 }
 
+func (o *GenericProjectFileConfirmNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *GenericProjectFileConfirmNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type GenericProjectFileConfirmInternalServerError struct {
 
 func (o *GenericProjectFileConfirmInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/generic-project-files/{generic-project-file-slug}/uploaded][%d] genericProjectFileConfirmInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GenericProjectFileConfirmInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *GenericProjectFileConfirmInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -77,6 +77,10 @@ func (o *GenericProjectFileDeleteOK) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/generic-project-files/{generic-project-file-slug}][%d] genericProjectFileDeleteOK  %+v", 200, o.Payload)
 }
 
+func (o *GenericProjectFileDeleteOK) GetPayload() *models.V0ProjectFileStorageResponseModel {
+	return o.Payload
+}
+
 func (o *GenericProjectFileDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ProjectFileStorageResponseModel)
@@ -104,6 +108,10 @@ type GenericProjectFileDeleteBadRequest struct {
 
 func (o *GenericProjectFileDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/generic-project-files/{generic-project-file-slug}][%d] genericProjectFileDeleteBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GenericProjectFileDeleteBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *GenericProjectFileDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *GenericProjectFileDeleteUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/generic-project-files/{generic-project-file-slug}][%d] genericProjectFileDeleteUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *GenericProjectFileDeleteUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *GenericProjectFileDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *GenericProjectFileDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/generic-project-files/{generic-project-file-slug}][%d] genericProjectFileDeleteNotFound  %+v", 404, o.Payload)
 }
 
+func (o *GenericProjectFileDeleteNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *GenericProjectFileDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type GenericProjectFileDeleteInternalServerError struct {
 
 func (o *GenericProjectFileDeleteInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /apps/{app-slug}/generic-project-files/{generic-project-file-slug}][%d] genericProjectFileDeleteInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GenericProjectFileDeleteInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *GenericProjectFileDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -77,6 +77,10 @@ func (o *AppShowOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}][%d] appShowOK  %+v", 200, o.Payload)
 }
 
+func (o *AppShowOK) GetPayload() *models.V0AppShowResponseModel {
+	return o.Payload
+}
+
 func (o *AppShowOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0AppShowResponseModel)
@@ -104,6 +108,10 @@ type AppShowBadRequest struct {
 
 func (o *AppShowBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}][%d] appShowBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AppShowBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppShowBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AppShowUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}][%d] appShowUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AppShowUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppShowUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AppShowNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}][%d] appShowNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AppShowNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppShowNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AppShowInternalServerError struct {
 
 func (o *AppShowInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}][%d] appShowInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AppShowInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppShowInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -77,6 +77,10 @@ func (o *ProvisioningProfileConfirmOK) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}/uploaded][%d] provisioningProfileConfirmOK  %+v", 200, o.Payload)
 }
 
+func (o *ProvisioningProfileConfirmOK) GetPayload() *models.V0ProvisionProfileResponseModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileConfirmOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ProvisionProfileResponseModel)
@@ -104,6 +108,10 @@ type ProvisioningProfileConfirmBadRequest struct {
 
 func (o *ProvisioningProfileConfirmBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}/uploaded][%d] provisioningProfileConfirmBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ProvisioningProfileConfirmBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ProvisioningProfileConfirmBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *ProvisioningProfileConfirmUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}/uploaded][%d] provisioningProfileConfirmUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *ProvisioningProfileConfirmUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileConfirmUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *ProvisioningProfileConfirmNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}/uploaded][%d] provisioningProfileConfirmNotFound  %+v", 404, o.Payload)
 }
 
+func (o *ProvisioningProfileConfirmNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileConfirmNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type ProvisioningProfileConfirmInternalServerError struct {
 
 func (o *ProvisioningProfileConfirmInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}/uploaded][%d] provisioningProfileConfirmInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ProvisioningProfileConfirmInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ProvisioningProfileConfirmInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

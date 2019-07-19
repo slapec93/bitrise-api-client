@@ -21,11 +21,11 @@ type V0OwnerAddOnResponseItemModel struct {
 	// apps
 	Apps []*V0AddOnAppResponseItemModel `json:"apps"`
 
-	// dashboard url
-	DashboardURL string `json:"dashboard_url,omitempty"`
-
 	// documentation url
 	DocumentationURL string `json:"documentation_url,omitempty"`
+
+	// has ui
+	HasUI bool `json:"has_ui,omitempty"`
 
 	// icon
 	Icon string `json:"icon,omitempty"`

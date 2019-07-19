@@ -77,6 +77,10 @@ func (o *AvatarCandidateCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/avatar-candidates][%d] avatarCandidateCreateCreated  %+v", 201, o.Payload)
 }
 
+func (o *AvatarCandidateCreateCreated) GetPayload() models.V0AvatarCandidateCreateResponseItems {
+	return o.Payload
+}
+
 func (o *AvatarCandidateCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
@@ -102,6 +106,10 @@ type AvatarCandidateCreateBadRequest struct {
 
 func (o *AvatarCandidateCreateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/avatar-candidates][%d] avatarCandidateCreateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AvatarCandidateCreateBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AvatarCandidateCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -133,6 +141,10 @@ func (o *AvatarCandidateCreateUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/avatar-candidates][%d] avatarCandidateCreateUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AvatarCandidateCreateUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AvatarCandidateCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -162,6 +174,10 @@ func (o *AvatarCandidateCreateNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/avatar-candidates][%d] avatarCandidateCreateNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AvatarCandidateCreateNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AvatarCandidateCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -189,6 +205,10 @@ type AvatarCandidateCreateInternalServerError struct {
 
 func (o *AvatarCandidateCreateInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/avatar-candidates][%d] avatarCandidateCreateInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AvatarCandidateCreateInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AvatarCandidateCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

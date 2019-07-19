@@ -77,6 +77,10 @@ func (o *AndroidKeystoreFileListOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/android-keystore-files][%d] androidKeystoreFileListOK  %+v", 200, o.Payload)
 }
 
+func (o *AndroidKeystoreFileListOK) GetPayload() *models.V0ProjectFileStorageListResponseModel {
+	return o.Payload
+}
+
 func (o *AndroidKeystoreFileListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ProjectFileStorageListResponseModel)
@@ -104,6 +108,10 @@ type AndroidKeystoreFileListBadRequest struct {
 
 func (o *AndroidKeystoreFileListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/android-keystore-files][%d] androidKeystoreFileListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AndroidKeystoreFileListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AndroidKeystoreFileListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AndroidKeystoreFileListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/android-keystore-files][%d] androidKeystoreFileListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AndroidKeystoreFileListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AndroidKeystoreFileListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AndroidKeystoreFileListNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/android-keystore-files][%d] androidKeystoreFileListNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AndroidKeystoreFileListNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AndroidKeystoreFileListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AndroidKeystoreFileListInternalServerError struct {
 
 func (o *AndroidKeystoreFileListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/android-keystore-files][%d] androidKeystoreFileListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AndroidKeystoreFileListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AndroidKeystoreFileListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

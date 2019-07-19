@@ -77,6 +77,10 @@ func (o *ProvisioningProfileCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/provisioning-profiles][%d] provisioningProfileCreateCreated  %+v", 201, o.Payload)
 }
 
+func (o *ProvisioningProfileCreateCreated) GetPayload() *models.V0ProvisionProfileResponseModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ProvisionProfileResponseModel)
@@ -104,6 +108,10 @@ type ProvisioningProfileCreateBadRequest struct {
 
 func (o *ProvisioningProfileCreateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/provisioning-profiles][%d] provisioningProfileCreateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ProvisioningProfileCreateBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ProvisioningProfileCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *ProvisioningProfileCreateUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/provisioning-profiles][%d] provisioningProfileCreateUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *ProvisioningProfileCreateUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *ProvisioningProfileCreateNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/provisioning-profiles][%d] provisioningProfileCreateNotFound  %+v", 404, o.Payload)
 }
 
+func (o *ProvisioningProfileCreateNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type ProvisioningProfileCreateInternalServerError struct {
 
 func (o *ProvisioningProfileCreateInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/provisioning-profiles][%d] provisioningProfileCreateInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ProvisioningProfileCreateInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ProvisioningProfileCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

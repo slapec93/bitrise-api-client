@@ -77,6 +77,10 @@ func (o *AppCreateOK) Error() string {
 	return fmt.Sprintf("[POST /apps/register][%d] appCreateOK  %+v", 200, o.Payload)
 }
 
+func (o *AppCreateOK) GetPayload() *models.V0AppRespModel {
+	return o.Payload
+}
+
 func (o *AppCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0AppRespModel)
@@ -104,6 +108,10 @@ type AppCreateBadRequest struct {
 
 func (o *AppCreateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/register][%d] appCreateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AppCreateBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AppCreateUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/register][%d] appCreateUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AppCreateUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AppCreateNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/register][%d] appCreateNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AppCreateNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AppCreateInternalServerError struct {
 
 func (o *AppCreateInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/register][%d] appCreateInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AppCreateInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

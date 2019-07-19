@@ -77,6 +77,10 @@ func (o *UserShowOK) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}][%d] userShowOK  %+v", 200, o.Payload)
 }
 
+func (o *UserShowOK) GetPayload() *models.V0UserProfileRespModel {
+	return o.Payload
+}
+
 func (o *UserShowOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0UserProfileRespModel)
@@ -104,6 +108,10 @@ type UserShowBadRequest struct {
 
 func (o *UserShowBadRequest) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}][%d] userShowBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *UserShowBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *UserShowBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *UserShowUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}][%d] userShowUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *UserShowUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *UserShowUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *UserShowNotFound) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}][%d] userShowNotFound  %+v", 404, o.Payload)
 }
 
+func (o *UserShowNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *UserShowNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type UserShowInternalServerError struct {
 
 func (o *UserShowInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /users/{user-slug}][%d] userShowInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *UserShowInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *UserShowInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

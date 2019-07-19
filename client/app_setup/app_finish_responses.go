@@ -77,6 +77,10 @@ func (o *AppFinishOK) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/finish][%d] appFinishOK  %+v", 200, o.Payload)
 }
 
+func (o *AppFinishOK) GetPayload() *models.V0AppFinishRespModel {
+	return o.Payload
+}
+
 func (o *AppFinishOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0AppFinishRespModel)
@@ -104,6 +108,10 @@ type AppFinishBadRequest struct {
 
 func (o *AppFinishBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/finish][%d] appFinishBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AppFinishBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppFinishBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AppFinishUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/finish][%d] appFinishUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AppFinishUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppFinishUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AppFinishNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/finish][%d] appFinishNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AppFinishNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppFinishNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AppFinishInternalServerError struct {
 
 func (o *AppFinishInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/finish][%d] appFinishInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AppFinishInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppFinishInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

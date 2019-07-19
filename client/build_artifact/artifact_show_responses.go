@@ -77,6 +77,10 @@ func (o *ArtifactShowOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactShowOK  %+v", 200, o.Payload)
 }
 
+func (o *ArtifactShowOK) GetPayload() *models.V0ArtifactShowResponseModel {
+	return o.Payload
+}
+
 func (o *ArtifactShowOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ArtifactShowResponseModel)
@@ -104,6 +108,10 @@ type ArtifactShowBadRequest struct {
 
 func (o *ArtifactShowBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactShowBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ArtifactShowBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ArtifactShowBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *ArtifactShowUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactShowUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *ArtifactShowUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ArtifactShowUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *ArtifactShowNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactShowNotFound  %+v", 404, o.Payload)
 }
 
+func (o *ArtifactShowNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ArtifactShowNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type ArtifactShowInternalServerError struct {
 
 func (o *ArtifactShowInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactShowInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ArtifactShowInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ArtifactShowInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

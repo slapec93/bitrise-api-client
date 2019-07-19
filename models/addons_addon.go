@@ -27,9 +27,6 @@ type AddonsAddon struct {
 	// categories
 	Categories []string `json:"categories"`
 
-	// dashboard url
-	DashboardURL string `json:"dashboard_url,omitempty"`
-
 	// description
 	Description string `json:"description,omitempty"`
 
@@ -38,6 +35,9 @@ type AddonsAddon struct {
 
 	// documentation url
 	DocumentationURL string `json:"documentation_url,omitempty"`
+
+	// has ui
+	HasUI bool `json:"has_ui,omitempty"`
 
 	// icon
 	Icon string `json:"icon,omitempty"`

@@ -77,6 +77,10 @@ func (o *ProvisioningProfileUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileUpdateOK  %+v", 200, o.Payload)
 }
 
+func (o *ProvisioningProfileUpdateOK) GetPayload() *models.V0ProvisionProfileResponseModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ProvisionProfileResponseModel)
@@ -104,6 +108,10 @@ type ProvisioningProfileUpdateBadRequest struct {
 
 func (o *ProvisioningProfileUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileUpdateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ProvisioningProfileUpdateBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ProvisioningProfileUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *ProvisioningProfileUpdateUnauthorized) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileUpdateUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *ProvisioningProfileUpdateUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileUpdateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *ProvisioningProfileUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileUpdateNotFound  %+v", 404, o.Payload)
 }
 
+func (o *ProvisioningProfileUpdateNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type ProvisioningProfileUpdateInternalServerError struct {
 
 func (o *ProvisioningProfileUpdateInternalServerError) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileUpdateInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ProvisioningProfileUpdateInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ProvisioningProfileUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

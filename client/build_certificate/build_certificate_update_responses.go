@@ -77,6 +77,10 @@ func (o *BuildCertificateUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/build-certificates/{build-certificate-slug}][%d] buildCertificateUpdateOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildCertificateUpdateOK) GetPayload() *models.V0BuildCertificateResponseModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildCertificateResponseModel)
@@ -104,6 +108,10 @@ type BuildCertificateUpdateBadRequest struct {
 
 func (o *BuildCertificateUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/build-certificates/{build-certificate-slug}][%d] buildCertificateUpdateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildCertificateUpdateBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildCertificateUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BuildCertificateUpdateUnauthorized) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/build-certificates/{build-certificate-slug}][%d] buildCertificateUpdateUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildCertificateUpdateUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateUpdateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BuildCertificateUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/build-certificates/{build-certificate-slug}][%d] buildCertificateUpdateNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildCertificateUpdateNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildCertificateUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BuildCertificateUpdateInternalServerError struct {
 
 func (o *BuildCertificateUpdateInternalServerError) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/build-certificates/{build-certificate-slug}][%d] buildCertificateUpdateInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildCertificateUpdateInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildCertificateUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

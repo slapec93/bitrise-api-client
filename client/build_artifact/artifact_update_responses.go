@@ -77,6 +77,10 @@ func (o *ArtifactUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactUpdateOK  %+v", 200, o.Payload)
 }
 
+func (o *ArtifactUpdateOK) GetPayload() *models.V0ArtifactShowResponseModel {
+	return o.Payload
+}
+
 func (o *ArtifactUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ArtifactShowResponseModel)
@@ -104,6 +108,10 @@ type ArtifactUpdateBadRequest struct {
 
 func (o *ArtifactUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactUpdateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ArtifactUpdateBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ArtifactUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *ArtifactUpdateUnauthorized) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactUpdateUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *ArtifactUpdateUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ArtifactUpdateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *ArtifactUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactUpdateNotFound  %+v", 404, o.Payload)
 }
 
+func (o *ArtifactUpdateNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ArtifactUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type ArtifactUpdateInternalServerError struct {
 
 func (o *ArtifactUpdateInternalServerError) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}][%d] artifactUpdateInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ArtifactUpdateInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ArtifactUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

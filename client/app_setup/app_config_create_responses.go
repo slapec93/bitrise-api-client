@@ -77,6 +77,10 @@ func (o *AppConfigCreateOK) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/bitrise.yml][%d] appConfigCreateOK  %+v", 200, o.Payload)
 }
 
+func (o *AppConfigCreateOK) GetPayload() models.V0AppConfigRespModel {
+	return o.Payload
+}
+
 func (o *AppConfigCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
@@ -102,6 +106,10 @@ type AppConfigCreateBadRequest struct {
 
 func (o *AppConfigCreateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/bitrise.yml][%d] appConfigCreateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AppConfigCreateBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppConfigCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -133,6 +141,10 @@ func (o *AppConfigCreateUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/bitrise.yml][%d] appConfigCreateUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AppConfigCreateUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppConfigCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -162,6 +174,10 @@ func (o *AppConfigCreateNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/bitrise.yml][%d] appConfigCreateNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AppConfigCreateNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppConfigCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -189,6 +205,10 @@ type AppConfigCreateInternalServerError struct {
 
 func (o *AppConfigCreateInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/bitrise.yml][%d] appConfigCreateInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AppConfigCreateInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppConfigCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

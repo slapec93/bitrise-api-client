@@ -77,6 +77,10 @@ func (o *ProvisioningProfileShowOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileShowOK  %+v", 200, o.Payload)
 }
 
+func (o *ProvisioningProfileShowOK) GetPayload() *models.V0ProvisionProfileResponseModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileShowOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0ProvisionProfileResponseModel)
@@ -104,6 +108,10 @@ type ProvisioningProfileShowBadRequest struct {
 
 func (o *ProvisioningProfileShowBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileShowBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ProvisioningProfileShowBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ProvisioningProfileShowBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *ProvisioningProfileShowUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileShowUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *ProvisioningProfileShowUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileShowUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *ProvisioningProfileShowNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileShowNotFound  %+v", 404, o.Payload)
 }
 
+func (o *ProvisioningProfileShowNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *ProvisioningProfileShowNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type ProvisioningProfileShowInternalServerError struct {
 
 func (o *ProvisioningProfileShowInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}][%d] provisioningProfileShowInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ProvisioningProfileShowInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *ProvisioningProfileShowInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

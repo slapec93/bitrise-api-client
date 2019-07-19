@@ -77,6 +77,10 @@ func (o *AppListByOrganizationOK) Error() string {
 	return fmt.Sprintf("[GET /organizations/{org-slug}/apps][%d] appListByOrganizationOK  %+v", 200, o.Payload)
 }
 
+func (o *AppListByOrganizationOK) GetPayload() *models.V0AppListResponseModel {
+	return o.Payload
+}
+
 func (o *AppListByOrganizationOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0AppListResponseModel)
@@ -104,6 +108,10 @@ type AppListByOrganizationBadRequest struct {
 
 func (o *AppListByOrganizationBadRequest) Error() string {
 	return fmt.Sprintf("[GET /organizations/{org-slug}/apps][%d] appListByOrganizationBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AppListByOrganizationBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppListByOrganizationBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AppListByOrganizationUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /organizations/{org-slug}/apps][%d] appListByOrganizationUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AppListByOrganizationUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppListByOrganizationUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AppListByOrganizationNotFound) Error() string {
 	return fmt.Sprintf("[GET /organizations/{org-slug}/apps][%d] appListByOrganizationNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AppListByOrganizationNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AppListByOrganizationNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AppListByOrganizationInternalServerError struct {
 
 func (o *AppListByOrganizationInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /organizations/{org-slug}/apps][%d] appListByOrganizationInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AppListByOrganizationInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AppListByOrganizationInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

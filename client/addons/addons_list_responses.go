@@ -77,6 +77,10 @@ func (o *AddonsListOK) Error() string {
 	return fmt.Sprintf("[GET /addons][%d] addonsListOK  %+v", 200, o.Payload)
 }
 
+func (o *AddonsListOK) GetPayload() *models.V0AddonsListResponseModel {
+	return o.Payload
+}
+
 func (o *AddonsListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0AddonsListResponseModel)
@@ -104,6 +108,10 @@ type AddonsListBadRequest struct {
 
 func (o *AddonsListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /addons][%d] addonsListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AddonsListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AddonsListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *AddonsListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /addons][%d] addonsListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *AddonsListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AddonsListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *AddonsListNotFound) Error() string {
 	return fmt.Sprintf("[GET /addons][%d] addonsListNotFound  %+v", 404, o.Payload)
 }
 
+func (o *AddonsListNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *AddonsListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type AddonsListInternalServerError struct {
 
 func (o *AddonsListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /addons][%d] addonsListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *AddonsListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *AddonsListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

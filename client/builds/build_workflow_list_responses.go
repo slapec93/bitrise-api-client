@@ -77,6 +77,10 @@ func (o *BuildWorkflowListOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-workflows][%d] buildWorkflowListOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildWorkflowListOK) GetPayload() *models.V0BuildWorkflowListResponseModel {
+	return o.Payload
+}
+
 func (o *BuildWorkflowListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildWorkflowListResponseModel)
@@ -104,6 +108,10 @@ type BuildWorkflowListBadRequest struct {
 
 func (o *BuildWorkflowListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-workflows][%d] buildWorkflowListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildWorkflowListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildWorkflowListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BuildWorkflowListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-workflows][%d] buildWorkflowListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildWorkflowListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildWorkflowListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BuildWorkflowListNotFound) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-workflows][%d] buildWorkflowListNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildWorkflowListNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildWorkflowListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BuildWorkflowListInternalServerError struct {
 
 func (o *BuildWorkflowListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/build-workflows][%d] buildWorkflowListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildWorkflowListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildWorkflowListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

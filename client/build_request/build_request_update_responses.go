@@ -77,6 +77,10 @@ func (o *BuildRequestUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/build-requests/{build-request-slug}][%d] buildRequestUpdateOK  %+v", 200, o.Payload)
 }
 
+func (o *BuildRequestUpdateOK) GetPayload() *models.V0BuildRequestUpdateResponseModel {
+	return o.Payload
+}
+
 func (o *BuildRequestUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0BuildRequestUpdateResponseModel)
@@ -104,6 +108,10 @@ type BuildRequestUpdateBadRequest struct {
 
 func (o *BuildRequestUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/build-requests/{build-request-slug}][%d] buildRequestUpdateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *BuildRequestUpdateBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildRequestUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *BuildRequestUpdateUnauthorized) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/build-requests/{build-request-slug}][%d] buildRequestUpdateUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *BuildRequestUpdateUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildRequestUpdateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *BuildRequestUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/build-requests/{build-request-slug}][%d] buildRequestUpdateNotFound  %+v", 404, o.Payload)
 }
 
+func (o *BuildRequestUpdateNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *BuildRequestUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type BuildRequestUpdateInternalServerError struct {
 
 func (o *BuildRequestUpdateInternalServerError) Error() string {
 	return fmt.Sprintf("[PATCH /apps/{app-slug}/build-requests/{build-request-slug}][%d] buildRequestUpdateInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *BuildRequestUpdateInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *BuildRequestUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

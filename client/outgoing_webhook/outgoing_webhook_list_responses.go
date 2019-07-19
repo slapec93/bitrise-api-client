@@ -71,6 +71,10 @@ func (o *OutgoingWebhookListOK) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/outgoing-webhooks][%d] outgoingWebhookListOK  %+v", 200, o.Payload)
 }
 
+func (o *OutgoingWebhookListOK) GetPayload() *models.V0AppWebhookListResponseModel {
+	return o.Payload
+}
+
 func (o *OutgoingWebhookListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0AppWebhookListResponseModel)
@@ -98,6 +102,10 @@ type OutgoingWebhookListBadRequest struct {
 
 func (o *OutgoingWebhookListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/outgoing-webhooks][%d] outgoingWebhookListBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *OutgoingWebhookListBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *OutgoingWebhookListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -129,6 +137,10 @@ func (o *OutgoingWebhookListUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/outgoing-webhooks][%d] outgoingWebhookListUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *OutgoingWebhookListUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *OutgoingWebhookListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -156,6 +168,10 @@ type OutgoingWebhookListInternalServerError struct {
 
 func (o *OutgoingWebhookListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /apps/{app-slug}/outgoing-webhooks][%d] outgoingWebhookListInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *OutgoingWebhookListInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *OutgoingWebhookListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -77,6 +77,10 @@ func (o *SSHKeyCreateOK) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/register-ssh-key][%d] sshKeyCreateOK  %+v", 200, o.Payload)
 }
 
+func (o *SSHKeyCreateOK) GetPayload() *models.V0SSHKeyRespModel {
+	return o.Payload
+}
+
 func (o *SSHKeyCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V0SSHKeyRespModel)
@@ -104,6 +108,10 @@ type SSHKeyCreateBadRequest struct {
 
 func (o *SSHKeyCreateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/register-ssh-key][%d] sshKeyCreateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *SSHKeyCreateBadRequest) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *SSHKeyCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -135,6 +143,10 @@ func (o *SSHKeyCreateUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/register-ssh-key][%d] sshKeyCreateUnauthorized  %+v", 401, o.Payload)
 }
 
+func (o *SSHKeyCreateUnauthorized) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *SSHKeyCreateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -164,6 +176,10 @@ func (o *SSHKeyCreateNotFound) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/register-ssh-key][%d] sshKeyCreateNotFound  %+v", 404, o.Payload)
 }
 
+func (o *SSHKeyCreateNotFound) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
+}
+
 func (o *SSHKeyCreateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ServiceStandardErrorRespModel)
@@ -191,6 +207,10 @@ type SSHKeyCreateInternalServerError struct {
 
 func (o *SSHKeyCreateInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /apps/{app-slug}/register-ssh-key][%d] sshKeyCreateInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *SSHKeyCreateInternalServerError) GetPayload() *models.ServiceStandardErrorRespModel {
+	return o.Payload
 }
 
 func (o *SSHKeyCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

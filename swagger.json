@@ -4954,7 +4954,7 @@
             "type": "object",
             "properties": {
                 "config": {
-                    "description": "Which config to use default-android-config, default-cordova-config, default-fastlane-config, default-ionic-config, default-ios-config,default-macos-config, default-react-native-config, default-xamarin-config, other-config (default if parameter is not speficied)",
+                    "description": "Which config to use `default-android-config`, `default-cordova-config`, `default-fastlane-config`, `default-ionic-config`, `default-ios-config`,`default-macos-config`, `default-react-native-config`, `default-xamarin-config`, `other-config` (default if parameter is not speficied)",
                     "type": "string"
                 },
                 "envs": {
@@ -4962,7 +4962,7 @@
                     "type": "object"
                 },
                 "mode": {
-                    "description": "config specification mode, has to be specified with manual value",
+                    "description": "config specification mode, has to be specified with `manual` value",
                     "type": "string"
                 },
                 "organization_slug": {
@@ -4970,7 +4970,7 @@
                     "type": "string"
                 },
                 "project_type": {
-                    "description": "The type of your project (android, ios, cordova, other, xamarin, macos, ionic, react-native, fastlane, null)",
+                    "description": "The type of your project (`android`, `ios`, `cordova`, `other`, `xamarin`, `macos`, `ionic`, `react-native`, `fastlane`, null)",
                     "type": "string"
                 },
                 "stack_id": {
@@ -5086,11 +5086,11 @@
                     "type": "string"
                 },
                 "is_public": {
-                    "description": "If true then the repository visibility setting will be public, in case of false it will be private",
+                    "description": "If `true` then the repository visibility setting will be public, in case of `false` it will be private",
                     "type": "boolean"
                 },
                 "provider": {
-                    "description": "The git provider you are using, it can be github, bitbucket, gitlab, gitlab-self-hosted or custom",
+                    "description": "The git provider you are using, it can be `github`, `bitbucket`, `gitlab`, `gitlab-self-hosted` or `custom`",
                     "type": "string"
                 },
                 "repo_url": {
@@ -5098,7 +5098,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "It has to be provided by legacy reasons and has to have the git value",
+                    "description": "It has to be provided by legacy reasons and has to have the `git` value",
                     "type": "string"
                 }
             }

@@ -21,6 +21,9 @@ type V0UserProfileDataModel struct {
 	// email
 	Email string `json:"email,omitempty"`
 
+	// is chat available
+	IsChatAvailable bool `json:"is_chat_available,omitempty"`
+
 	// slug
 	Slug string `json:"slug,omitempty"`
 

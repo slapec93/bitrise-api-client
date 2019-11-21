@@ -16,6 +16,9 @@ import (
 // swagger:model v0.AppAddOnResponseItemModel
 type V0AppAddOnResponseItemModel struct {
 
+	// description
+	Description string `json:"description,omitempty"`
+
 	// documentation url
 	DocumentationURL string `json:"documentation_url,omitempty"`
 
@@ -28,8 +31,14 @@ type V0AppAddOnResponseItemModel struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// is beta
+	IsBeta bool `json:"is_beta,omitempty"`
+
 	// plan
 	Plan *AddonsPlan `json:"plan,omitempty"`
+
+	// setup guide
+	SetupGuide *AddonsSetupGuide `json:"setup_guide,omitempty"`
 
 	// summary
 	Summary string `json:"summary,omitempty"`
@@ -43,6 +52,10 @@ func (m *V0AppAddOnResponseItemModel) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validatePlan(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSetupGuide(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -62,6 +75,24 @@ func (m *V0AppAddOnResponseItemModel) validatePlan(formats strfmt.Registry) erro
 		if err := m.Plan.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("plan")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V0AppAddOnResponseItemModel) validateSetupGuide(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SetupGuide) { // not required
+		return nil
+	}
+
+	if m.SetupGuide != nil {
+		if err := m.SetupGuide.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("setup_guide")
 			}
 			return err
 		}

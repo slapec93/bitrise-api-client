@@ -228,7 +228,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppUploadParams"
                         }
                     }
@@ -496,7 +495,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AndroidKeystoreFileUploadParams"
                         }
                     }
@@ -568,7 +566,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AvatarCandidateCreateBulkParams"
                         }
                     }
@@ -647,7 +644,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AvatarPromoteParams"
                         }
                     }
@@ -779,7 +775,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppConfigRequestParam"
                         }
                     }
@@ -985,7 +980,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildCertificateUploadParams"
                         }
                     }
@@ -1192,7 +1186,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildCertificateUpdateParams"
                         }
                     }
@@ -1402,7 +1395,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildRequestUpdateParams"
                         }
                     }
@@ -1675,7 +1667,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildTriggerParams"
                         }
                     }
@@ -1826,7 +1817,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.BuildAbortParams"
                         }
                     }
@@ -2144,7 +2134,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ArtifactUpdateParams"
                         }
                     }
@@ -2354,7 +2343,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppFinishParams"
                         }
                     }
@@ -2498,7 +2486,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProjectFileStorageUploadParams"
                         }
                     }
@@ -2705,7 +2692,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProjectFileStorageDocumentUpdateParams"
                         }
                     }
@@ -2912,7 +2898,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppWebhookCreateParams"
                         }
                     }
@@ -2988,7 +2973,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.AppWebhookUpdateParams"
                         }
                     }
@@ -3402,7 +3386,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProvisionProfileUploadParams"
                         }
                     }
@@ -3609,7 +3592,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.ProvProfileDocumentUpdateParams"
                         }
                     }
@@ -3750,7 +3732,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/v0.SSHKeyUploadParams"
                         }
                     }
@@ -4707,6 +4688,9 @@
                 "id": {
                     "type": "string"
                 },
+                "is_beta": {
+                    "type": "boolean"
+                },
                 "plans": {
                     "type": "array",
                     "items": {
@@ -4726,7 +4710,8 @@
                     }
                 },
                 "setup_guide": {
-                    "type": "string"
+                    "type": "object",
+                    "$ref": "#/definitions/addons.SetupGuide"
                 },
                 "subtitle": {
                     "type": "string"
@@ -4781,6 +4766,34 @@
                 },
                 "price": {
                     "type": "integer"
+                }
+            }
+        },
+        "addons.SetupGuide": {
+            "type": "object",
+            "properties": {
+                "instructions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/addons.SetupInstruction"
+                    }
+                },
+                "notification": {
+                    "type": "string"
+                }
+            }
+        },
+        "addons.SetupInstruction": {
+            "type": "object",
+            "properties": {
+                "card_content": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
                 }
             }
         },
@@ -4903,6 +4916,9 @@
         "v0.AppAddOnResponseItemModel": {
             "type": "object",
             "properties": {
+                "description": {
+                    "type": "string"
+                },
                 "documentation_url": {
                     "type": "string"
                 },
@@ -4915,9 +4931,16 @@
                 "id": {
                     "type": "string"
                 },
+                "is_beta": {
+                    "type": "boolean"
+                },
                 "plan": {
                     "type": "object",
                     "$ref": "#/definitions/addons.Plan"
+                },
+                "setup_guide": {
+                    "type": "object",
+                    "$ref": "#/definitions/addons.SetupGuide"
                 },
                 "summary": {
                     "type": "string"
@@ -6066,6 +6089,9 @@
                 "id": {
                     "type": "string"
                 },
+                "is_beta": {
+                    "type": "boolean"
+                },
                 "summary": {
                     "type": "string"
                 },
@@ -6118,7 +6144,7 @@
                     "type": "string"
                 },
                 "price": {
-                    "type": "integer"
+                    "type": "string"
                 }
             }
         },
@@ -6378,6 +6404,9 @@
                 },
                 "email": {
                     "type": "string"
+                },
+                "is_chat_available": {
+                    "type": "boolean"
                 },
                 "slug": {
                     "type": "string"

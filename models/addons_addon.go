@@ -45,6 +45,9 @@ type AddonsAddon struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// is beta
+	IsBeta bool `json:"is_beta,omitempty"`
+
 	// plans
 	Plans []*AddonsPlan `json:"plans"`
 
@@ -55,7 +58,7 @@ type AddonsAddon struct {
 	PreviewImages []string `json:"preview_images"`
 
 	// setup guide
-	SetupGuide string `json:"setup_guide,omitempty"`
+	SetupGuide *AddonsSetupGuide `json:"setup_guide,omitempty"`
 
 	// subtitle
 	Subtitle string `json:"subtitle,omitempty"`
@@ -76,6 +79,10 @@ func (m *AddonsAddon) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePlans(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSetupGuide(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -130,6 +137,24 @@ func (m *AddonsAddon) validatePlans(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AddonsAddon) validateSetupGuide(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SetupGuide) { // not required
+		return nil
+	}
+
+	if m.SetupGuide != nil {
+		if err := m.SetupGuide.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("setup_guide")
+			}
+			return err
+		}
 	}
 
 	return nil

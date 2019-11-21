@@ -33,6 +33,9 @@ type V0OwnerAddOnResponseItemModel struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// is beta
+	IsBeta bool `json:"is_beta,omitempty"`
+
 	// summary
 	Summary string `json:"summary,omitempty"`
 

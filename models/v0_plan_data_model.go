@@ -28,7 +28,7 @@ type V0PlanDataModel struct {
 	Name string `json:"name,omitempty"`
 
 	// price
-	Price int64 `json:"price,omitempty"`
+	Price string `json:"price,omitempty"`
 }
 
 // Validate validates this v0 plan data model

@@ -42,6 +42,9 @@ type V0BuildResponseItemModel struct {
 	// is on hold
 	IsOnHold bool `json:"is_on_hold,omitempty"`
 
+	// machine type id
+	MachineTypeID string `json:"machine_type_id,omitempty"`
+
 	// original build params
 	OriginalBuildParams string `json:"original_build_params,omitempty"`
 
@@ -56,9 +59,6 @@ type V0BuildResponseItemModel struct {
 
 	// slug
 	Slug string `json:"slug,omitempty"`
-
-	// stack config type
-	StackConfigType string `json:"stack_config_type,omitempty"`
 
 	// stack identifier
 	StackIdentifier string `json:"stack_identifier,omitempty"`

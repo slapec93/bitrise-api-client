@@ -4504,6 +4504,65 @@
                 }
             }
         },
+        "/users/{user-slug}/apple-api-credentials": {
+            "get": {
+                "security": [
+                    {
+                        "PersonalAccessToken": []
+                    }
+                ],
+                "description": "List Apple API credentials for a specific Bitrise user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "apple-api-credentials"
+                ],
+                "summary": "List Apple API credentials for a specific user",
+                "operationId": "apple-api-credential-list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User slug",
+                        "name": "user-slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v0.AppleAPICredentialsListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/service.StandardErrorRespModel"
+                        }
+                    }
+                }
+            }
+        },
         "/users/{user-slug}/apps": {
             "get": {
                 "security": [
@@ -4971,7 +5030,9 @@
         },
         "v0.AppConfigRespModel": {
             "type": "object",
-            "additionalProperties": {}
+            "additionalProperties": {
+                "type": "string"
+            }
         },
         "v0.AppFinishParams": {
             "type": "object",
@@ -4982,7 +5043,10 @@
                 },
                 "envs": {
                     "description": "Environment variables for the application workflows, e.g. {\"env1\":\"val1\",\"env2\":\"val2\"}",
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "mode": {
                     "description": "config specification mode, has to be specified with `manual` value",
@@ -5226,6 +5290,40 @@
                 }
             }
         },
+        "v0.AppleAPICredentialResponseItem": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "issuer_id": {
+                    "type": "string"
+                },
+                "key_id": {
+                    "type": "string"
+                },
+                "private_key": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "v0.AppleAPICredentialsListResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v0.AppleAPICredentialResponseItem"
+                    }
+                }
+            }
+        },
         "v0.ArtifactDeleteResponseModel": {
             "type": "object",
             "properties": {
@@ -5323,15 +5421,7 @@
         "v0.AvatarCandidateCreateBulkParams": {
             "type": "array",
             "items": {
-                "type": "object",
-                "properties": {
-                    "filename": {
-                        "type": "string"
-                    },
-                    "filesize": {
-                        "type": "integer"
-                    }
-                }
+                "$ref": "#/definitions/v0.AvatarCandidateCreateParams"
             }
         },
         "v0.AvatarCandidateCreateParams": {
@@ -5365,21 +5455,7 @@
         "v0.AvatarCandidateCreateResponseItems": {
             "type": "array",
             "items": {
-                "type": "object",
-                "properties": {
-                    "filename": {
-                        "type": "string"
-                    },
-                    "filesize": {
-                        "type": "integer"
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "upload_url": {
-                        "type": "string"
-                    }
-                }
+                "$ref": "#/definitions/v0.AvatarCandidateCreateResponseItem"
             }
         },
         "v0.AvatarPromoteParams": {
@@ -5564,6 +5640,9 @@
                 "is_on_hold": {
                     "type": "boolean"
                 },
+                "machine_type_id": {
+                    "type": "string"
+                },
                 "original_build_params": {
                     "type": "string"
                 },
@@ -5581,9 +5660,6 @@
                     "$ref": "#/definitions/v0.AppResponseItemModel"
                 },
                 "slug": {
-                    "type": "string"
-                },
-                "stack_config_type": {
                     "type": "string"
                 },
                 "stack_identifier": {
@@ -5767,6 +5843,9 @@
                 "is_on_hold": {
                     "type": "boolean"
                 },
+                "machine_type_id": {
+                    "type": "string"
+                },
                 "original_build_params": {
                     "type": "string"
                 },
@@ -5780,9 +5859,6 @@
                     "type": "string"
                 },
                 "slug": {
-                    "type": "string"
-                },
-                "stack_config_type": {
                     "type": "string"
                 },
                 "stack_identifier": {

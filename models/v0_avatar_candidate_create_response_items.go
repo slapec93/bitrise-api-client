@@ -16,7 +16,7 @@ import (
 
 // V0AvatarCandidateCreateResponseItems v0 avatar candidate create response items
 // swagger:model v0.AvatarCandidateCreateResponseItems
-type V0AvatarCandidateCreateResponseItems []*V0AvatarCandidateCreateResponseItemsItems0
+type V0AvatarCandidateCreateResponseItems []*V0AvatarCandidateCreateResponseItem
 
 // Validate validates this v0 avatar candidate create response items
 func (m V0AvatarCandidateCreateResponseItems) Validate(formats strfmt.Registry) error {
@@ -41,45 +41,5 @@ func (m V0AvatarCandidateCreateResponseItems) Validate(formats strfmt.Registry) 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-// V0AvatarCandidateCreateResponseItemsItems0 v0 avatar candidate create response items items0
-// swagger:model V0AvatarCandidateCreateResponseItemsItems0
-type V0AvatarCandidateCreateResponseItemsItems0 struct {
-
-	// filename
-	Filename string `json:"filename,omitempty"`
-
-	// filesize
-	Filesize int64 `json:"filesize,omitempty"`
-
-	// slug
-	Slug string `json:"slug,omitempty"`
-
-	// upload url
-	UploadURL string `json:"upload_url,omitempty"`
-}
-
-// Validate validates this v0 avatar candidate create response items items0
-func (m *V0AvatarCandidateCreateResponseItemsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *V0AvatarCandidateCreateResponseItemsItems0) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *V0AvatarCandidateCreateResponseItemsItems0) UnmarshalBinary(b []byte) error {
-	var res V0AvatarCandidateCreateResponseItemsItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
 	return nil
 }

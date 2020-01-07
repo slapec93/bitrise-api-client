@@ -16,7 +16,7 @@ import (
 
 // V0AvatarCandidateCreateBulkParams v0 avatar candidate create bulk params
 // swagger:model v0.AvatarCandidateCreateBulkParams
-type V0AvatarCandidateCreateBulkParams []*V0AvatarCandidateCreateBulkParamsItems0
+type V0AvatarCandidateCreateBulkParams []*V0AvatarCandidateCreateParams
 
 // Validate validates this v0 avatar candidate create bulk params
 func (m V0AvatarCandidateCreateBulkParams) Validate(formats strfmt.Registry) error {
@@ -41,39 +41,5 @@ func (m V0AvatarCandidateCreateBulkParams) Validate(formats strfmt.Registry) err
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-// V0AvatarCandidateCreateBulkParamsItems0 v0 avatar candidate create bulk params items0
-// swagger:model V0AvatarCandidateCreateBulkParamsItems0
-type V0AvatarCandidateCreateBulkParamsItems0 struct {
-
-	// filename
-	Filename string `json:"filename,omitempty"`
-
-	// filesize
-	Filesize int64 `json:"filesize,omitempty"`
-}
-
-// Validate validates this v0 avatar candidate create bulk params items0
-func (m *V0AvatarCandidateCreateBulkParamsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *V0AvatarCandidateCreateBulkParamsItems0) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *V0AvatarCandidateCreateBulkParamsItems0) UnmarshalBinary(b []byte) error {
-	var res V0AvatarCandidateCreateBulkParamsItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
 	return nil
 }

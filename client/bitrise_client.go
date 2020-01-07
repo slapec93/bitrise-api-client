@@ -10,6 +10,7 @@ import (
 	"github.com/bitrise-io/bitrise-api-client/client/addons"
 	"github.com/bitrise-io/bitrise-api-client/client/android_keystore_file"
 	"github.com/bitrise-io/bitrise-api-client/client/app_setup"
+	"github.com/bitrise-io/bitrise-api-client/client/apple_api_credentials"
 	"github.com/bitrise-io/bitrise-api-client/client/application"
 	"github.com/bitrise-io/bitrise-api-client/client/avatar_candidate"
 	"github.com/bitrise-io/bitrise-api-client/client/build_artifact"
@@ -78,6 +79,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Bitrise {
 	cli.AndroidKeystoreFile = android_keystore_file.New(transport, formats)
 
 	cli.AppSetup = app_setup.New(transport, formats)
+
+	cli.AppleAPICredentials = apple_api_credentials.New(transport, formats)
 
 	cli.Application = application.New(transport, formats)
 
@@ -157,6 +160,8 @@ type Bitrise struct {
 
 	AppSetup *app_setup.Client
 
+	AppleAPICredentials *apple_api_credentials.Client
+
 	Application *application.Client
 
 	AvatarCandidate *avatar_candidate.Client
@@ -197,6 +202,8 @@ func (c *Bitrise) SetTransport(transport runtime.ClientTransport) {
 	c.AndroidKeystoreFile.SetTransport(transport)
 
 	c.AppSetup.SetTransport(transport)
+
+	c.AppleAPICredentials.SetTransport(transport)
 
 	c.Application.SetTransport(transport)
 

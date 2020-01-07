@@ -19,7 +19,7 @@ type V0AppFinishParams struct {
 	Config string `json:"config,omitempty"`
 
 	// Environment variables for the application workflows, e.g. {"env1":"val1","env2":"val2"}
-	Envs interface{} `json:"envs,omitempty"`
+	Envs map[string]string `json:"envs,omitempty"`
 
 	// config specification mode, has to be specified with `manual` value
 	Mode string `json:"mode,omitempty"`

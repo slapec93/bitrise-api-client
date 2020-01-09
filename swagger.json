@@ -5302,6 +5302,9 @@
                 "key_id": {
                     "type": "string"
                 },
+                "name": {
+                    "type": "string"
+                },
                 "private_key": {
                     "type": "string"
                 },

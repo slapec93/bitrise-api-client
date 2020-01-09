@@ -24,6 +24,9 @@ type V0AppleAPICredentialResponseItem struct {
 	// key id
 	KeyID string `json:"key_id,omitempty"`
 
+	// name
+	Name string `json:"name,omitempty"`
+
 	// private key
 	PrivateKey string `json:"private_key,omitempty"`
 

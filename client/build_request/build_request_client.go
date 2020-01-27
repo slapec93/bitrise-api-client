@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new build request API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,19 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-BuildRequestList lists the open build requests for an app
+// ClientService is the interface for Client methods
+type ClientService interface {
+	BuildRequestList(params *BuildRequestListParams, authInfo runtime.ClientAuthInfoWriter) (*BuildRequestListOK, error)
 
-List the existing open build requests of a specified Bitrise app
+	BuildRequestUpdate(params *BuildRequestUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*BuildRequestUpdateOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  BuildRequestList lists the open build requests for an app
+
+  List the existing open build requests of a specified Bitrise app
 */
 func (a *Client) BuildRequestList(params *BuildRequestListParams, authInfo runtime.ClientAuthInfoWriter) (*BuildRequestListOK, error) {
 	// TODO: Validate the params before sending
@@ -42,7 +50,7 @@ func (a *Client) BuildRequestList(params *BuildRequestListParams, authInfo runti
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/build-requests",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &BuildRequestListReader{formats: a.formats},
@@ -64,9 +72,9 @@ func (a *Client) BuildRequestList(params *BuildRequestListParams, authInfo runti
 }
 
 /*
-BuildRequestUpdate updates a build request
+  BuildRequestUpdate updates a build request
 
-Update a specific build request of a specific app
+  Update a specific build request of a specific app
 */
 func (a *Client) BuildRequestUpdate(params *BuildRequestUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*BuildRequestUpdateOK, error) {
 	// TODO: Validate the params before sending

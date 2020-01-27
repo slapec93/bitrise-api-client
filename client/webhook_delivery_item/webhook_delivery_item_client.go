@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new webhook delivery item API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,21 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-WebhookDeliveryItemList lists the webhook delivery items of an app
+// ClientService is the interface for Client methods
+type ClientService interface {
+	WebhookDeliveryItemList(params *WebhookDeliveryItemListParams, authInfo runtime.ClientAuthInfoWriter) (*WebhookDeliveryItemListOK, error)
 
-List all the delivery items of an outgoing webhook of a Bitrise application
+	WebhookDeliveryItemRedeliver(params *WebhookDeliveryItemRedeliverParams, authInfo runtime.ClientAuthInfoWriter) (*WebhookDeliveryItemRedeliverOK, error)
+
+	WebhookDeliveryItemShow(params *WebhookDeliveryItemShowParams, authInfo runtime.ClientAuthInfoWriter) (*WebhookDeliveryItemShowOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  WebhookDeliveryItemList lists the webhook delivery items of an app
+
+  List all the delivery items of an outgoing webhook of a Bitrise application
 */
 func (a *Client) WebhookDeliveryItemList(params *WebhookDeliveryItemListParams, authInfo runtime.ClientAuthInfoWriter) (*WebhookDeliveryItemListOK, error) {
 	// TODO: Validate the params before sending
@@ -42,7 +52,7 @@ func (a *Client) WebhookDeliveryItemList(params *WebhookDeliveryItemListParams, 
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &WebhookDeliveryItemListReader{formats: a.formats},
@@ -64,9 +74,9 @@ func (a *Client) WebhookDeliveryItemList(params *WebhookDeliveryItemListParams, 
 }
 
 /*
-WebhookDeliveryItemRedeliver res deliver the webhook delivery items of an app
+  WebhookDeliveryItemRedeliver res deliver the webhook delivery items of an app
 
-Re-deliver the delivery item of a specified webhook of a Bitrise application
+  Re-deliver the delivery item of a specified webhook of a Bitrise application
 */
 func (a *Client) WebhookDeliveryItemRedeliver(params *WebhookDeliveryItemRedeliverParams, authInfo runtime.ClientAuthInfoWriter) (*WebhookDeliveryItemRedeliverOK, error) {
 	// TODO: Validate the params before sending
@@ -79,7 +89,7 @@ func (a *Client) WebhookDeliveryItemRedeliver(params *WebhookDeliveryItemRedeliv
 		Method:             "POST",
 		PathPattern:        "/apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items/{webhook-delivery-item-slug}/redeliver",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &WebhookDeliveryItemRedeliverReader{formats: a.formats},
@@ -101,9 +111,9 @@ func (a *Client) WebhookDeliveryItemRedeliver(params *WebhookDeliveryItemRedeliv
 }
 
 /*
-WebhookDeliveryItemShow gets a specific delivery item of a webhook
+  WebhookDeliveryItemShow gets a specific delivery item of a webhook
 
-Get the specified delivery item of an outgoing webhook of a Bitrise application
+  Get the specified delivery item of an outgoing webhook of a Bitrise application
 */
 func (a *Client) WebhookDeliveryItemShow(params *WebhookDeliveryItemShowParams, authInfo runtime.ClientAuthInfoWriter) (*WebhookDeliveryItemShowOK, error) {
 	// TODO: Validate the params before sending
@@ -116,7 +126,7 @@ func (a *Client) WebhookDeliveryItemShow(params *WebhookDeliveryItemShowParams, 
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}/delivery-items/{webhook-delivery-item-slug}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &WebhookDeliveryItemShowReader{formats: a.formats},

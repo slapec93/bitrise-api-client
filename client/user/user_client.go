@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new user API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,21 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-UserPlan thes subscription plan of the user
+// ClientService is the interface for Client methods
+type ClientService interface {
+	UserPlan(params *UserPlanParams, authInfo runtime.ClientAuthInfoWriter) (*UserPlanOK, error)
 
-Get the subscription of the user: the current plan, any pending plans, and the duration of a trial period if applicable
+	UserProfile(params *UserProfileParams, authInfo runtime.ClientAuthInfoWriter) (*UserProfileOK, error)
+
+	UserShow(params *UserShowParams, authInfo runtime.ClientAuthInfoWriter) (*UserShowOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  UserPlan thes subscription plan of the user
+
+  Get the subscription of the user: the current plan, any pending plans, and the duration of a trial period if applicable
 */
 func (a *Client) UserPlan(params *UserPlanParams, authInfo runtime.ClientAuthInfoWriter) (*UserPlanOK, error) {
 	// TODO: Validate the params before sending
@@ -42,7 +52,7 @@ func (a *Client) UserPlan(params *UserPlanParams, authInfo runtime.ClientAuthInf
 		Method:             "GET",
 		PathPattern:        "/me/plan",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &UserPlanReader{formats: a.formats},
@@ -64,9 +74,9 @@ func (a *Client) UserPlan(params *UserPlanParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-UserProfile gets your profile data
+  UserProfile gets your profile data
 
-Shows the authenticated users profile data
+  Shows the authenticated users profile data
 */
 func (a *Client) UserProfile(params *UserProfileParams, authInfo runtime.ClientAuthInfoWriter) (*UserProfileOK, error) {
 	// TODO: Validate the params before sending
@@ -79,7 +89,7 @@ func (a *Client) UserProfile(params *UserProfileParams, authInfo runtime.ClientA
 		Method:             "GET",
 		PathPattern:        "/me",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &UserProfileReader{formats: a.formats},
@@ -101,9 +111,9 @@ func (a *Client) UserProfile(params *UserProfileParams, authInfo runtime.ClientA
 }
 
 /*
-UserShow gets a specific user
+  UserShow gets a specific user
 
-Show information about a specific user
+  Show information about a specific user
 */
 func (a *Client) UserShow(params *UserShowParams, authInfo runtime.ClientAuthInfoWriter) (*UserShowOK, error) {
 	// TODO: Validate the params before sending
@@ -116,7 +126,7 @@ func (a *Client) UserShow(params *UserShowParams, authInfo runtime.ClientAuthInf
 		Method:             "GET",
 		PathPattern:        "/users/{user-slug}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &UserShowReader{formats: a.formats},

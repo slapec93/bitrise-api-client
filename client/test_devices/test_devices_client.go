@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new test devices API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,17 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-TestDeviceList lists the test devices for an app
+// ClientService is the interface for Client methods
+type ClientService interface {
+	TestDeviceList(params *TestDeviceListParams, authInfo runtime.ClientAuthInfoWriter) (*TestDeviceListOK, error)
 
-List registered test devices of all members of a specified Bitrise app
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  TestDeviceList lists the test devices for an app
+
+  List registered test devices of all members of a specified Bitrise app
 */
 func (a *Client) TestDeviceList(params *TestDeviceListParams, authInfo runtime.ClientAuthInfoWriter) (*TestDeviceListOK, error) {
 	// TODO: Validate the params before sending
@@ -42,7 +48,7 @@ func (a *Client) TestDeviceList(params *TestDeviceListParams, authInfo runtime.C
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/test-devices",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &TestDeviceListReader{formats: a.formats},

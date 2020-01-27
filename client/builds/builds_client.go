@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new builds API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,31 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-BuildAbort aborts a specific build
+// ClientService is the interface for Client methods
+type ClientService interface {
+	BuildAbort(params *BuildAbortParams, authInfo runtime.ClientAuthInfoWriter) (*BuildAbortOK, error)
 
-Abort a specific build. Set an abort reason with the `abort_reason` parameter. Use the `abort_with_success` parameter to abort a build but still count it as a successful one.
+	BuildBitriseYmlShow(params *BuildBitriseYmlShowParams, authInfo runtime.ClientAuthInfoWriter) (*BuildBitriseYmlShowOK, error)
+
+	BuildList(params *BuildListParams, authInfo runtime.ClientAuthInfoWriter) (*BuildListOK, error)
+
+	BuildListAll(params *BuildListAllParams, authInfo runtime.ClientAuthInfoWriter) (*BuildListAllOK, error)
+
+	BuildLog(params *BuildLogParams, authInfo runtime.ClientAuthInfoWriter) (*BuildLogOK, error)
+
+	BuildShow(params *BuildShowParams, authInfo runtime.ClientAuthInfoWriter) (*BuildShowOK, error)
+
+	BuildTrigger(params *BuildTriggerParams, authInfo runtime.ClientAuthInfoWriter) (*BuildTriggerOK, error)
+
+	BuildWorkflowList(params *BuildWorkflowListParams, authInfo runtime.ClientAuthInfoWriter) (*BuildWorkflowListOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  BuildAbort aborts a specific build
+
+  Abort a specific build. Set an abort reason with the `abort_reason` parameter. Use the `abort_with_success` parameter to abort a build but still count it as a successful one.
 */
 func (a *Client) BuildAbort(params *BuildAbortParams, authInfo runtime.ClientAuthInfoWriter) (*BuildAbortOK, error) {
 	// TODO: Validate the params before sending
@@ -64,9 +84,9 @@ func (a *Client) BuildAbort(params *BuildAbortParams, authInfo runtime.ClientAut
 }
 
 /*
-BuildBitriseYmlShow gets the bitrise yml of a build
+  BuildBitriseYmlShow gets the bitrise yml of a build
 
-Get the bitrise.yml file of one of the builds of a given app. This will return the `bitrise.yml` configuration with which the build ran. You can compare it to [the current bitrise.yml configuration](https://api-docs.bitrise.io/#/application/app-config-datastore-show) of the app.
+  Get the bitrise.yml file of one of the builds of a given app. This will return the `bitrise.yml` configuration with which the build ran. You can compare it to [the current bitrise.yml configuration](https://api-docs.bitrise.io/#/application/app-config-datastore-show) of the app.
 */
 func (a *Client) BuildBitriseYmlShow(params *BuildBitriseYmlShowParams, authInfo runtime.ClientAuthInfoWriter) (*BuildBitriseYmlShowOK, error) {
 	// TODO: Validate the params before sending
@@ -79,7 +99,7 @@ func (a *Client) BuildBitriseYmlShow(params *BuildBitriseYmlShowParams, authInfo
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/builds/{build-slug}/bitrise.yml",
 		ProducesMediaTypes: []string{"text/plain"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &BuildBitriseYmlShowReader{formats: a.formats},
@@ -101,9 +121,9 @@ func (a *Client) BuildBitriseYmlShow(params *BuildBitriseYmlShowParams, authInfo
 }
 
 /*
-BuildList lists all builds of an app
+  BuildList lists all builds of an app
 
-List all the builds of a specified Bitrise app. Set parameters to filter builds: for example, you can search for builds run with a given workflow or all builds that were triggered by Pull Requests. It returns all the relevant data of the build.
+  List all the builds of a specified Bitrise app. Set parameters to filter builds: for example, you can search for builds run with a given workflow or all builds that were triggered by Pull Requests. It returns all the relevant data of the build.
 */
 func (a *Client) BuildList(params *BuildListParams, authInfo runtime.ClientAuthInfoWriter) (*BuildListOK, error) {
 	// TODO: Validate the params before sending
@@ -116,7 +136,7 @@ func (a *Client) BuildList(params *BuildListParams, authInfo runtime.ClientAuthI
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/builds",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &BuildListReader{formats: a.formats},
@@ -138,9 +158,9 @@ func (a *Client) BuildList(params *BuildListParams, authInfo runtime.ClientAuthI
 }
 
 /*
-BuildListAll lists all builds
+  BuildListAll lists all builds
 
-List all the Bitrise builds that can be accessed with the authenticated account. Filter builds based on their owner, using the owner slug, or the status of the build.
+  List all the Bitrise builds that can be accessed with the authenticated account. Filter builds based on their owner, using the owner slug, or the status of the build.
 */
 func (a *Client) BuildListAll(params *BuildListAllParams, authInfo runtime.ClientAuthInfoWriter) (*BuildListAllOK, error) {
 	// TODO: Validate the params before sending
@@ -153,7 +173,7 @@ func (a *Client) BuildListAll(params *BuildListAllParams, authInfo runtime.Clien
 		Method:             "GET",
 		PathPattern:        "/builds",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &BuildListAllReader{formats: a.formats},
@@ -175,9 +195,9 @@ func (a *Client) BuildListAll(params *BuildListAllParams, authInfo runtime.Clien
 }
 
 /*
-BuildLog gets the build log of a build
+  BuildLog gets the build log of a build
 
-Get the build log of a specified build of a Bitrise app. You can get the build slug either by calling the [/builds](https://api-docs.bitrise.io/#/builds/build-list) endpoint or by clicking on the build on bitrise.io and copying the slug from the URL.
+  Get the build log of a specified build of a Bitrise app. You can get the build slug either by calling the [/builds](https://api-docs.bitrise.io/#/builds/build-list) endpoint or by clicking on the build on bitrise.io and copying the slug from the URL.
 */
 func (a *Client) BuildLog(params *BuildLogParams, authInfo runtime.ClientAuthInfoWriter) (*BuildLogOK, error) {
 	// TODO: Validate the params before sending
@@ -190,7 +210,7 @@ func (a *Client) BuildLog(params *BuildLogParams, authInfo runtime.ClientAuthInf
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/builds/{build-slug}/log",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &BuildLogReader{formats: a.formats},
@@ -212,9 +232,9 @@ func (a *Client) BuildLog(params *BuildLogParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-BuildShow gets a build of a given app
+  BuildShow gets a build of a given app
 
-Get the specified build of a given Bitrise app. You need to provide both an app slug and a build slug. You can get the build slug either by calling the [/builds](https://api-docs.bitrise.io/#/builds/build-list) endpoint or by clicking on the build on bitrise.io and copying the slug from the URL. The endpoint returns all the relevant data of the build.
+  Get the specified build of a given Bitrise app. You need to provide both an app slug and a build slug. You can get the build slug either by calling the [/builds](https://api-docs.bitrise.io/#/builds/build-list) endpoint or by clicking on the build on bitrise.io and copying the slug from the URL. The endpoint returns all the relevant data of the build.
 */
 func (a *Client) BuildShow(params *BuildShowParams, authInfo runtime.ClientAuthInfoWriter) (*BuildShowOK, error) {
 	// TODO: Validate the params before sending
@@ -227,7 +247,7 @@ func (a *Client) BuildShow(params *BuildShowParams, authInfo runtime.ClientAuthI
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/builds/{build-slug}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &BuildShowReader{formats: a.formats},
@@ -249,9 +269,9 @@ func (a *Client) BuildShow(params *BuildShowParams, authInfo runtime.ClientAuthI
 }
 
 /*
-BuildTrigger triggers a new build
+  BuildTrigger triggers a new build
 
-Trigger a new build. Specify an app slug and at least one parameter out of three: a git tag or git commit hash, a branch, or a workflow ID. You can also set specific parameters for Pull Request builds and define additional environment variables for your build. [Check out our detailed guide](https://devcenter.bitrise.io/api/build-trigger/).
+  Trigger a new build. Specify an app slug and at least one parameter out of three: a git tag or git commit hash, a branch, or a workflow ID. You can also set specific parameters for Pull Request builds and define additional environment variables for your build. [Check out our detailed guide](https://devcenter.bitrise.io/api/build-trigger/).
 */
 func (a *Client) BuildTrigger(params *BuildTriggerParams, authInfo runtime.ClientAuthInfoWriter) (*BuildTriggerOK, error) {
 	// TODO: Validate the params before sending
@@ -286,9 +306,9 @@ func (a *Client) BuildTrigger(params *BuildTriggerParams, authInfo runtime.Clien
 }
 
 /*
-BuildWorkflowList lists the workflows of an app
+  BuildWorkflowList lists the workflows of an app
 
-List the workflows that were triggered at any time for a given Bitrise app. Note that it might list workflows that are currently not defined in the app's `bitrise.yml` configuration - and conversely, workflows that were never triggered will not be listed even if they are defined in the `bitrise.yml` file.
+  List the workflows that were triggered at any time for a given Bitrise app. Note that it might list workflows that are currently not defined in the app's `bitrise.yml` configuration - and conversely, workflows that were never triggered will not be listed even if they are defined in the `bitrise.yml` file.
 */
 func (a *Client) BuildWorkflowList(params *BuildWorkflowListParams, authInfo runtime.ClientAuthInfoWriter) (*BuildWorkflowListOK, error) {
 	// TODO: Validate the params before sending
@@ -301,7 +321,7 @@ func (a *Client) BuildWorkflowList(params *BuildWorkflowListParams, authInfo run
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/build-workflows",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &BuildWorkflowListReader{formats: a.formats},

@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new activity API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,17 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-ActivityList gets list of bitrise activity events
+// ClientService is the interface for Client methods
+type ClientService interface {
+	ActivityList(params *ActivityListParams, authInfo runtime.ClientAuthInfoWriter) (*ActivityListOK, error)
 
-List all the Bitrise activity events
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  ActivityList gets list of bitrise activity events
+
+  List all the Bitrise activity events
 */
 func (a *Client) ActivityList(params *ActivityListParams, authInfo runtime.ClientAuthInfoWriter) (*ActivityListOK, error) {
 	// TODO: Validate the params before sending
@@ -42,7 +48,7 @@ func (a *Client) ActivityList(params *ActivityListParams, authInfo runtime.Clien
 		Method:             "GET",
 		PathPattern:        "/me/activities",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &ActivityListReader{formats: a.formats},

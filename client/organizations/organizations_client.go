@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new organizations API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,19 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-OrgList lists the organizations that the user is part of
+// ClientService is the interface for Client methods
+type ClientService interface {
+	OrgList(params *OrgListParams, authInfo runtime.ClientAuthInfoWriter) (*OrgListOK, error)
 
-List all Bitrise organizations that the user is part of
+	OrgShow(params *OrgShowParams, authInfo runtime.ClientAuthInfoWriter) (*OrgShowOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  OrgList lists the organizations that the user is part of
+
+  List all Bitrise organizations that the user is part of
 */
 func (a *Client) OrgList(params *OrgListParams, authInfo runtime.ClientAuthInfoWriter) (*OrgListOK, error) {
 	// TODO: Validate the params before sending
@@ -42,7 +50,7 @@ func (a *Client) OrgList(params *OrgListParams, authInfo runtime.ClientAuthInfoW
 		Method:             "GET",
 		PathPattern:        "/organizations",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &OrgListReader{formats: a.formats},
@@ -64,9 +72,9 @@ func (a *Client) OrgList(params *OrgListParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-OrgShow gets a specified organization
+  OrgShow gets a specified organization
 
-Get a specified Bitrise organization that the user is part of.
+  Get a specified Bitrise organization that the user is part of.
 */
 func (a *Client) OrgShow(params *OrgShowParams, authInfo runtime.ClientAuthInfoWriter) (*OrgShowOK, error) {
 	// TODO: Validate the params before sending
@@ -79,7 +87,7 @@ func (a *Client) OrgShow(params *OrgShowParams, authInfo runtime.ClientAuthInfoW
 		Method:             "GET",
 		PathPattern:        "/organizations/{org-slug}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &OrgShowReader{formats: a.formats},

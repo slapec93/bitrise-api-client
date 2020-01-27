@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new avatar candidate API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,21 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-AvatarCandidateCreate creates avatar candidates
+// ClientService is the interface for Client methods
+type ClientService interface {
+	AvatarCandidateCreate(params *AvatarCandidateCreateParams, authInfo runtime.ClientAuthInfoWriter) (*AvatarCandidateCreateCreated, error)
 
-Add new avatar candidates to a specific app
+	AvatarCandidateList(params *AvatarCandidateListParams, authInfo runtime.ClientAuthInfoWriter) (*AvatarCandidateListOK, error)
+
+	AvatarCandidatePromote(params *AvatarCandidatePromoteParams, authInfo runtime.ClientAuthInfoWriter) (*AvatarCandidatePromoteOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  AvatarCandidateCreate creates avatar candidates
+
+  Add new avatar candidates to a specific app
 */
 func (a *Client) AvatarCandidateCreate(params *AvatarCandidateCreateParams, authInfo runtime.ClientAuthInfoWriter) (*AvatarCandidateCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -64,9 +74,9 @@ func (a *Client) AvatarCandidateCreate(params *AvatarCandidateCreateParams, auth
 }
 
 /*
-AvatarCandidateList gets list of the avatar candidates
+  AvatarCandidateList gets list of the avatar candidates
 
-List all available avatar candidates for an application
+  List all available avatar candidates for an application
 */
 func (a *Client) AvatarCandidateList(params *AvatarCandidateListParams, authInfo runtime.ClientAuthInfoWriter) (*AvatarCandidateListOK, error) {
 	// TODO: Validate the params before sending
@@ -101,9 +111,9 @@ func (a *Client) AvatarCandidateList(params *AvatarCandidateListParams, authInfo
 }
 
 /*
-AvatarCandidatePromote promotes an avatar candidate
+  AvatarCandidatePromote promotes an avatar candidate
 
-Promotes an avatar candidate for an app
+  Promotes an avatar candidate for an app
 */
 func (a *Client) AvatarCandidatePromote(params *AvatarCandidatePromoteParams, authInfo runtime.ClientAuthInfoWriter) (*AvatarCandidatePromoteOK, error) {
 	// TODO: Validate the params before sending

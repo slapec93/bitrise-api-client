@@ -16,7 +16,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/bitrise-io/bitrise-api-client/models"
+	"github.com/bitrise-io/bitrise-api-client/models"
 )
 
 // NewProvisioningProfileUpdateParams creates a new ProvisioningProfileUpdateParams object

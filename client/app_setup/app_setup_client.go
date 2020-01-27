@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new app setup API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,25 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-AppConfigCreate uploads a new bitrise yml for your application
+// ClientService is the interface for Client methods
+type ClientService interface {
+	AppConfigCreate(params *AppConfigCreateParams, authInfo runtime.ClientAuthInfoWriter) (*AppConfigCreateOK, error)
 
-Upload a new bitrise.yml for your application.
+	AppCreate(params *AppCreateParams, authInfo runtime.ClientAuthInfoWriter) (*AppCreateOK, error)
+
+	AppFinish(params *AppFinishParams, authInfo runtime.ClientAuthInfoWriter) (*AppFinishOK, error)
+
+	AppWebhookCreate(params *AppWebhookCreateParams, authInfo runtime.ClientAuthInfoWriter) (*AppWebhookCreateOK, error)
+
+	SSHKeyCreate(params *SSHKeyCreateParams, authInfo runtime.ClientAuthInfoWriter) (*SSHKeyCreateOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  AppConfigCreate uploads a new bitrise yml for your application
+
+  Upload a new bitrise.yml for your application.
 */
 func (a *Client) AppConfigCreate(params *AppConfigCreateParams, authInfo runtime.ClientAuthInfoWriter) (*AppConfigCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -64,9 +78,9 @@ func (a *Client) AppConfigCreate(params *AppConfigCreateParams, authInfo runtime
 }
 
 /*
-AppCreate adds a new app
+  AppCreate adds a new app
 
-Add a new app to Bitrise. This is the first step of the app registration process. To successfully set it up, you need to provide the required app parameters: your git provider, the repository URL, the slug of the repository as it appears at the provider, and the slug of the owner of the repository. Read more about the app creation process in our [detailed guide](https://devcenter.bitrise.io/api/adding-and-managing-apps/#adding-a-new-app).
+  Add a new app to Bitrise. This is the first step of the app registration process. To successfully set it up, you need to provide the required app parameters: your git provider, the repository URL, the slug of the repository as it appears at the provider, and the slug of the owner of the repository. Read more about the app creation process in our [detailed guide](https://devcenter.bitrise.io/api/adding-and-managing-apps/#adding-a-new-app).
 */
 func (a *Client) AppCreate(params *AppCreateParams, authInfo runtime.ClientAuthInfoWriter) (*AppCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -101,9 +115,9 @@ func (a *Client) AppCreate(params *AppCreateParams, authInfo runtime.ClientAuthI
 }
 
 /*
-AppFinish saves the application at the end of the app registration process
+  AppFinish saves the application at the end of the app registration process
 
-Save the application after registering it on Bitrise and registering an SSH key (and, optionally, adding a webhook). With this endpoint you can define the initial configuration, define application-level environment variables, determine the project type, and set an Organization to be the owner of the app. Read more about the app registration process in our [detailed guide](https://devcenter.bitrise.io/api/adding-and-managing-apps/#adding-a-new-app).
+  Save the application after registering it on Bitrise and registering an SSH key (and, optionally, adding a webhook). With this endpoint you can define the initial configuration, define application-level environment variables, determine the project type, and set an Organization to be the owner of the app. Read more about the app registration process in our [detailed guide](https://devcenter.bitrise.io/api/adding-and-managing-apps/#adding-a-new-app).
 */
 func (a *Client) AppFinish(params *AppFinishParams, authInfo runtime.ClientAuthInfoWriter) (*AppFinishOK, error) {
 	// TODO: Validate the params before sending
@@ -138,9 +152,9 @@ func (a *Client) AppFinish(params *AppFinishParams, authInfo runtime.ClientAuthI
 }
 
 /*
-AppWebhookCreate registers an incoming webhook for a specific application
+  AppWebhookCreate registers an incoming webhook for a specific application
 
-[Register an incoming webhook](https://devcenter.bitrise.io/api/incoming-and-outgoing-webhooks/#incoming-webhooks) for a specific application. You can do this during the app registration process or at any other time in an app's life. When calling this endpoint, a webhook is registered at your git provider: this is necessary to automatically trigger builds on Bitrise.
+  [Register an incoming webhook](https://devcenter.bitrise.io/api/incoming-and-outgoing-webhooks/#incoming-webhooks) for a specific application. You can do this during the app registration process or at any other time in an app's life. When calling this endpoint, a webhook is registered at your git provider: this is necessary to automatically trigger builds on Bitrise.
 */
 func (a *Client) AppWebhookCreate(params *AppWebhookCreateParams, authInfo runtime.ClientAuthInfoWriter) (*AppWebhookCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -175,9 +189,9 @@ func (a *Client) AppWebhookCreate(params *AppWebhookCreateParams, authInfo runti
 }
 
 /*
-SSHKeyCreate adds an SSH key to a specific app
+  SSHKeyCreate adds an SSH key to a specific app
 
-Add an SSH-key to a specific app. After creating an app, you need to register the SSH key so that Bitrise will be able to access and clone your repository during the build process. This requires the app slug of your newly created app.
+  Add an SSH-key to a specific app. After creating an app, you need to register the SSH key so that Bitrise will be able to access and clone your repository during the build process. This requires the app slug of your newly created app.
 */
 func (a *Client) SSHKeyCreate(params *SSHKeyCreateParams, authInfo runtime.ClientAuthInfoWriter) (*SSHKeyCreateOK, error) {
 	// TODO: Validate the params before sending

@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new android keystore file API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,19 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-AndroidKeystoreFileCreate creates an android keystore file
+// ClientService is the interface for Client methods
+type ClientService interface {
+	AndroidKeystoreFileCreate(params *AndroidKeystoreFileCreateParams, authInfo runtime.ClientAuthInfoWriter) (*AndroidKeystoreFileCreateCreated, error)
 
-Add a new Android keystore file to an app
+	AndroidKeystoreFileList(params *AndroidKeystoreFileListParams, authInfo runtime.ClientAuthInfoWriter) (*AndroidKeystoreFileListOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  AndroidKeystoreFileCreate creates an android keystore file
+
+  Add a new Android keystore file to an app
 */
 func (a *Client) AndroidKeystoreFileCreate(params *AndroidKeystoreFileCreateParams, authInfo runtime.ClientAuthInfoWriter) (*AndroidKeystoreFileCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -64,9 +72,9 @@ func (a *Client) AndroidKeystoreFileCreate(params *AndroidKeystoreFileCreatePara
 }
 
 /*
-AndroidKeystoreFileList gets a list of the android keystore files
+  AndroidKeystoreFileList gets a list of the android keystore files
 
-List all the android keystore files that have been uploaded to a specific app.
+  List all the android keystore files that have been uploaded to a specific app.
 */
 func (a *Client) AndroidKeystoreFileList(params *AndroidKeystoreFileListParams, authInfo runtime.ClientAuthInfoWriter) (*AndroidKeystoreFileListOK, error) {
 	// TODO: Validate the params before sending
@@ -79,7 +87,7 @@ func (a *Client) AndroidKeystoreFileList(params *AndroidKeystoreFileListParams, 
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/android-keystore-files",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &AndroidKeystoreFileListReader{formats: a.formats},

@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new apple api credentials API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,17 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-AppleAPICredentialList lists apple API credentials for a specific user
+// ClientService is the interface for Client methods
+type ClientService interface {
+	AppleAPICredentialList(params *AppleAPICredentialListParams, authInfo runtime.ClientAuthInfoWriter) (*AppleAPICredentialListOK, error)
 
-List Apple API credentials for a specific Bitrise user
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  AppleAPICredentialList lists apple API credentials for a specific user
+
+  List Apple API credentials for a specific Bitrise user
 */
 func (a *Client) AppleAPICredentialList(params *AppleAPICredentialListParams, authInfo runtime.ClientAuthInfoWriter) (*AppleAPICredentialListOK, error) {
 	// TODO: Validate the params before sending
@@ -42,7 +48,7 @@ func (a *Client) AppleAPICredentialList(params *AppleAPICredentialListParams, au
 		Method:             "GET",
 		PathPattern:        "/users/{user-slug}/apple-api-credentials",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &AppleAPICredentialListReader{formats: a.formats},

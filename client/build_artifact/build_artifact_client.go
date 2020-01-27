@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new build artifact API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,23 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-ArtifactDelete deletes a build artifact
+// ClientService is the interface for Client methods
+type ClientService interface {
+	ArtifactDelete(params *ArtifactDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*ArtifactDeleteOK, error)
 
-Delete a build artifact of an app's build. The required parameters are app slug, build slug and artifact slug. You can fetch the build artifact slug if you first list all build artifacts of an app with the [/apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-list) endpoint.
+	ArtifactList(params *ArtifactListParams, authInfo runtime.ClientAuthInfoWriter) (*ArtifactListOK, error)
+
+	ArtifactShow(params *ArtifactShowParams, authInfo runtime.ClientAuthInfoWriter) (*ArtifactShowOK, error)
+
+	ArtifactUpdate(params *ArtifactUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*ArtifactUpdateOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  ArtifactDelete deletes a build artifact
+
+  Delete a build artifact of an app's build. The required parameters are app slug, build slug and artifact slug. You can fetch the build artifact slug if you first list all build artifacts of an app with the [/apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-list) endpoint.
 */
 func (a *Client) ArtifactDelete(params *ArtifactDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*ArtifactDeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -42,7 +54,7 @@ func (a *Client) ArtifactDelete(params *ArtifactDeleteParams, authInfo runtime.C
 		Method:             "DELETE",
 		PathPattern:        "/apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &ArtifactDeleteReader{formats: a.formats},
@@ -64,9 +76,9 @@ func (a *Client) ArtifactDelete(params *ArtifactDeleteParams, authInfo runtime.C
 }
 
 /*
-ArtifactList gets a list of all build artifacts
+  ArtifactList gets a list of all build artifacts
 
-List all build artifacts that have been generated for an app's build. You can use the created build artifact slugs from the response output to retrieve data of a specific build artifact with the [GET/apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-show) endpoint or update a build artifact with the [PATCH/apps](https://api-docs.bitrise.io/#/build-artifact/artifact-update) endpoint.
+  List all build artifacts that have been generated for an app's build. You can use the created build artifact slugs from the response output to retrieve data of a specific build artifact with the [GET/apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-show) endpoint or update a build artifact with the [PATCH/apps](https://api-docs.bitrise.io/#/build-artifact/artifact-update) endpoint.
 */
 func (a *Client) ArtifactList(params *ArtifactListParams, authInfo runtime.ClientAuthInfoWriter) (*ArtifactListOK, error) {
 	// TODO: Validate the params before sending
@@ -79,7 +91,7 @@ func (a *Client) ArtifactList(params *ArtifactListParams, authInfo runtime.Clien
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/builds/{build-slug}/artifacts",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &ArtifactListReader{formats: a.formats},
@@ -101,9 +113,9 @@ func (a *Client) ArtifactList(params *ArtifactListParams, authInfo runtime.Clien
 }
 
 /*
-ArtifactShow gets a specific build artifact
+  ArtifactShow gets a specific build artifact
 
-Retrieve data of a specific build artifact. The response output contains a time-limited download url (expires in 10 minutes) and a public install page URL. You can view the build artifact with both URLs, but the public install page url will not work unless you [enable it](https://devcenter.bitrise.io/tutorials/deploy/bitrise-app-deployment/#enabling-public-page-for-the-app).
+  Retrieve data of a specific build artifact. The response output contains a time-limited download url (expires in 10 minutes) and a public install page URL. You can view the build artifact with both URLs, but the public install page url will not work unless you [enable it](https://devcenter.bitrise.io/tutorials/deploy/bitrise-app-deployment/#enabling-public-page-for-the-app).
 */
 func (a *Client) ArtifactShow(params *ArtifactShowParams, authInfo runtime.ClientAuthInfoWriter) (*ArtifactShowOK, error) {
 	// TODO: Validate the params before sending
@@ -116,7 +128,7 @@ func (a *Client) ArtifactShow(params *ArtifactShowParams, authInfo runtime.Clien
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/builds/{build-slug}/artifacts/{artifact-slug}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &ArtifactShowReader{formats: a.formats},
@@ -138,9 +150,9 @@ func (a *Client) ArtifactShow(params *ArtifactShowParams, authInfo runtime.Clien
 }
 
 /*
-ArtifactUpdate updates a build artifact
+  ArtifactUpdate updates a build artifact
 
-Update the `is_public_page_enabled` attribute of your app's build. The required parameters are app slug, build slug and artifact slug. You can fetch the build artifact slug if you first list all build artifacts of an app with the [GET /apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-list) endpoint.
+  Update the `is_public_page_enabled` attribute of your app's build. The required parameters are app slug, build slug and artifact slug. You can fetch the build artifact slug if you first list all build artifacts of an app with the [GET /apps/](https://api-docs.bitrise.io/#/build-artifact/artifact-list) endpoint.
 */
 func (a *Client) ArtifactUpdate(params *ArtifactUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*ArtifactUpdateOK, error) {
 	// TODO: Validate the params before sending

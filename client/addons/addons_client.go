@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new addons API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,25 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-AddonListByApp gets list of the addons for apps
+// ClientService is the interface for Client methods
+type ClientService interface {
+	AddonListByApp(params *AddonListByAppParams, authInfo runtime.ClientAuthInfoWriter) (*AddonListByAppOK, error)
 
-List all the provisioned addons for the authorized apps
+	AddonListByOrganization(params *AddonListByOrganizationParams, authInfo runtime.ClientAuthInfoWriter) (*AddonListByOrganizationOK, error)
+
+	AddonListByUser(params *AddonListByUserParams, authInfo runtime.ClientAuthInfoWriter) (*AddonListByUserOK, error)
+
+	AddonsList(params *AddonsListParams, authInfo runtime.ClientAuthInfoWriter) (*AddonsListOK, error)
+
+	AddonsShow(params *AddonsShowParams, authInfo runtime.ClientAuthInfoWriter) (*AddonsShowOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  AddonListByApp gets list of the addons for apps
+
+  List all the provisioned addons for the authorized apps
 */
 func (a *Client) AddonListByApp(params *AddonListByAppParams, authInfo runtime.ClientAuthInfoWriter) (*AddonListByAppOK, error) {
 	// TODO: Validate the params before sending
@@ -42,7 +56,7 @@ func (a *Client) AddonListByApp(params *AddonListByAppParams, authInfo runtime.C
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/addons",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &AddonListByAppReader{formats: a.formats},
@@ -64,9 +78,9 @@ func (a *Client) AddonListByApp(params *AddonListByAppParams, authInfo runtime.C
 }
 
 /*
-AddonListByOrganization gets list of the addons for organization
+  AddonListByOrganization gets list of the addons for organization
 
-List all the provisioned addons for organization
+  List all the provisioned addons for organization
 */
 func (a *Client) AddonListByOrganization(params *AddonListByOrganizationParams, authInfo runtime.ClientAuthInfoWriter) (*AddonListByOrganizationOK, error) {
 	// TODO: Validate the params before sending
@@ -79,7 +93,7 @@ func (a *Client) AddonListByOrganization(params *AddonListByOrganizationParams, 
 		Method:             "GET",
 		PathPattern:        "/organizations/{organization-slug}/addons",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &AddonListByOrganizationReader{formats: a.formats},
@@ -101,9 +115,9 @@ func (a *Client) AddonListByOrganization(params *AddonListByOrganizationParams, 
 }
 
 /*
-AddonListByUser gets list of the addons for user
+  AddonListByUser gets list of the addons for user
 
-List all the provisioned addons for the authenticated user
+  List all the provisioned addons for the authenticated user
 */
 func (a *Client) AddonListByUser(params *AddonListByUserParams, authInfo runtime.ClientAuthInfoWriter) (*AddonListByUserOK, error) {
 	// TODO: Validate the params before sending
@@ -116,7 +130,7 @@ func (a *Client) AddonListByUser(params *AddonListByUserParams, authInfo runtime
 		Method:             "GET",
 		PathPattern:        "/users/{user-slug}/addons",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &AddonListByUserReader{formats: a.formats},
@@ -138,9 +152,9 @@ func (a *Client) AddonListByUser(params *AddonListByUserParams, authInfo runtime
 }
 
 /*
-AddonsList gets list of available bitrise addons
+  AddonsList gets list of available bitrise addons
 
-List all the available Bitrise addons
+  List all the available Bitrise addons
 */
 func (a *Client) AddonsList(params *AddonsListParams, authInfo runtime.ClientAuthInfoWriter) (*AddonsListOK, error) {
 	// TODO: Validate the params before sending
@@ -153,7 +167,7 @@ func (a *Client) AddonsList(params *AddonsListParams, authInfo runtime.ClientAut
 		Method:             "GET",
 		PathPattern:        "/addons",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &AddonsListReader{formats: a.formats},
@@ -175,9 +189,9 @@ func (a *Client) AddonsList(params *AddonsListParams, authInfo runtime.ClientAut
 }
 
 /*
-AddonsShow gets a specific bitrise addon
+  AddonsShow gets a specific bitrise addon
 
-Show details of a specific Bitrise addon
+  Show details of a specific Bitrise addon
 */
 func (a *Client) AddonsShow(params *AddonsShowParams, authInfo runtime.ClientAuthInfoWriter) (*AddonsShowOK, error) {
 	// TODO: Validate the params before sending
@@ -190,7 +204,7 @@ func (a *Client) AddonsShow(params *AddonsShowParams, authInfo runtime.ClientAut
 		Method:             "GET",
 		PathPattern:        "/addons/{addon-id}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &AddonsShowReader{formats: a.formats},

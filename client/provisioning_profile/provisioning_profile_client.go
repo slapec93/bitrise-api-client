@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new provisioning profile API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,27 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-ProvisioningProfileConfirm confirms a provisioning profile upload
+// ClientService is the interface for Client methods
+type ClientService interface {
+	ProvisioningProfileConfirm(params *ProvisioningProfileConfirmParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileConfirmOK, error)
 
-This is the last step of the upload process. Confirm the provisioning profile upload and view the file on the Code Signing tab of a specific app. Read more in our [Confirming the iOS code signing file upload](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.
+	ProvisioningProfileCreate(params *ProvisioningProfileCreateParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileCreateCreated, error)
+
+	ProvisioningProfileDelete(params *ProvisioningProfileDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileDeleteOK, error)
+
+	ProvisioningProfileList(params *ProvisioningProfileListParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileListOK, error)
+
+	ProvisioningProfileShow(params *ProvisioningProfileShowParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileShowOK, error)
+
+	ProvisioningProfileUpdate(params *ProvisioningProfileUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileUpdateOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  ProvisioningProfileConfirm confirms a provisioning profile upload
+
+  This is the last step of the upload process. Confirm the provisioning profile upload and view the file on the Code Signing tab of a specific app. Read more in our [Confirming the iOS code signing file upload](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.
 */
 func (a *Client) ProvisioningProfileConfirm(params *ProvisioningProfileConfirmParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileConfirmOK, error) {
 	// TODO: Validate the params before sending
@@ -64,9 +80,9 @@ func (a *Client) ProvisioningProfileConfirm(params *ProvisioningProfileConfirmPa
 }
 
 /*
-ProvisioningProfileCreate creates a provisioning profile
+  ProvisioningProfileCreate creates a provisioning profile
 
-Create a temporary pre-signed upload URL (expires in 10 minutes) for the provisioning profile and upload it to AWS with a simple `curl` request. To complete the upload process, continue with the [POST /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}/uploaded](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-confirm) endpoint. Read more in our [Creating and uploading an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#creating--uploading-an-ios-code-signing-file) guide.
+  Create a temporary pre-signed upload URL (expires in 10 minutes) for the provisioning profile and upload it to AWS with a simple `curl` request. To complete the upload process, continue with the [POST /apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}/uploaded](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-confirm) endpoint. Read more in our [Creating and uploading an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#creating--uploading-an-ios-code-signing-file) guide.
 */
 func (a *Client) ProvisioningProfileCreate(params *ProvisioningProfileCreateParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -101,9 +117,9 @@ func (a *Client) ProvisioningProfileCreate(params *ProvisioningProfileCreatePara
 }
 
 /*
-ProvisioningProfileDelete deletes a provisioning profile
+  ProvisioningProfileDelete deletes a provisioning profile
 
-Delete an app's provisioning profile. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Deleting an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#deleting-an-ios-code-signing-file) guide.
+  Delete an app's provisioning profile. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Deleting an iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#deleting-an-ios-code-signing-file) guide.
 */
 func (a *Client) ProvisioningProfileDelete(params *ProvisioningProfileDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileDeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -116,7 +132,7 @@ func (a *Client) ProvisioningProfileDelete(params *ProvisioningProfileDeletePara
 		Method:             "DELETE",
 		PathPattern:        "/apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &ProvisioningProfileDeleteReader{formats: a.formats},
@@ -138,9 +154,9 @@ func (a *Client) ProvisioningProfileDelete(params *ProvisioningProfileDeletePara
 }
 
 /*
-ProvisioningProfileList gets a list of the provisioning profiles
+  ProvisioningProfileList gets a list of the provisioning profiles
 
-List all the provisioning profiles that have been uploaded to a specific app. Read more in our [Listing the uploaded iOS code signing files of an app](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#listing-the-uploaded-ios-code-signing-files-of-an-app) guide.
+  List all the provisioning profiles that have been uploaded to a specific app. Read more in our [Listing the uploaded iOS code signing files of an app](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#listing-the-uploaded-ios-code-signing-files-of-an-app) guide.
 */
 func (a *Client) ProvisioningProfileList(params *ProvisioningProfileListParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileListOK, error) {
 	// TODO: Validate the params before sending
@@ -153,7 +169,7 @@ func (a *Client) ProvisioningProfileList(params *ProvisioningProfileListParams, 
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/provisioning-profiles",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &ProvisioningProfileListReader{formats: a.formats},
@@ -175,9 +191,9 @@ func (a *Client) ProvisioningProfileList(params *ProvisioningProfileListParams, 
 }
 
 /*
-ProvisioningProfileShow gets a specific provisioning profile
+  ProvisioningProfileShow gets a specific provisioning profile
 
-Retrieve data of a specific provisioning profile. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Getting a specific iOS code signing file's data](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#getting-a-specific-ios-code-signing-files-data) guide.
+  Retrieve data of a specific provisioning profile. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Getting a specific iOS code signing file's data](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#getting-a-specific-ios-code-signing-files-data) guide.
 */
 func (a *Client) ProvisioningProfileShow(params *ProvisioningProfileShowParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileShowOK, error) {
 	// TODO: Validate the params before sending
@@ -190,7 +206,7 @@ func (a *Client) ProvisioningProfileShow(params *ProvisioningProfileShowParams, 
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/provisioning-profiles/{provisioning-profile-slug}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &ProvisioningProfileShowReader{formats: a.formats},
@@ -212,9 +228,9 @@ func (a *Client) ProvisioningProfileShow(params *ProvisioningProfileShowParams, 
 }
 
 /*
-ProvisioningProfileUpdate updates a provisioning profile
+  ProvisioningProfileUpdate updates a provisioning profile
 
-Update an uploaded provisioning profile's attributes. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Updating an uploaded iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.
+  Update an uploaded provisioning profile's attributes. You can fetch the provisioning profile's slug if you call the [GET /apps/{app-slug}/provisioning-profiles](https://api-docs.bitrise.io/#/provisioning-profile/provisioning-profile-list) endpoint. Read more in our [Updating an uploaded iOS code signing file](https://devcenter.bitrise.io/api/managing-ios-code-signing-files/#confirming-the-ios-code-signing-file-upload) guide.
 */
 func (a *Client) ProvisioningProfileUpdate(params *ProvisioningProfileUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*ProvisioningProfileUpdateOK, error) {
 	// TODO: Validate the params before sending

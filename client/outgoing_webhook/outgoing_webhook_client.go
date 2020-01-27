@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new outgoing webhook API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,10 +25,23 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-OutgoingWebhookCreate creates an outgoing webhook for an app
+// ClientService is the interface for Client methods
+type ClientService interface {
+	OutgoingWebhookCreate(params *OutgoingWebhookCreateParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookCreateOK, error)
 
-Create an outgoing webhook for a specified Bitrise app: this can be used to send build events to a specified URL with custom headers. Currently, only build events can trigger outgoing webhooks.
+	OutgoingWebhookDelete(params *OutgoingWebhookDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookDeleteOK, error)
+
+	OutgoingWebhookList(params *OutgoingWebhookListParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookListOK, error)
+
+	OutgoingWebhookUpdate(params *OutgoingWebhookUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookUpdateOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  OutgoingWebhookCreate creates an outgoing webhook for an app
+
+  Create an outgoing webhook for a specified Bitrise app: this can be used to send build events to a specified URL with custom headers. Currently, only build events can trigger outgoing webhooks.
 */
 func (a *Client) OutgoingWebhookCreate(params *OutgoingWebhookCreateParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -42,7 +54,7 @@ func (a *Client) OutgoingWebhookCreate(params *OutgoingWebhookCreateParams, auth
 		Method:             "POST",
 		PathPattern:        "/apps/{app-slug}/outgoing-webhooks",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &OutgoingWebhookCreateReader{formats: a.formats},
@@ -64,9 +76,9 @@ func (a *Client) OutgoingWebhookCreate(params *OutgoingWebhookCreateParams, auth
 }
 
 /*
-OutgoingWebhookDelete deletes an outgoing webhook of an app
+  OutgoingWebhookDelete deletes an outgoing webhook of an app
 
-Delete an existing outgoing webhook for a specified Bitrise app.
+  Delete an existing outgoing webhook for a specified Bitrise app.
 */
 func (a *Client) OutgoingWebhookDelete(params *OutgoingWebhookDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookDeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -79,7 +91,7 @@ func (a *Client) OutgoingWebhookDelete(params *OutgoingWebhookDeleteParams, auth
 		Method:             "DELETE",
 		PathPattern:        "/apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &OutgoingWebhookDeleteReader{formats: a.formats},
@@ -101,9 +113,9 @@ func (a *Client) OutgoingWebhookDelete(params *OutgoingWebhookDeleteParams, auth
 }
 
 /*
-OutgoingWebhookList lists the outgoing webhooks of an app
+  OutgoingWebhookList lists the outgoing webhooks of an app
 
-List all the outgoing webhooks registered for a specified Bitrise app. This returns all the relevant data of the webhook, including the slug of the webhook and its URL.
+  List all the outgoing webhooks registered for a specified Bitrise app. This returns all the relevant data of the webhook, including the slug of the webhook and its URL.
 */
 func (a *Client) OutgoingWebhookList(params *OutgoingWebhookListParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookListOK, error) {
 	// TODO: Validate the params before sending
@@ -116,7 +128,7 @@ func (a *Client) OutgoingWebhookList(params *OutgoingWebhookListParams, authInfo
 		Method:             "GET",
 		PathPattern:        "/apps/{app-slug}/outgoing-webhooks",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &OutgoingWebhookListReader{formats: a.formats},
@@ -138,9 +150,9 @@ func (a *Client) OutgoingWebhookList(params *OutgoingWebhookListParams, authInfo
 }
 
 /*
-OutgoingWebhookUpdate updates an outgoing webhook of an app
+  OutgoingWebhookUpdate updates an outgoing webhook of an app
 
-Update an existing outgoing webhook (URL, events, secrets and headers) for a specified Bitrise app. Even if you do not want to change one of the parameters, you still have to provide that parameter as well: simply use its existing value.
+  Update an existing outgoing webhook (URL, events, secrets and headers) for a specified Bitrise app. Even if you do not want to change one of the parameters, you still have to provide that parameter as well: simply use its existing value.
 */
 func (a *Client) OutgoingWebhookUpdate(params *OutgoingWebhookUpdateParams, authInfo runtime.ClientAuthInfoWriter) (*OutgoingWebhookUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -153,7 +165,7 @@ func (a *Client) OutgoingWebhookUpdate(params *OutgoingWebhookUpdateParams, auth
 		Method:             "PUT",
 		PathPattern:        "/apps/{app-slug}/outgoing-webhooks/{app-webhook-slug}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &OutgoingWebhookUpdateReader{formats: a.formats},

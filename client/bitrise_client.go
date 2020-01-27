@@ -26,7 +26,7 @@ import (
 	"github.com/bitrise-io/bitrise-api-client/client/webhook_delivery_item"
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Default bitrise HTTP client.
@@ -71,43 +71,24 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Bitrise {
 
 	cli := new(Bitrise)
 	cli.Transport = transport
-
 	cli.Activity = activity.New(transport, formats)
-
 	cli.Addons = addons.New(transport, formats)
-
 	cli.AndroidKeystoreFile = android_keystore_file.New(transport, formats)
-
 	cli.AppSetup = app_setup.New(transport, formats)
-
 	cli.AppleAPICredentials = apple_api_credentials.New(transport, formats)
-
 	cli.Application = application.New(transport, formats)
-
 	cli.AvatarCandidate = avatar_candidate.New(transport, formats)
-
 	cli.BuildArtifact = build_artifact.New(transport, formats)
-
 	cli.BuildCertificate = build_certificate.New(transport, formats)
-
 	cli.BuildRequest = build_request.New(transport, formats)
-
 	cli.Builds = builds.New(transport, formats)
-
 	cli.GenericProjectFile = generic_project_file.New(transport, formats)
-
 	cli.Organizations = organizations.New(transport, formats)
-
 	cli.OutgoingWebhook = outgoing_webhook.New(transport, formats)
-
 	cli.ProvisioningProfile = provisioning_profile.New(transport, formats)
-
 	cli.TestDevices = test_devices.New(transport, formats)
-
 	cli.User = user.New(transport, formats)
-
 	cli.WebhookDeliveryItem = webhook_delivery_item.New(transport, formats)
-
 	return cli
 }
 
@@ -152,41 +133,41 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // Bitrise is a client for bitrise
 type Bitrise struct {
-	Activity *activity.Client
+	Activity activity.ClientService
 
-	Addons *addons.Client
+	Addons addons.ClientService
 
-	AndroidKeystoreFile *android_keystore_file.Client
+	AndroidKeystoreFile android_keystore_file.ClientService
 
-	AppSetup *app_setup.Client
+	AppSetup app_setup.ClientService
 
-	AppleAPICredentials *apple_api_credentials.Client
+	AppleAPICredentials apple_api_credentials.ClientService
 
-	Application *application.Client
+	Application application.ClientService
 
-	AvatarCandidate *avatar_candidate.Client
+	AvatarCandidate avatar_candidate.ClientService
 
-	BuildArtifact *build_artifact.Client
+	BuildArtifact build_artifact.ClientService
 
-	BuildCertificate *build_certificate.Client
+	BuildCertificate build_certificate.ClientService
 
-	BuildRequest *build_request.Client
+	BuildRequest build_request.ClientService
 
-	Builds *builds.Client
+	Builds builds.ClientService
 
-	GenericProjectFile *generic_project_file.Client
+	GenericProjectFile generic_project_file.ClientService
 
-	Organizations *organizations.Client
+	Organizations organizations.ClientService
 
-	OutgoingWebhook *outgoing_webhook.Client
+	OutgoingWebhook outgoing_webhook.ClientService
 
-	ProvisioningProfile *provisioning_profile.Client
+	ProvisioningProfile provisioning_profile.ClientService
 
-	TestDevices *test_devices.Client
+	TestDevices test_devices.ClientService
 
-	User *user.Client
+	User user.ClientService
 
-	WebhookDeliveryItem *webhook_delivery_item.Client
+	WebhookDeliveryItem webhook_delivery_item.ClientService
 
 	Transport runtime.ClientTransport
 }
@@ -194,41 +175,22 @@ type Bitrise struct {
 // SetTransport changes the transport on the client and all its subresources
 func (c *Bitrise) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
-
 	c.Activity.SetTransport(transport)
-
 	c.Addons.SetTransport(transport)
-
 	c.AndroidKeystoreFile.SetTransport(transport)
-
 	c.AppSetup.SetTransport(transport)
-
 	c.AppleAPICredentials.SetTransport(transport)
-
 	c.Application.SetTransport(transport)
-
 	c.AvatarCandidate.SetTransport(transport)
-
 	c.BuildArtifact.SetTransport(transport)
-
 	c.BuildCertificate.SetTransport(transport)
-
 	c.BuildRequest.SetTransport(transport)
-
 	c.Builds.SetTransport(transport)
-
 	c.GenericProjectFile.SetTransport(transport)
-
 	c.Organizations.SetTransport(transport)
-
 	c.OutgoingWebhook.SetTransport(transport)
-
 	c.ProvisioningProfile.SetTransport(transport)
-
 	c.TestDevices.SetTransport(transport)
-
 	c.User.SetTransport(transport)
-
 	c.WebhookDeliveryItem.SetTransport(transport)
-
 }

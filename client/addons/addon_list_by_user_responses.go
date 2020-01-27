@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/bitrise-io/bitrise-api-client/models"
+	"github.com/bitrise-io/bitrise-api-client/models"
 )
 
 // AddonListByUserReader is a Reader for the AddonListByUser structure.

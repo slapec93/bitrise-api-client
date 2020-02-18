@@ -1,0 +1,107 @@
+// tslint:disable
+
+{{#imports}}
+/// <reference path="{{&.}}" />
+{{/imports}}
+
+import { fetch } from 'whatwg-fetch';
+import { timeout, stringifyQuery } from './util';
+
+export type RequestHeaders = {
+    [header: string]: string;
+}
+export type RequestHeadersHandler = (headers: RequestHeaders) => RequestHeaders;
+
+{{#definitions}}
+export type {{#normalizedType}}{{ name }}{{/normalizedType}} = {{#tsType}}{{#normalizedType}}{{> type}}{{/normalizedType}}{{/tsType}};
+{{/definitions}}
+
+export type Logger = { log: (line: string) => any };
+
+export interface ResponseWithBody<S extends number, T> {
+    status: S;
+    body: T;
+}
+
+export type QueryParameters = { [param: string]: any };
+
+export interface CommonRequestOptions {
+  $queryParameters?: QueryParameters;
+  $domain?: string;
+  $path?: string | ((path: string) => string);
+  $timeout?: number;
+}
+
+/**
+ * {{&description}}
+ * @class {{&className}}
+ * @param {(string)} [domainOrOptions] - The project domain.
+ */
+export class {{&className}} {
+    private domain: string = "{{&domain}}";
+    private requestHeadersHandler?: RequestHeadersHandler;
+
+    constructor(domain?: string, private logger?: Logger) {
+        if(domain) {
+            this.domain = domain;
+        }
+    }
+
+    getDomain() {
+        return this.domain;
+    }
+
+    setRequestHeadersHandler(handler: RequestHeadersHandler) {
+        this.requestHeadersHandler = handler;
+    }
+
+    private request(method: string, url: string, body: any, headers: RequestHeaders, queryParameters: QueryParameters, opts: CommonRequestOptions): Promise<Response> {
+        if (this.logger) {
+          this.logger.log(`Call ${method} ${url}`);
+        }
+
+        const reqTimeout = opts.$timeout || 10000;
+        const query = stringifyQuery(queryParameters);
+        url = query ? `${url}?${query}` : url;
+
+        if (typeof(body) === 'object' && !(body.constructor.name === 'Buffer')) {
+            headers['Content-Type'] = 'application/json';
+        }
+
+        const fetchParams = {
+            method,
+            headers: this.requestHeadersHandler ? this.requestHeadersHandler({...headers}) : headers,
+        };
+
+        if (body) {
+            fetchParams["body"] = JSON.stringify(body);
+        }
+
+        return timeout(reqTimeout, fetch(url, fetchParams));
+    }
+
+    private convertParameterCollectionFormat < T > (param: T, collectionFormat: string | undefined): T | string {
+        if (Array.isArray(param) && param.length >= 2) {
+            switch (collectionFormat) {
+                case "csv":
+                    return param.join(",");
+                case "ssv":
+                    return param.join(" ");
+                case "tsv":
+                    return param.join("\t");
+                case "pipes":
+                    return param.join("|");
+                default:
+                    return param;
+            }
+        }
+
+        return param;
+    }
+
+{{#methods}}
+    {{> method}}
+{{/methods}}
+}
+
+export default {{&className}};

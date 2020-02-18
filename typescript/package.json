@@ -1,0 +1,32 @@
+{
+  "name": "bitrise-api-client",
+  "version": "1.0.0",
+  "description": "Javascript client bindings for bitrise api",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --build ./tsconfig.json",
+    "generate-client": "./generator",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitrise-io/bitrise-api-client.git"
+  },
+  "keywords": [
+    "bitrise",
+    "api"
+  ],
+  "author": "Bitrise",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bitrise-io/bitrise-api-client/issues"
+  },
+  "homepage": "https://github.com/bitrise-io/bitrise-api-client#readme",
+  "dependencies": {
+    "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "swagger-typescript-codegen": "^3.0.3",
+    "typescript": "^3.7.5"
+  }
+}

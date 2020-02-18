@@ -138,6 +138,11 @@ console-browserify@1.1.x:
   dependencies:
     date-now "^0.1.4"
 
+cookie-storage@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/cookie-storage/-/cookie-storage-6.0.0.tgz#256944c150b3487b32d86b828d65e50c9122e097"
+  integrity sha512-k9GqiqWIhytlm+Jprm+4mxW1tSa5iB9t3U46ueqkXx1dqD8lEEXKzVgSjyg57ybkhJFpB5PJqO53+J+8RlDZBw==
+
 core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -261,6 +266,11 @@ exit@0.1.2, exit@0.1.x:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/exit/-/exit-0.1.2.tgz#0632638f8d877cc82107d30a0fff1a17cba1cd0c"
   integrity sha1-BjJjj42HfMghB9MKD/8aF8uhzQw=
+
+fetch-intercept@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/fetch-intercept/-/fetch-intercept-2.3.1.tgz#1f37ac57d7f0742aae5e3ae11ed18c2acbc43f61"
+  integrity sha512-6tEgV10w4Zr4YFLc+RXaUQ1k8O4okX6AsnYYQqGhfXeiDZcBTQonVpjM5LbLWXWzaQzCA3DyJbsOHEB5szRn5A==
 
 fs.realpath@^1.0.0:
   version "1.0.0"

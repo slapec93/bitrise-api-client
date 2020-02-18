@@ -104,7 +104,7 @@ async {{&methodName}}(parameters: {
         {{/isPOST}}
     {{/isBodyParameter}}
 
-    const response = await this.request('{{method}}', domain + path, requestBody, headers, queryParameters, parameters)
+    const response = await this.request('{{method}}', domain + path, requestBody, headers, queryParameters, parameters);
     const responseBody = await response.json();
 
     return { body: responseBody, status: <any> response.status };

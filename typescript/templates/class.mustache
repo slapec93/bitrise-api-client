@@ -16,8 +16,6 @@ export type RequestHeadersHandler = (headers: RequestHeaders) => RequestHeaders;
 export type {{#normalizedType}}{{ name }}{{/normalizedType}} = {{#tsType}}{{#normalizedType}}{{> type}}{{/normalizedType}}{{/tsType}};
 {{/definitions}}
 
-export type Logger = { log: (line: string) => any };
-
 export interface ResponseWithBody<S extends number, T> {
     status: S;
     body: T;
@@ -32,19 +30,24 @@ export interface CommonRequestOptions {
   $timeout?: number;
 }
 
+export const PUBLIC_DOMAIN: string = "{{&domain}}";
+
 /**
  * {{&description}}
  * @class {{&className}}
  * @param {(string)} [domainOrOptions] - The project domain.
  */
 export class {{&className}} {
-    private domain: string = "{{&domain}}";
+    private domain: string = PUBLIC_DOMAIN;
     private requestHeadersHandler?: RequestHeadersHandler;
+    private interceptors: InterceptorRegistrar;
 
-    constructor(domain?: string, private logger?: Logger) {
-        if(domain) {
+    constructor(interceptors: InterceptorRegistrar, domain?: string) {
+        if (domain) {
             this.domain = domain;
         }
+
+        this.interceptors = interceptors;
     }
 
     getDomain() {
@@ -56,10 +59,6 @@ export class {{&className}} {
     }
 
     private request(method: string, url: string, body: any, headers: RequestHeaders, queryParameters: QueryParameters, opts: CommonRequestOptions): Promise<Response> {
-        if (this.logger) {
-          this.logger.log(`Call ${method} ${url}`);
-        }
-
         const reqTimeout = opts.$timeout || 10000;
         const query = stringifyQuery(queryParameters);
         url = query ? `${url}?${query}` : url;
@@ -77,7 +76,17 @@ export class {{&className}} {
             fetchParams["body"] = JSON.stringify(body);
         }
 
-        return timeout(reqTimeout, fetch(url, fetchParams));
+        this.interceptors.register();
+
+        let result: Promise<Response>;
+
+        try {
+            result = timeout(reqTimeout, fetch(url, fetchParams));
+        } finally {
+            this.interceptors.unregister();
+        }
+
+        return result;
     }
 
     private convertParameterCollectionFormat < T > (param: T, collectionFormat: string | undefined): T | string {

@@ -2,7 +2,7 @@ import 'isomorphic-fetch';
 
 import BitriseAPI, { PUBLIC_DOMAIN } from './client/api';
 import { AuthTokenInterceptor, CSRFTokenInterceptor, InterceptorChain } from './client/auth-interceptors';
-import { CookieStorage, ConstantStorage } from './client/storages';
+import { CookieStorage, ConstantStorage } from './client/storage';
 
 const createStorage = (field_name: string, token?: string | null): TokenStorage => {
     if (token) {
@@ -16,7 +16,7 @@ export default (apiToken?: string | undefined): BitriseAPI => {
     const apiTokenStore = createStorage("expiring_api_token", apiToken);
     const csrfTokenStore = createStorage("CSRF-TOKEN");
 
-    const authTokenInterceptor = new AuthTokenInterceptor(PUBLIC_DOMAIN, apiTokenStore);
+    const authTokenInterceptor = new AuthTokenInterceptor({ domain: PUBLIC_DOMAIN }, apiTokenStore);
     const csrftokenInterceptor = new CSRFTokenInterceptor(csrfTokenStore);
 
     return new BitriseAPI(

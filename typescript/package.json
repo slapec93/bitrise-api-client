@@ -1,7 +1,7 @@
 {
-  "name": "bitrise-api-client",
-  "version": "1.0.0",
-  "description": "Javascript client bindings for bitrise api",
+  "name": "@bitrise/api-client",
+  "version": "0.0.1",
+  "description": "Javascript client for bitrise public api",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc --build ./tsconfig.json",

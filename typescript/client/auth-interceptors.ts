@@ -1,17 +1,22 @@
-import fetchIntercept from 'fetch-intercept';
+import fetchIntercept, { FetchInterceptor } from 'fetch-intercept';
 import { includeField } from './util'
 
-export class AuthTokenInterceptor implements Interceptor {
+export class AuthTokenInterceptor implements FetchInterceptor {
     private tokenStorage: TokenStorage;
     private domain: string;
-    private requestConfig: Array<any> = [];
+    private tokenExpiration: number = 7200; // 2 hours
+    private requestConfig: [string, RequestInit] = ["", {}];
 
-    constructor(domain: string, tokenStorage: TokenStorage) {
+    constructor({ domain, tokenExpiration }: AuthenticationOptions, tokenStorage: TokenStorage) {
         this.domain = domain;
         this.tokenStorage = tokenStorage;
+
+        if (tokenExpiration) {
+            this.tokenExpiration = tokenExpiration;
+        }
     }
 
-    request = async (url: string, config: RequestInit): Promise<any[]> => {
+    request = async (url: string, config: RequestInit): Promise<[string, RequestInit]> => {
         const authUrl = this.domain + '/me/profile/security/user_auth_tokens';
 
         if (url === authUrl) {
@@ -31,7 +36,6 @@ export class AuthTokenInterceptor implements Interceptor {
         return this.requestConfig;
     }
 
-
     responseError = async (err: Error): Promise<Response> => {
         this.tokenStorage.storeToken(null);
 
@@ -45,7 +49,7 @@ export class AuthTokenInterceptor implements Interceptor {
 
     private replayRequest = async (): Promise<Response> => {
         const [url, config] = this.requestConfig;
-        this.requestConfig = [];
+        this.requestConfig = ["", {}];
 
         return fetch(url, config);
     }
@@ -54,8 +58,8 @@ export class AuthTokenInterceptor implements Interceptor {
         const tokenResponse = await fetch(authUrl, {
             credentials: 'include',
             body: JSON.stringify({
-                description: `API client - generated at ${Date.now()}`,
-                expire_in_seconds: null,
+                description: `API client - token request at ${Date.now()}`,
+                expire_in_seconds: this.tokenExpiration,
                 registration_type: 'login'
             })
         });
@@ -64,14 +68,14 @@ export class AuthTokenInterceptor implements Interceptor {
     }
 }
 
-export class CSRFTokenInterceptor implements Interceptor {
+export class CSRFTokenInterceptor implements FetchInterceptor {
     private tokenStorage: TokenStorage;
 
     constructor(tokenStorage: TokenStorage) {
         this.tokenStorage = tokenStorage;
     }
 
-    request = async (url: string, config: RequestInit): Promise<any[]> => {
+    request = async (url: string, config: RequestInit): Promise<[string, RequestInit]> => {
         const token = this.tokenStorage.getToken();
 
         if (token) {
@@ -81,20 +85,20 @@ export class CSRFTokenInterceptor implements Interceptor {
         return [url, config];
     }
 
-    responseError = (_: Error) => {
-        // no-op
+    responseError = (err: Error): Promise<any> => {
+        return Promise.reject(err);
     }
 }
 
 export class InterceptorChain implements InterceptorRegistrar {
-    private interceptors: Array<Interceptor> = [];
+    private interceptors: Array<FetchInterceptor> = [];
     private registrations: Array<Function> = [];
 
-    private constructor(interceptors: Array<Interceptor>) {
+    private constructor(interceptors: Array<FetchInterceptor>) {
         this.interceptors = interceptors;
     }
 
-    static of(...interceptors: Array<Interceptor>): InterceptorChain {
+    static of(...interceptors: Array<FetchInterceptor>): InterceptorChain {
         return new InterceptorChain(interceptors);
     }
 

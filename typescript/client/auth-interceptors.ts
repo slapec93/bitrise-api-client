@@ -1,4 +1,3 @@
-
 import fetchIntercept from 'fetch-intercept';
 import { includeField } from './util'
 
@@ -12,7 +11,7 @@ export class AuthTokenInterceptor implements Interceptor {
         this.tokenStorage = tokenStorage;
     }
 
-    async request(url: string, config: RequestInit): Promise<any[]> {
+    request = async (url: string, config: RequestInit): Promise<any[]> => {
         const authUrl = this.domain + '/me/profile/security/user_auth_tokens';
 
         if (url === authUrl) {
@@ -33,7 +32,7 @@ export class AuthTokenInterceptor implements Interceptor {
     }
 
 
-    async responseError(err: Error): Promise<Response> {
+    responseError = async (err: Error): Promise<Response> => {
         this.tokenStorage.storeToken(null);
 
         if (false) {
@@ -44,14 +43,14 @@ export class AuthTokenInterceptor implements Interceptor {
         return this.replayRequest();
     }
 
-    private async replayRequest(): Promise<Response> {
+    private replayRequest = async (): Promise<Response> => {
         const [url, config] = this.requestConfig;
         this.requestConfig = [];
 
         return fetch(url, config);
     }
 
-    private async fetchApiToken(authUrl: string): Promise<string> {
+    private fetchApiToken = async (authUrl: string): Promise<string> => {
         const tokenResponse = await fetch(authUrl, {
             credentials: 'include',
             body: JSON.stringify({
@@ -72,7 +71,7 @@ export class CSRFTokenInterceptor implements Interceptor {
         this.tokenStorage = tokenStorage;
     }
 
-    async request(url: string, config: RequestInit): Promise<any[]> {
+    request = async (url: string, config: RequestInit): Promise<any[]> => {
         const token = this.tokenStorage.getToken();
 
         if (token) {
@@ -82,7 +81,7 @@ export class CSRFTokenInterceptor implements Interceptor {
         return [url, config];
     }
 
-    responseError(_: Error) {
+    responseError = (_: Error) => {
         // no-op
     }
 }

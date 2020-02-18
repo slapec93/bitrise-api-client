@@ -1,9 +1,6 @@
 // tslint:disable
 
 import {
-    fetch
-} from 'whatwg-fetch';
-import {
     timeout,
     stringifyQuery
 } from './util';

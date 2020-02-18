@@ -1,3 +1,8 @@
+/**
+ * SWAGGER GENERATED API CLIENT
+ * THIS FILE IS AUTO-GENERATED DO NOT EDIT!!
+ */
+
 // tslint:disable
 
 import {

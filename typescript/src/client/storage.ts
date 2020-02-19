@@ -2,50 +2,63 @@
 import { CookieStorage as CookieStore } from 'cookie-storage';
 
 export interface TokenStorage {
-    getToken(): string|null;
-    storeToken(token: string|null): void;
+    getAuthToken(): string|null;
+    getCSRFToken(): string|null;
+    storeAuthToken(token: string|null): void;
 }
 
+export type StorageOption = {
+    CSRFTokenName: string,
+    authTokenName: string,
+    cookieDomain?: string,
+    expirationSec?: number,
+};
+
 export class CookieStorage implements TokenStorage {
-    private fieldName: string;
+    private options: StorageOption;
     private expirationSec: number = 3600; // expires in an hour
     private store: CookieStore;
 
-    constructor(fieldName: string, expirationSec?: number) {
+    constructor(options: StorageOption) {
         this.store = new CookieStore({
             secure: location.protocol === 'https:',
-            domain: 'bitrise.io'
+            domain: options.cookieDomain || 'bitrise.io'
         });
 
-        this.fieldName = fieldName;
-
-        if (expirationSec) {
-            this.expirationSec = expirationSec;
-        }
+        this.options = options;
     }
 
-    getToken = (): string|null => {
-        return this.store.getItem(this.fieldName);
-    }
+    getAuthToken = (): string|null => this.getToken(this.options.authTokenName);
 
-    storeToken = (token: string) => {
+    getCSRFToken = (): string|null => this.getToken(this.options.CSRFTokenName);
+
+    storeAuthToken = (token: string) => {
         const expires = new Date(Date.now() + this.expirationSec * 1000);
-        this.store.setItem(this.fieldName, token, { expires });
+        this.store.setItem(this.options.authTokenName, token, { expires });
+    }
+
+    private getToken = (tokenName: string): string|null => {
+        const token = this.store.getItem(tokenName);
+        return token === 'null' ? null : token;
     }
 }
 
 export class ConstantStorage implements TokenStorage {
     private token: string|null = null;
 
-    constructor(token :string) {
-        this.token = token;
+    constructor(authToken :string) {
+        this.token = authToken;
     }
 
-    getToken = (): string|null => {
+    getAuthToken = (): string|null => {
         return this.token;
     }
 
-    storeToken = (token: string) => {
+    getCSRFToken() {
+        return null;
+    }
+
+    storeAuthToken = (token: string) => {
         this.token = token || this.token;
     }
 }

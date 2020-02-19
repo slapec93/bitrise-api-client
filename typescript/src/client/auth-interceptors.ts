@@ -4,22 +4,34 @@ import { includeField } from './util'
 
 export type AuthenticationOptions = {
     tokenExpiration?: number;
-    domain: string
+    authDomain?: string
 };
+
+export interface Interceptor {
+    request?(url: string, config: RequestInit): Promise<[string, RequestInit]>;
+    response?(response: Response): Promise<Response>;
+}
 
 export interface InterceptorRegistrar {
     register(): void;
     unregister(): void;
 };
 
-export class AuthTokenInterceptor implements FetchInterceptor {
+const DEFAULT_AUTH_DOMAIN = 'https://app.bitrise.io';
+
+const CSRF_HEADER = 'X-CSRF-TOKEN';
+
+const TOKEN_HEADER = 'Authorization';
+
+export class AuthTokenInterceptor implements Interceptor {
     private tokenStorage: TokenStorage;
     private domain: string;
+    private replayed: boolean = false;
     private tokenExpiration: number = 7200; // 2 hours
     private requestConfig: [string, RequestInit] = ["", {}];
 
-    constructor({ domain, tokenExpiration }: AuthenticationOptions, tokenStorage: TokenStorage) {
-        this.domain = domain;
+    constructor({ authDomain, tokenExpiration }: AuthenticationOptions, tokenStorage: TokenStorage) {
+        this.domain = authDomain || DEFAULT_AUTH_DOMAIN;
         this.tokenStorage = tokenStorage;
 
         if (tokenExpiration) {
@@ -31,31 +43,31 @@ export class AuthTokenInterceptor implements FetchInterceptor {
         const authUrl = this.domain + '/me/profile/security/user_auth_tokens';
 
         if (url === authUrl) {
+            // do not intercept itself :)
             return [url, config];
         }
 
-        let token = this.tokenStorage.getToken();
+        let authToken = this.tokenStorage.getAuthToken();
 
-        if (!token) {
-            token = await this.fetchApiToken(authUrl);
-            this.tokenStorage.storeToken(token);
+        if (!authToken) {
+            authToken = await this.fetchApiToken(authUrl);
+            this.tokenStorage.storeAuthToken(authToken);
         }
 
-        config.headers = includeField(config.headers, { 'Authorization': `token ${token}` });
+        config.headers = includeField(config.headers, { [TOKEN_HEADER]: `token ${authToken}` });
         this.requestConfig = [url, config];
 
         return this.requestConfig;
     }
 
-    responseError = async (err: Error): Promise<Response> => {
-        this.tokenStorage.storeToken(null);
-
-        if (false) {
-            //
-            throw err;
+    response = async (response: Response): Promise<Response> => {
+        if (!this.replayed && response.status === 401) {
+            this.tokenStorage.storeAuthToken(null);
+            this.replayed = true;
+            return this.replayRequest();
         }
 
-        return this.replayRequest();
+        return response;
     }
 
     private replayRequest = async (): Promise<Response> => {
@@ -66,7 +78,12 @@ export class AuthTokenInterceptor implements FetchInterceptor {
     }
 
     private fetchApiToken = async (authUrl: string): Promise<string> => {
+        const csrf = this.tokenStorage.getCSRFToken();
+        const headers = CSRFTokenInterceptor.addHeader(<Headers>{}, csrf);
+
         const tokenResponse = await fetch(authUrl, {
+            headers,
+            method: 'POST',
             credentials: 'include',
             body: JSON.stringify({
                 description: `API client - token request at ${Date.now()}`,
@@ -75,11 +92,15 @@ export class AuthTokenInterceptor implements FetchInterceptor {
             })
         });
 
+        if (!tokenResponse.ok) {
+            throw new Error('Authentication request failed');
+        }
+
         return (await tokenResponse.json()).token;
     }
 }
 
-export class CSRFTokenInterceptor implements FetchInterceptor {
+export class CSRFTokenInterceptor implements Interceptor {
     private tokenStorage: TokenStorage;
 
     constructor(tokenStorage: TokenStorage) {
@@ -87,17 +108,14 @@ export class CSRFTokenInterceptor implements FetchInterceptor {
     }
 
     request = async (url: string, config: RequestInit): Promise<[string, RequestInit]> => {
-        const token = this.tokenStorage.getToken();
-
-        if (token) {
-            config.headers = includeField(config.headers, { 'X-CSRF-TOKEN': token });
-        }
+        const token = this.tokenStorage.getCSRFToken();
+        config.headers = CSRFTokenInterceptor.addHeader(<Headers>config.headers, token);
 
         return [url, config];
     }
 
-    responseError = (err: Error): Promise<any> => {
-        return Promise.reject(err);
+    static addHeader(headers: Headers, csrf: string|null): Headers {
+        return csrf ? includeField(headers, { [CSRF_HEADER]: csrf }) : headers;
     }
 }
 

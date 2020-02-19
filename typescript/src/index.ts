@@ -4,20 +4,22 @@ import BitriseAPI, { PUBLIC_DOMAIN } from './client/api';
 import { AuthTokenInterceptor, CSRFTokenInterceptor, InterceptorChain } from './client/auth-interceptors';
 import { CookieStorage, ConstantStorage, TokenStorage } from './client/storage';
 
-const createStorage = (field_name: string, token?: string | null): TokenStorage => {
+const createStorage = (token?: string | null): TokenStorage => {
     if (token) {
         return new ConstantStorage(token);
     }
 
-    return new CookieStorage(field_name);
+    return new CookieStorage({
+        CSRFTokenName: 'CSRF-TOKEN',
+        authTokenName: 'expiring_api_token'
+    });
 };
 
 export default (apiToken?: string | undefined): BitriseAPI => {
-    const apiTokenStore = createStorage("expiring_api_token", apiToken);
-    const csrfTokenStore = createStorage("CSRF-TOKEN");
+    const tokenStore = createStorage(apiToken);
 
-    const authTokenInterceptor = new AuthTokenInterceptor({ domain: PUBLIC_DOMAIN }, apiTokenStore);
-    const csrftokenInterceptor = new CSRFTokenInterceptor(csrfTokenStore);
+    const authTokenInterceptor = new AuthTokenInterceptor({ authDomain: PUBLIC_DOMAIN }, tokenStore);
+    const csrftokenInterceptor = new CSRFTokenInterceptor(tokenStore);
 
     return new BitriseAPI(
         InterceptorChain.of(authTokenInterceptor, csrftokenInterceptor)

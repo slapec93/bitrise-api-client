@@ -13,3 +13,5 @@ export const stringifyQuery = (params: QueryParameters): string =>
     ).join('&');
 
 export const includeField = <T>(object: T, data: Object): T => ({ ...(object || {}), ...data }) as T;
+
+export const dateFromNow = (second: number): Date => new Date(Date.now() + second * 1000);

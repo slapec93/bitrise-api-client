@@ -1,5 +1,6 @@
 
-import { CookieStorage as CookieStore } from 'cookie-storage';
+import { CookieStorage } from 'cookie-storage';
+import { dateFromNow } from './util';
 
 export interface TokenStorage {
     getAuthToken(): string|null;
@@ -14,18 +15,19 @@ export type StorageOption = {
     expirationSec?: number,
 };
 
-export class CookieStorage implements TokenStorage {
+export class CookieTokenStorage implements TokenStorage {
     private options: StorageOption;
     private expirationSec: number = 3600; // expires in an hour
-    private store: CookieStore;
+    private store: CookieStorage;
 
     constructor(options: StorageOption) {
-        this.store = new CookieStore({
+        this.store = new CookieStorage({
             secure: location.protocol === 'https:',
             domain: options.cookieDomain || 'bitrise.io'
         });
 
         this.options = options;
+        this.expirationSec = this.options.expirationSec || 3600;
     }
 
     getAuthToken = (): string|null => this.getToken(this.options.authTokenName);
@@ -33,7 +35,7 @@ export class CookieStorage implements TokenStorage {
     getCSRFToken = (): string|null => this.getToken(this.options.CSRFTokenName);
 
     storeAuthToken = (token: string) => {
-        const expires = new Date(Date.now() + this.expirationSec * 1000);
+        const expires = dateFromNow(this.expirationSec);
         this.store.setItem(this.options.authTokenName, token, { expires });
     }
 
@@ -43,22 +45,22 @@ export class CookieStorage implements TokenStorage {
     }
 }
 
-export class ConstantStorage implements TokenStorage {
-    private token: string|null = null;
+export class ConstantTokenStorage implements TokenStorage {
+    private authToken: string|null = null;
 
     constructor(authToken :string) {
-        this.token = authToken;
+        this.authToken = authToken;
     }
 
     getAuthToken = (): string|null => {
-        return this.token;
+        return this.authToken;
     }
 
     getCSRFToken() {
         return null;
     }
 
-    storeAuthToken = (token: string) => {
-        this.token = token || this.token;
+    storeAuthToken = (token: string|null) => {
+        this.authToken = token || this.authToken;
     }
 }

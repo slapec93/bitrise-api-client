@@ -1,5 +1,5 @@
 import { TokenStorage } from './storage';
-import fetchIntercept, { FetchInterceptor } from 'fetch-intercept';
+import fetchIntercept from 'fetch-intercept';
 import { includeField } from './util'
 
 export type AuthenticationOptions = {
@@ -120,14 +120,14 @@ export class CSRFTokenInterceptor implements Interceptor {
 }
 
 export class InterceptorChain implements InterceptorRegistrar {
-    private interceptors: Array<FetchInterceptor> = [];
+    private interceptors: Array<Interceptor> = [];
     private registrations: Array<Function> = [];
 
-    private constructor(interceptors: Array<FetchInterceptor>) {
+    private constructor(interceptors: Array<Interceptor>) {
         this.interceptors = interceptors;
     }
 
-    static of(...interceptors: Array<FetchInterceptor>): InterceptorChain {
+    static of(...interceptors: Array<Interceptor>): InterceptorChain {
         return new InterceptorChain(interceptors);
     }
 

@@ -2,14 +2,14 @@ import 'isomorphic-fetch';
 
 import BitriseAPI, { PUBLIC_DOMAIN } from './client/api';
 import { AuthTokenInterceptor, CSRFTokenInterceptor, InterceptorChain } from './client/auth-interceptors';
-import { CookieStorage, ConstantStorage, TokenStorage } from './client/storage';
+import { CookieTokenStorage, ConstantTokenStorage, TokenStorage } from './client/storage';
 
 const createStorage = (token?: string | null): TokenStorage => {
     if (token) {
-        return new ConstantStorage(token);
+        return new ConstantTokenStorage(token);
     }
 
-    return new CookieStorage({
+    return new CookieTokenStorage({
         CSRFTokenName: 'CSRF-TOKEN',
         authTokenName: 'expiring_api_token'
     });

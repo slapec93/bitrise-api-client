@@ -1,5 +1,16 @@
+import { TokenStorage } from './storage';
 import fetchIntercept, { FetchInterceptor } from 'fetch-intercept';
 import { includeField } from './util'
+
+export type AuthenticationOptions = {
+    tokenExpiration?: number;
+    domain: string
+};
+
+export interface InterceptorRegistrar {
+    register(): void;
+    unregister(): void;
+};
 
 export class AuthTokenInterceptor implements FetchInterceptor {
     private tokenStorage: TokenStorage;

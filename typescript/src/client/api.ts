@@ -6,6 +6,9 @@
 // tslint:disable
 
 import {
+    InterceptorRegistrar
+} from './auth-interceptors';
+import {
     timeout,
     stringifyQuery
 } from './util';

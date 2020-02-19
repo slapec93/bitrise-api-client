@@ -2,7 +2,7 @@ import 'isomorphic-fetch';
 
 import BitriseAPI, { PUBLIC_DOMAIN } from './client/api';
 import { AuthTokenInterceptor, CSRFTokenInterceptor, InterceptorChain } from './client/auth-interceptors';
-import { CookieStorage, ConstantStorage } from './client/storage';
+import { CookieStorage, ConstantStorage, TokenStorage } from './client/storage';
 
 const createStorage = (field_name: string, token?: string | null): TokenStorage => {
     if (token) {

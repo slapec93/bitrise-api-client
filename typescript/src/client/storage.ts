@@ -1,6 +1,11 @@
 
 import { CookieStorage as CookieStore } from 'cookie-storage';
 
+export interface TokenStorage {
+    getToken(): string|null;
+    storeToken(token: string|null): void;
+}
+
 export class CookieStorage implements TokenStorage {
     private fieldName: string;
     private expirationSec: number = 3600; // expires in an hour
@@ -19,28 +24,28 @@ export class CookieStorage implements TokenStorage {
         }
     }
 
-    getToken() {
+    getToken = (): string|null => {
         return this.store.getItem(this.fieldName);
     }
 
-    storeToken(token: string) {
+    storeToken = (token: string) => {
         const expires = new Date(Date.now() + this.expirationSec * 1000);
         this.store.setItem(this.fieldName, token, { expires });
     }
 }
 
 export class ConstantStorage implements TokenStorage {
-    private token: string | null = null;
+    private token: string|null = null;
 
     constructor(token :string) {
         this.token = token;
     }
 
-    getToken() {
+    getToken = (): string|null => {
         return this.token;
     }
 
-    storeToken(token: string) {
+    storeToken = (token: string) => {
         this.token = token || this.token;
     }
 }

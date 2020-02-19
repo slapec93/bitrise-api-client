@@ -2,10 +2,14 @@
   "name": "@bitrise/api-client",
   "version": "0.0.1",
   "description": "Javascript client for bitrise public api",
-  "main": "dist/index.js",
+  "main": "dist/bitrise-api-client.cjs.js",
+  "module": "dist/bitrise-api-client.esm.js",
+  "browser": "dist/bitrise-api-client.umd.js",
   "scripts": {
-    "build": "tsc --build ./tsconfig.json",
-    "generate-client": "./generator.js"
+    "build": "rollup -c",
+    "generate-client": "./generator.js",
+    "test": "jest",
+    "generate-declarations": "tsc --declaration --esModuleInterop --emitDeclarationOnly --declarationDir dist  src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -22,13 +26,22 @@
   },
   "homepage": "https://github.com/bitrise-io/bitrise-api-client#readme",
   "dependencies": {
-    "@types/isomorphic-fetch": "^0.0.35",
     "cookie-storage": "^6.0.0",
     "fetch-intercept": "^2.3.1",
     "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
+    "@types/isomorphic-fetch": "^0.0.35",
+    "@types/jest": "^25.1.2",
+    "jest": "^25.1.0",
+    "rollup": "^1.31.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript": "^1.0.1",
     "swagger-typescript-codegen": "^3.0.3",
+    "ts-jest": "^25.2.0",
+    "tslib": "^1.10.0",
     "typescript": "^3.7.5"
   }
 }

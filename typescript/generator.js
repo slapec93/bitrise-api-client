@@ -23,4 +23,4 @@ const tsSourceCode = CodeGen.getTypescriptCode({
   }
 });
 
-fs.writeFileSync("./client/api.ts", tsSourceCode);
+fs.writeFileSync("./src/client/api.ts", tsSourceCode);

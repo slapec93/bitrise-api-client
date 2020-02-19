@@ -900,7 +900,7 @@ export class BitriseAPI {
         this.requestHeadersHandler = handler;
     }
 
-    private request(method: string, url: string, body: any, headers: RequestHeaders, queryParameters: QueryParameters, opts: CommonRequestOptions): Promise < Response > {
+    private async request(method: string, url: string, body: any, headers: RequestHeaders, queryParameters: QueryParameters, opts: CommonRequestOptions): Promise < Response > {
         const reqTimeout = opts.$timeout || 10000;
         const query = stringifyQuery(queryParameters);
         url = query ? `${url}?${query}` : url;
@@ -909,8 +909,9 @@ export class BitriseAPI {
             headers['Content-Type'] = 'application/json';
         }
 
-        const fetchParams = {
+        const fetchParams: RequestInit = {
             method,
+            mode: 'cors',
             headers: this.requestHeadersHandler ? this.requestHeadersHandler({
                 ...headers
             }) : headers,
@@ -922,10 +923,10 @@ export class BitriseAPI {
 
         this.interceptors.register();
 
-        let result: Promise < Response > ;
+        let result: Response;
 
         try {
-            result = timeout(reqTimeout, fetch(url, fetchParams));
+            result = await timeout(reqTimeout, fetch(url, fetchParams));
         } finally {
             this.interceptors.unregister();
         }

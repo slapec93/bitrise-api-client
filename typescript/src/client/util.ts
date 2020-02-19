@@ -15,3 +15,12 @@ export const stringifyQuery = (params: QueryParameters): string =>
 export const includeField = <T>(object: T, data: Object): T => ({ ...(object || {}), ...data }) as T;
 
 export const dateFromNow = (second: number): Date => new Date(Date.now() + second * 1000);
+
+export const syncify = async (method: Function): Promise<Function> => {
+    try {
+        const result = await method();
+        return () => result;
+    } catch (err) {
+        return () => { throw err; };
+    }
+};

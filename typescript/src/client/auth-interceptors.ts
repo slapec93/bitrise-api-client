@@ -1,5 +1,5 @@
+import fetchIntercept, { FetchInterceptor } from 'fetch-intercept';
 import { TokenStorage } from './storage';
-import fetchIntercept from 'fetch-intercept';
 import { includeField } from './util'
 
 export type AuthenticationOptions = {
@@ -19,9 +19,9 @@ export interface InterceptorRegistrar {
 
 const DEFAULT_AUTH_DOMAIN = 'https://app.bitrise.io';
 
-const CSRF_HEADER = 'X-CSRF-TOKEN';
+export const CSRF_HEADER = 'x-csrf-token';
 
-const TOKEN_HEADER = 'Authorization';
+export const TOKEN_HEADER = 'Authorization';
 
 export class AuthTokenInterceptor implements Interceptor {
     private tokenStorage: TokenStorage;
@@ -30,12 +30,12 @@ export class AuthTokenInterceptor implements Interceptor {
     private tokenExpiration: number = 7200; // 2 hours
     private requestConfig: [string, RequestInit] = ["", {}];
 
-    constructor({ authDomain, tokenExpiration }: AuthenticationOptions, tokenStorage: TokenStorage) {
-        this.domain = authDomain || DEFAULT_AUTH_DOMAIN;
+    constructor(tokenStorage: TokenStorage, options?: AuthenticationOptions) {
+        this.domain = options?.authDomain || DEFAULT_AUTH_DOMAIN;
         this.tokenStorage = tokenStorage;
 
-        if (tokenExpiration) {
-            this.tokenExpiration = tokenExpiration;
+        if (options?.tokenExpiration) {
+            this.tokenExpiration = options?.tokenExpiration;
         }
     }
 
@@ -78,15 +78,11 @@ export class AuthTokenInterceptor implements Interceptor {
     }
 
     private fetchApiToken = async (authUrl: string): Promise<string> => {
-        const csrf = this.tokenStorage.getCSRFToken();
-        const headers = CSRFTokenInterceptor.addHeader(<Headers>{}, csrf);
-
         const tokenResponse = await fetch(authUrl, {
-            headers,
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify({
-                description: `API client - token request at ${Date.now()}`,
+                description: `API client - token request`,
                 expire_in_seconds: this.tokenExpiration,
                 registration_type: 'login'
             })
@@ -108,14 +104,13 @@ export class CSRFTokenInterceptor implements Interceptor {
     }
 
     request = async (url: string, config: RequestInit): Promise<[string, RequestInit]> => {
-        const token = this.tokenStorage.getCSRFToken();
-        config.headers = CSRFTokenInterceptor.addHeader(<Headers>config.headers, token);
+        const csrfToken = this.tokenStorage.getCSRFToken();
+
+        if (csrfToken) {
+            config.headers = includeField(config.headers, { [CSRF_HEADER]: csrfToken })
+        }
 
         return [url, config];
-    }
-
-    static addHeader(headers: Headers, csrf: string|null): Headers {
-        return csrf ? includeField(headers, { [CSRF_HEADER]: csrf }) : headers;
     }
 }
 
@@ -132,7 +127,8 @@ export class InterceptorChain implements InterceptorRegistrar {
     }
 
     register() {
-        this.registrations = this.interceptors.map(interceptor => fetchIntercept.register(interceptor));
+        this.registrations = this.interceptors
+            .map(interceptor => fetchIntercept.register(<FetchInterceptor>interceptor));
     }
 
     unregister() {

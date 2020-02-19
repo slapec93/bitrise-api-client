@@ -1,6 +1,5 @@
-import 'isomorphic-fetch';
-
-import BitriseAPI, { PUBLIC_DOMAIN } from './client/api';
+import 'cross-fetch/polyfill';
+import BitriseAPI from './client/api';
 import { AuthTokenInterceptor, CSRFTokenInterceptor, InterceptorChain } from './client/auth-interceptors';
 import { CookieTokenStorage, ConstantTokenStorage, TokenStorage } from './client/storage';
 
@@ -18,7 +17,7 @@ const createStorage = (token?: string | null): TokenStorage => {
 export default (apiToken?: string | undefined): BitriseAPI => {
     const tokenStore = createStorage(apiToken);
 
-    const authTokenInterceptor = new AuthTokenInterceptor({ authDomain: PUBLIC_DOMAIN }, tokenStore);
+    const authTokenInterceptor = new AuthTokenInterceptor(tokenStore);
     const csrftokenInterceptor = new CSRFTokenInterceptor(tokenStore);
 
     return new BitriseAPI(

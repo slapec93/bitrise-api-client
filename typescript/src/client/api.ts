@@ -872,7 +872,7 @@ export interface CommonRequestOptions {
     $timeout ? : number;
 }
 
-export const PUBLIC_DOMAIN: string = "https://api.bitrise.io/v0.1";
+const PUBLIC_DOMAIN: string = "https://api.bitrise.io/v0.1";
 
 /**
  * Official REST API for Bitrise.io

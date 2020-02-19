@@ -27,13 +27,13 @@
   "homepage": "https://github.com/bitrise-io/bitrise-api-client#readme",
   "dependencies": {
     "cookie-storage": "^6.0.0",
-    "fetch-intercept": "^2.3.1",
-    "isomorphic-fetch": "^2.2.1"
+    "cross-fetch": "^3.0.4",
+    "fetch-intercept": "^2.3.1"
   },
   "devDependencies": {
-    "@types/isomorphic-fetch": "^0.0.35",
     "@types/jest": "^25.1.2",
     "jest": "^25.1.0",
+    "jest-fetch-mock": "^3.0.1",
     "rollup": "^1.31.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-builtins": "^2.1.2",

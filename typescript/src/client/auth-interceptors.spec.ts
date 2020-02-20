@@ -1,7 +1,7 @@
 
 const fetchMock = require('jest-fetch-mock');
 import { CSRFTokenInterceptor, CSRF_HEADER, AuthTokenInterceptor, TOKEN_HEADER } from './auth-interceptors';
-import { syncify } from './util';
+import { syncify } from './test-util';
 
 const testToken = "testToken";
 

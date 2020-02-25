@@ -1,20 +1,13 @@
-import fetchIntercept, { FetchInterceptor } from 'fetch-intercept';
+import { Interceptor } from './interceptor-chain';
 import { TokenStorage } from './storage';
 import { includeField } from './util'
 
+export type AuthFailureCallback = (errprResponse: Response|Error) => Promise<void>;
+
 export type AuthenticationOptions = {
     tokenExpiration?: number;
-    authDomain?: string
-};
-
-export interface Interceptor {
-    request?(url: string, config: RequestInit): Promise<[string, RequestInit]>;
-    response?(response: Response): Promise<Response>;
-}
-
-export interface InterceptorRegistrar {
-    register(): void;
-    unregister(): void;
+    authDomain?: string,
+    authFailureCallback?: AuthFailureCallback
 };
 
 const DEFAULT_AUTH_DOMAIN = 'https://app.bitrise.io';
@@ -26,6 +19,8 @@ export const TOKEN_HEADER = 'Authorization';
 export class AuthTokenInterceptor implements Interceptor {
     private tokenStorage: TokenStorage;
     private domain: string;
+    private forbiddenHTTPStatuses :Array<number> = [401, 403];
+    private authFailureCallback: AuthFailureCallback = () => Promise.resolve();
     private replayed: boolean = false;
     private tokenExpiration: number = 7200; // 2 hours
     private requestConfig: [string, RequestInit] = ["", {}];
@@ -35,7 +30,11 @@ export class AuthTokenInterceptor implements Interceptor {
         this.tokenStorage = tokenStorage;
 
         if (options?.tokenExpiration) {
-            this.tokenExpiration = options?.tokenExpiration;
+            this.tokenExpiration = options.tokenExpiration;
+        }
+
+        if (options?.authFailureCallback) {
+            this.authFailureCallback = options.authFailureCallback;
         }
     }
 
@@ -60,7 +59,7 @@ export class AuthTokenInterceptor implements Interceptor {
     };
 
     response = async (response: Response): Promise<Response> => {
-        if (!this.replayed && response.status === 401) {
+        if (!this.replayed && this.forbiddenHTTPStatuses.includes(response.status)) {
             this.tokenStorage.storeAuthToken(null);
             this.replayed = true;
             return this.replayRequest();
@@ -103,9 +102,11 @@ export class AuthTokenInterceptor implements Interceptor {
 
             if (tokenResponse.ok) {
                 token = (await tokenResponse.json()).token;
+            } else {
+                await this.authFailureCallback(tokenResponse);
             }
-        } catch {
-            // TODO: do some logging
+        } catch (err) {
+            await this.authFailureCallback(err);
         }
 
         return token;
@@ -128,27 +129,4 @@ export class CSRFTokenInterceptor implements Interceptor {
 
         return [url, config];
     };
-}
-
-export class InterceptorChain implements InterceptorRegistrar {
-    private interceptors: Array<Interceptor> = [];
-    private registrations: Array<Function> = [];
-
-    private constructor(interceptors: Array<Interceptor>) {
-        this.interceptors = interceptors;
-    }
-
-    static of(...interceptors: Array<Interceptor>): InterceptorChain {
-        return new InterceptorChain(interceptors);
-    }
-
-    register() {
-        this.registrations = this.interceptors
-            .map(interceptor => fetchIntercept.register(<FetchInterceptor>interceptor));
-    }
-
-    unregister() {
-        this.registrations.forEach(unregister => unregister());
-        this.registrations = [];
-    }
 }

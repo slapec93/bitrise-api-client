@@ -26,21 +26,31 @@ describe('Factory', () => {
     });
 
     it('should use ConstantStorage when token specified', () => {
-        factory("testToken");
+        factory({ apiToken: 'testToken' });
 
-        expect(AuthTokenInterceptor).toHaveBeenCalledWith(mockConstantStorage);
+        expect(AuthTokenInterceptor).toHaveBeenCalledWith(mockConstantStorage, expect.anything());
         expect(CSRFTokenInterceptor).toHaveBeenCalledWith(mockConstantStorage);
     });
 
     it('should throw error when token not specified in node', () => {
         mockIsNode = true;
-        expect(factory).toThrow();
+
+        expect(
+            () => { factory({}); }
+        ).toThrow();
     });
 
     it('should use CookieStorage in browser', () => {
-        factory();
+        factory({});
 
-        expect(AuthTokenInterceptor).toHaveBeenCalledWith(mockCookieStorage);
+        expect(AuthTokenInterceptor).toHaveBeenCalledWith(mockCookieStorage, expect.anything());
         expect(CSRFTokenInterceptor).toHaveBeenCalledWith(mockCookieStorage);
+    });
+
+    it('should pass auth failure method to token interceptor', () => {
+        const mockAuthFailure = jest.fn();
+        factory({ authFailureCallback: mockAuthFailure });
+
+        expect(AuthTokenInterceptor).toHaveBeenCalledWith(mockCookieStorage, { authFailureCallback: mockAuthFailure });
     });
 });

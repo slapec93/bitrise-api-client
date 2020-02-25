@@ -1,7 +1,6 @@
-
 const fetchMock = require('jest-fetch-mock');
 
-import { CSRFTokenInterceptor, CSRF_HEADER, AuthTokenInterceptor, TOKEN_HEADER } from './auth-interceptors';
+import { CSRFTokenInterceptor, CSRF_HEADER, AuthTokenInterceptor, TOKEN_HEADER, AuthFailureCallback } from './auth-interceptors';
 
 const testToken = "testToken";
 
@@ -12,11 +11,13 @@ const mockStorage = {
 };
 
 describe('AuthTokenInterceptor', () => {
+    let mockAuthCallback :AuthFailureCallback;
     let authTokenInterceptor :AuthTokenInterceptor;
 
     beforeEach(() => {
+        mockAuthCallback = jest.fn().mockImplementation(() => Promise.resolve());
         fetchMock.resetMocks();
-        authTokenInterceptor = new AuthTokenInterceptor(mockStorage);
+        authTokenInterceptor = new AuthTokenInterceptor(mockStorage, { authFailureCallback: mockAuthCallback });
     });
 
     beforeAll(() => fetchMock.enableMocks());
@@ -99,6 +100,17 @@ describe('AuthTokenInterceptor', () => {
         const [, config] = await authTokenInterceptor.request('test-url', mockConfig);
 
         expect(config.headers).toEqual(mockConfig.headers);
+    });
+
+    it('should call auth failure callback', async () => {
+        const fetchError = new Error('network error');
+
+        fetchMock.mockRejectOnce(fetchError);
+        mockStorage.getAuthToken.mockImplementation(() => null);
+
+        await authTokenInterceptor.request('test-url', { });
+
+        expect(mockAuthCallback).toHaveBeenCalledWith(fetchError);
     });
 });
 

@@ -3,11 +3,11 @@
  * THIS FILE IS AUTO-GENERATED DO NOT EDIT!!
  */
 
-// tslint:disable
+/* eslint-disable */
 
 import {
     InterceptorRegistrar
-} from './auth-interceptors';
+} from './interceptor-chain';
 import {
     timeout,
     stringifyQuery

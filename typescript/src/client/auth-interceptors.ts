@@ -1,13 +1,15 @@
 import { Interceptor } from './interceptor-chain';
 import { TokenStorage } from './storage';
-import { includeField } from './util'
+import { includeField } from './util';
 
-export type AuthFailureCallback = (errprResponse: Response|Error) => Promise<void>;
+export type AuthFailureCallback = (
+  errorResponse: Response | Error,
+) => Promise<void>;
 
 export type AuthenticationOptions = {
-    tokenExpiration?: number;
-    authDomain?: string,
-    authFailureCallback?: AuthFailureCallback
+  tokenExpiration?: number;
+  authDomain?: string;
+  authFailureCallback?: AuthFailureCallback;
 };
 
 const DEFAULT_AUTH_DOMAIN = 'https://app.bitrise.io';
@@ -17,116 +19,129 @@ export const CSRF_HEADER = 'x-csrf-token';
 export const TOKEN_HEADER = 'Authorization';
 
 export class AuthTokenInterceptor implements Interceptor {
-    private tokenStorage: TokenStorage;
-    private domain: string;
-    private forbiddenHTTPStatuses :Array<number> = [401, 403];
-    private authFailureCallback: AuthFailureCallback = () => Promise.resolve();
-    private replayed: boolean = false;
-    private tokenExpiration: number = 7200; // 2 hours
-    private requestConfig: [string, RequestInit] = ["", {}];
+  private tokenStorage: TokenStorage;
+  private domain: string;
+  private forbiddenHTTPStatuses: Array<number> = [401, 403];
+  private authFailureCallback: AuthFailureCallback = () => Promise.resolve();
+  private replayed = false;
+  private tokenExpiration = 7200; // 2 hours
+  private requestConfig: [string, RequestInit] = ['', {}];
 
-    constructor(tokenStorage: TokenStorage, options?: AuthenticationOptions) {
-        this.domain = options?.authDomain || DEFAULT_AUTH_DOMAIN;
-        this.tokenStorage = tokenStorage;
+  constructor(tokenStorage: TokenStorage, options?: AuthenticationOptions) {
+    this.domain = options?.authDomain || DEFAULT_AUTH_DOMAIN;
+    this.tokenStorage = tokenStorage;
 
-        if (options?.tokenExpiration) {
-            this.tokenExpiration = options.tokenExpiration;
-        }
-
-        if (options?.authFailureCallback) {
-            this.authFailureCallback = options.authFailureCallback;
-        }
+    if (options?.tokenExpiration) {
+      this.tokenExpiration = options.tokenExpiration;
     }
 
-    request = async (url: string, config: RequestInit): Promise<[string, RequestInit]> => {
-        const authUrl = this.domain + '/me/profile/security/user_auth_tokens';
+    if (options?.authFailureCallback) {
+      this.authFailureCallback = options.authFailureCallback;
+    }
+  }
 
-        if (url === authUrl) {
-            // do not intercept itself :)
-            return [url, config];
-        }
+  request = async (
+    url: string,
+    config: RequestInit,
+  ): Promise<[string, RequestInit]> => {
+    const authUrl = this.domain + '/me/profile/security/user_auth_tokens';
 
-        const authToken = await this.upsertAuthToken(authUrl);
+    if (url === authUrl) {
+      // do not intercept itself :)
+      return [url, config];
+    }
 
-        if (authToken) {
-            config.headers = includeField(config.headers, { [TOKEN_HEADER]: `token ${authToken}` });
-        }
+    const authToken = await this.upsertAuthToken(authUrl);
 
-        // store config for later use
-        this.requestConfig = [url, config];
+    if (authToken) {
+      config.headers = includeField(config.headers, {
+        [TOKEN_HEADER]: `token ${authToken}`,
+      });
+    }
 
-        return this.requestConfig;
-    };
+    // store config for later use
+    this.requestConfig = [url, config];
 
-    response = async (response: Response): Promise<Response> => {
-        if (!this.replayed && this.forbiddenHTTPStatuses.includes(response.status)) {
-            this.tokenStorage.storeAuthToken(null);
-            this.replayed = true;
-            return this.replayRequest();
-        }
+    return this.requestConfig;
+  };
 
-        return response;
-    };
+  response = async (response: Response): Promise<Response> => {
+    if (
+      !this.replayed &&
+      this.forbiddenHTTPStatuses.includes(response.status)
+    ) {
+      this.tokenStorage.storeAuthToken(null);
+      this.replayed = true;
+      return this.replayRequest();
+    }
 
-    private replayRequest = async (): Promise<Response> => {
-        const [url, config] = this.requestConfig;
-        this.requestConfig = ["", {}];
+    return response;
+  };
 
-        return fetch(url, config);
-    };
+  private replayRequest = async (): Promise<Response> => {
+    const [url, config] = this.requestConfig;
+    this.requestConfig = ['', {}];
 
-    private upsertAuthToken = async (authUrl: string): Promise<string|null> => {
-        let authToken = this.tokenStorage.getAuthToken();
+    return fetch(url, config);
+  };
 
-        if (!authToken) {
-            authToken = await this.fetchApiToken(authUrl);
-            this.tokenStorage.storeAuthToken(authToken);
-        }
+  private upsertAuthToken = async (authUrl: string): Promise<string | null> => {
+    let authToken = this.tokenStorage.getAuthToken();
 
-        return authToken;
-    };
+    if (!authToken) {
+      authToken = await this.fetchApiToken(authUrl);
+      this.tokenStorage.storeAuthToken(authToken);
+    }
 
-    private fetchApiToken = async (authUrl: string): Promise<string|null> => {
-        let token = null;
+    return authToken;
+  };
 
-        try {
-            const tokenResponse = await fetch(authUrl, {
-                method: 'POST',
-                credentials: 'include',
-                body: JSON.stringify({
-                    description: 'API client - token request',
-                    expire_in_seconds: this.tokenExpiration,
-                    registration_type: 'login'
-                })
-            });
+  private fetchApiToken = async (authUrl: string): Promise<string | null> => {
+    let token = null;
 
-            if (tokenResponse.ok) {
-                token = (await tokenResponse.json()).token;
-            } else {
-                await this.authFailureCallback(tokenResponse);
-            }
-        } catch (err) {
-            await this.authFailureCallback(err);
-        }
+    try {
+      const tokenResponse = await fetch(authUrl, {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({
+          description: 'API client - token request',
+          'expire_in_seconds': this.tokenExpiration,
+          'registration_type': 'login',
+        }),
+      });
 
-        return token;
-    };
+      if (tokenResponse.ok) {
+        token = (await tokenResponse.json()).token;
+      } else {
+        await this.authFailureCallback(tokenResponse);
+      }
+    } catch (err) {
+      await this.authFailureCallback(err);
+    }
+
+    return token;
+  };
 }
 
 export class CSRFTokenInterceptor implements Interceptor {
-    private tokenStorage: TokenStorage;
+  private tokenStorage: TokenStorage;
 
-    constructor(tokenStorage: TokenStorage) {
-        this.tokenStorage = tokenStorage;
+  constructor(tokenStorage: TokenStorage) {
+    this.tokenStorage = tokenStorage;
+  }
+
+  request = async (
+    url: string,
+    config: RequestInit,
+  ): Promise<[string, RequestInit]> => {
+    const csrfToken = this.tokenStorage.getCSRFToken();
+
+    if (csrfToken) {
+      config.headers = includeField(config.headers, {
+        [CSRF_HEADER]: csrfToken,
+      });
     }
 
-    request = async (url: string, config: RequestInit): Promise<[string, RequestInit]> => {
-        const csrfToken = this.tokenStorage.getCSRFToken();
-
-        if (csrfToken) {
-            config.headers = includeField(config.headers, { [CSRF_HEADER]: csrfToken })
-        }
-
-        return [url, config];
-    };
+    return [url, config];
+  };
 }

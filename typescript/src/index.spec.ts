@@ -17,7 +17,7 @@ jest.mock('./client/storage', () => ({
 }));
 
 jest.mock('./client/util', () => ({
-    isNodePlatform: jest.fn().mockImplementation(() => mockIsNode)
+    isNodePlatform: jest.fn().mockImplementation(() => mockIsNode),
 }));
 
 describe('Factory', () => {
@@ -35,9 +35,9 @@ describe('Factory', () => {
     it('should throw error when token not specified in node', () => {
         mockIsNode = true;
 
-        expect(
-            () => { factory({}); }
-        ).toThrow();
+        expect(() => {
+            factory({});
+        }).toThrow();
     });
 
     it('should use CookieStorage in browser', () => {

@@ -6,11 +6,11 @@ import { CookieTokenStorage, ConstantTokenStorage, TokenStorage } from './client
 import { isNodePlatform } from './client/util';
 
 export type ApiClientOptions = {
-    apiToken?: string,
-    authFailureCallback?: AuthFailureCallback
+    apiToken?: string;
+    authFailureCallback?: AuthFailureCallback;
 };
 
-const createStorage = (token?: string|null): TokenStorage => {
+const createStorage = (token?: string | null): TokenStorage => {
     if (token) {
         return new ConstantTokenStorage(token);
     }
@@ -21,7 +21,7 @@ const createStorage = (token?: string|null): TokenStorage => {
 
     return new CookieTokenStorage({
         CSRFTokenName: 'CSRF-TOKEN',
-        authTokenName: 'expiring_api_token'
+        authTokenName: 'expiring_api_token',
     });
 };
 
@@ -31,7 +31,5 @@ export default ({ apiToken, authFailureCallback }: ApiClientOptions): BitriseAPI
     const authTokenInterceptor = new AuthTokenInterceptor(tokenStore, { authFailureCallback });
     const csrftokenInterceptor = new CSRFTokenInterceptor(tokenStore);
 
-    return new BitriseAPI(
-        InterceptorChain.of(authTokenInterceptor, csrftokenInterceptor)
-    );
+    return new BitriseAPI(InterceptorChain.of(authTokenInterceptor, csrftokenInterceptor));
 };

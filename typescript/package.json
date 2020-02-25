@@ -26,11 +26,13 @@
   },
   "homepage": "https://github.com/bitrise-io/bitrise-api-client#readme",
   "dependencies": {
+    "browser-or-node": "^1.2.1",
     "cookie-storage": "^6.0.0",
     "cross-fetch": "^3.0.4",
     "fetch-intercept": "^2.3.1"
   },
   "devDependencies": {
+    "@types/browser-or-node": "^1.2.0",
     "@types/jest": "^25.1.2",
     "jest": "^25.1.0",
     "jest-fetch-mock": "^3.0.1",

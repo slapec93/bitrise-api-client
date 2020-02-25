@@ -1,3 +1,4 @@
+import { isNode } from 'browser-or-node';
 import { QueryParameters } from './api';
 
 export const timeout = <T>(ms: number, promise: Promise<T>): Promise<T> => {
@@ -22,3 +23,5 @@ export const stringifyQuery = (params: QueryParameters): string =>
 export const includeField = <T>(source: T, props: Object): T => ({ ...(source || {}), ...props }) as T;
 
 export const dateFromNow = (second: number): Date => new Date(Date.now() + second * 1000);
+
+export const isNodePlatform = () => isNode;

@@ -34,7 +34,11 @@ export class CookieTokenStorage implements TokenStorage {
 
     getCSRFToken = (): string|null => this.getToken(this.options.CSRFTokenName);
 
-    storeAuthToken = (token: string) => {
+    storeAuthToken = (token: string|null) => {
+        if (!token) {
+            return;
+        }
+
         const expires = dateFromNow(this.expirationSec);
         this.store.setItem(this.options.authTokenName, token, { expires });
     }

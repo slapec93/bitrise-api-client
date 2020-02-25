@@ -47,18 +47,17 @@ export class AuthTokenInterceptor implements Interceptor {
             return [url, config];
         }
 
-        let authToken = this.tokenStorage.getAuthToken();
+        const authToken = await this.upsertAuthToken(authUrl);
 
-        if (!authToken) {
-            authToken = await this.fetchApiToken(authUrl);
-            this.tokenStorage.storeAuthToken(authToken);
+        if (authToken) {
+            config.headers = includeField(config.headers, { [TOKEN_HEADER]: `token ${authToken}` });
         }
 
-        config.headers = includeField(config.headers, { [TOKEN_HEADER]: `token ${authToken}` });
+        // store config for later use
         this.requestConfig = [url, config];
 
         return this.requestConfig;
-    }
+    };
 
     response = async (response: Response): Promise<Response> => {
         if (!this.replayed && response.status === 401) {
@@ -68,32 +67,49 @@ export class AuthTokenInterceptor implements Interceptor {
         }
 
         return response;
-    }
+    };
 
     private replayRequest = async (): Promise<Response> => {
         const [url, config] = this.requestConfig;
         this.requestConfig = ["", {}];
 
         return fetch(url, config);
-    }
+    };
 
-    private fetchApiToken = async (authUrl: string): Promise<string> => {
-        const tokenResponse = await fetch(authUrl, {
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify({
-                description: `API client - token request`,
-                expire_in_seconds: this.tokenExpiration,
-                registration_type: 'login'
-            })
-        });
+    private upsertAuthToken = async (authUrl: string): Promise<string|null> => {
+        let authToken = this.tokenStorage.getAuthToken();
 
-        if (!tokenResponse.ok) {
-            throw new Error('Authentication request failed');
+        if (!authToken) {
+            authToken = await this.fetchApiToken(authUrl);
+            this.tokenStorage.storeAuthToken(authToken);
         }
 
-        return (await tokenResponse.json()).token;
-    }
+        return authToken;
+    };
+
+    private fetchApiToken = async (authUrl: string): Promise<string|null> => {
+        let token = null;
+
+        try {
+            const tokenResponse = await fetch(authUrl, {
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify({
+                    description: 'API client - token request',
+                    expire_in_seconds: this.tokenExpiration,
+                    registration_type: 'login'
+                })
+            });
+
+            if (tokenResponse.ok) {
+                token = (await tokenResponse.json()).token;
+            }
+        } catch {
+            // TODO: do some logging
+        }
+
+        return token;
+    };
 }
 
 export class CSRFTokenInterceptor implements Interceptor {
@@ -111,7 +127,7 @@ export class CSRFTokenInterceptor implements Interceptor {
         }
 
         return [url, config];
-    }
+    };
 }
 
 export class InterceptorChain implements InterceptorRegistrar {

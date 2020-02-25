@@ -1,7 +1,7 @@
 
 const fetchMock = require('jest-fetch-mock');
+
 import { CSRFTokenInterceptor, CSRF_HEADER, AuthTokenInterceptor, TOKEN_HEADER } from './auth-interceptors';
-import { syncify } from './test-util';
 
 const testToken = "testToken";
 
@@ -38,7 +38,7 @@ describe('AuthTokenInterceptor', () => {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify({
-                description: `API client - token request`,
+                description: 'API client - token request',
                 expire_in_seconds: 7200,
                 registration_type: 'login'
             })
@@ -85,15 +85,20 @@ describe('AuthTokenInterceptor', () => {
         response = await authTokenInterceptor.response(mockResponse);
         expect(await response.text()).toEqual("prev-response");
 
-        expect(fetch).toHaveBeenCalledTimes(1);
+        expect(fetchMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw error in case authentication calls failed', async () => {
-        fetchMock.mockResponses("token-response", { status: 500 });
+    it('should not insert token into response when authentication failed', async () => {
+        fetchMock.mockRejectOnce(new Error('network error'));
         mockStorage.getAuthToken.mockImplementation(() => null);
 
-        const actorSync = await syncify(() => authTokenInterceptor.request('test-url', {}));
-        expect(actorSync).toThrow();
+        const mockConfig = {
+            headers: {"test-header": "test"}
+        };
+
+        const [, config] = await authTokenInterceptor.request('test-url', mockConfig);
+
+        expect(config.headers).toEqual(mockConfig.headers);
     });
 });
 

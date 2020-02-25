@@ -35,6 +35,11 @@ describe('CookieStorage', () => {
         expect(mockCookieStorage.setItem).toHaveBeenCalledWith(authTokenName, testToken, expect.anything());
     });
 
+    it('should not store null tokens', () => {
+        cookieStorage.storeAuthToken(null);
+        expect(mockCookieStorage.setItem).not.toHaveBeenCalled();
+    });
+
     it('should get CSRF token with correct name', () => {
         cookieStorage.getCSRFToken();
         expect(mockCookieStorage.getItem).toHaveBeenCalledWith(CSRFTokenName);

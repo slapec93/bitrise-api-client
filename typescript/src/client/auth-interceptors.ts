@@ -111,7 +111,7 @@ export class AuthTokenInterceptor implements Interceptor {
       });
 
       if (tokenResponse.ok) {
-        token = (await tokenResponse.json()).token;
+        ({ token } = (await tokenResponse.json()));
       } else {
         await this.authFailureCallback(tokenResponse);
       }

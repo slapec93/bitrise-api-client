@@ -86,7 +86,7 @@ describe('ConstantStorage', () => {
     expect(constantStorage.getCSRFToken()).toBeNull();
   });
 
-  it('should only set auth token if not nu;;', () => {
+  it('should only set auth token if not null', () => {
     constantStorage.storeAuthToken(null);
     expect(constantStorage.getAuthToken()).toEqual(testToken);
 

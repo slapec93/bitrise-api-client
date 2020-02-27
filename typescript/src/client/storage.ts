@@ -14,6 +14,8 @@ export type StorageOption = {
   expirationSec?: number;
 };
 
+const DEFAULT_COOKIE_DOMAIN = 'bitrise.io';
+
 export class CookieTokenStorage implements TokenStorage {
   private options: StorageOption;
   private expirationSec = 3600; // expires in an hour
@@ -22,7 +24,7 @@ export class CookieTokenStorage implements TokenStorage {
   constructor(options: StorageOption) {
     this.store = new CookieStorage({
       secure: location.protocol === 'https:',
-      domain: options.cookieDomain || 'bitrise.io',
+      domain: options.cookieDomain || DEFAULT_COOKIE_DOMAIN,
     });
 
     this.options = options;

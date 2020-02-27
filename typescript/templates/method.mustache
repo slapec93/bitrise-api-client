@@ -1,0 +1,111 @@
+/**
+* {{&summary}}
+* @method
+{{#isDeprecated}}
+* @deprecated
+{{/isDeprecated}}
+{{#externalDocs}}
+* @see {@link {{&url}}|{{#description}}{{&description}}{{/description}}{{^description}}External docs{{/description}}}
+{{/externalDocs}}
+* @name {{&className}}#{{&methodName}}
+{{#parameters}}
+    {{^isSingleton}} * @param {{=<% %>=}}{<%#normalizedTypeV2%><%&type%><%/normalizedTypeV2%>}<%={{ }}=%> {{&camelCaseName}} - {{&description}}{{/isSingleton}}
+{{/parameters}}
+*/
+async {{&methodName}}(parameters: {
+{{#parameters}}{{^isSingleton}}'{{&camelCaseName}}'{{&cardinality}}:{{#normalizedType}}{{> type}}{{/normalizedType}},
+{{/isSingleton}}{{/parameters}}
+} & CommonRequestOptions): Promise<{{#normalizedType}}{{&responseTypes}}{{/normalizedType}}> {
+    const domain = parameters.$domain ? parameters.$domain : this.domain;
+    let path = '{{&path}}';
+
+    if (parameters.$path) {
+        path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+    }
+
+    let requestBody: any;
+    let queryParameters: QueryParameters = {};
+    let headers: RequestHeaders = {};
+
+{{#headers}}
+    headers['{{&name}}'] = {{&value}};
+{{/headers}}
+
+{{#parameters}}
+
+    {{#isQueryParameter}}
+        {{#isSingleton}}
+            queryParameters['{{&name}}'] = '{{&singleton}}';
+        {{/isSingleton}}
+        {{^isSingleton}}
+            {{#isPatternType}}
+                Object.keys(parameters).forEach(function(parameterName) {
+                    if(new RegExp('{{&pattern}}').test(parameterName)){
+                        queryParameters[parameterName] = this.convertParameterCollectionFormat(
+                            parameters[parameterName],
+                            '{{&collectionFormat}}'
+                        );
+                    }
+                });
+            {{/isPatternType}}
+            {{^isPatternType}}
+                if(parameters['{{&camelCaseName}}'] !== undefined) {
+                    queryParameters['{{&name}}'] = this.convertParameterCollectionFormat(
+                        parameters['{{&camelCaseName}}'],
+                        '{{&collectionFormat}}'
+                    );
+                }
+            {{/isPatternType}}
+        {{/isSingleton}}
+    {{/isQueryParameter}}
+
+    {{#isPathParameter}}
+        path = path.replace(
+            '{{=<% %>=}}{<%&name%>}<%={{ }}=%>',
+            `${encodeURIComponent(this.convertParameterCollectionFormat(
+                parameters['{{&camelCaseName}}'],
+                '{{&collectionFormat}}'
+            ).toString())}`
+        );
+    {{/isPathParameter}}
+
+    {{#isHeaderParameter}}
+        {{#isSingleton}}
+            headers['{{&name}}'] = '{{&singleton}}';
+        {{/isSingleton}}
+        {{^isSingleton}}
+            if(parameters['{{&camelCaseName}}'] !== undefined) {
+                headers['{{&name}}'] = parameters['{{&camelCaseName}}'];
+            }
+        {{/isSingleton}}
+    {{/isHeaderParameter}}
+
+    {{#isBodyParameter}}
+        if(parameters['{{&camelCaseName}}'] !== undefined) {
+            requestBody = parameters['{{&camelCaseName}}'];
+        }
+    {{/isBodyParameter}}
+
+    {{#required}}
+    if(!parameters['{{&camelCaseName}}']) {
+        throw new Error('Missing required {{&paramType}} parameter: {{&camelCaseName}}');
+    }
+    {{/required}}
+
+{{/parameters}}
+
+    if(parameters.$queryParameters) {
+        queryParameters = { ...queryParameters, ...parameters.$queryParameters };
+    }
+
+    {{^isBodyParameter}}
+        {{#isPOST}}
+            queryParameters = {};
+        {{/isPOST}}
+    {{/isBodyParameter}}
+
+    const response = await this.request('{{method}}', domain + path, requestBody, headers, queryParameters, parameters);
+    const responseBody = await response.json();
+
+    return { body: responseBody, status: <any> response.status };
+}

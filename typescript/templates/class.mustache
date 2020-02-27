@@ -1,0 +1,122 @@
+/**
+* SWAGGER GENERATED API CLIENT
+* THIS FILE IS AUTO-GENERATED DO NOT EDIT!!
+*/
+
+/* eslint-disable */
+
+{{#imports}}
+/// <reference path="{{&.}}" />
+{{/imports}}
+
+import { InterceptorRegistrar } from './interceptor-chain';
+import { timeout, stringifyQuery } from './util';
+
+export type RequestHeaders = {
+    [header: string]: string;
+}
+export type RequestHeadersHandler = (headers: RequestHeaders) => RequestHeaders;
+
+{{#definitions}}
+export type {{#normalizedType}}{{ name }}{{/normalizedType}} = {{#tsType}}{{#normalizedType}}{{> type}}{{/normalizedType}}{{/tsType}};
+{{/definitions}}
+
+export interface ResponseWithBody<S extends number, T> {
+    status: S;
+    body: T;
+}
+
+export type QueryParameters = { [param: string]: any };
+
+export interface CommonRequestOptions {
+  $queryParameters?: QueryParameters;
+  $domain?: string;
+  $path?: string | ((path: string) => string);
+  $timeout?: number;
+}
+
+const PUBLIC_DOMAIN: string = "{{&domain}}";
+
+/**
+ * {{&description}}
+ * @class {{&className}}
+ * @param {(string)} [domainOrOptions] - The project domain.
+ */
+export class {{&className}} {
+    private domain: string = PUBLIC_DOMAIN;
+    private requestHeadersHandler?: RequestHeadersHandler;
+    private interceptors: InterceptorRegistrar;
+
+    constructor(interceptors: InterceptorRegistrar, domain?: string) {
+        if (domain) {
+            this.domain = domain;
+        }
+
+        this.interceptors = interceptors;
+    }
+
+    getDomain() {
+        return this.domain;
+    }
+
+    setRequestHeadersHandler(handler: RequestHeadersHandler) {
+        this.requestHeadersHandler = handler;
+    }
+
+    private async request(method: string, url: string, body: any, headers: RequestHeaders, queryParameters: QueryParameters, opts: CommonRequestOptions): Promise<Response> {
+        const reqTimeout = opts.$timeout || 10000;
+        const query = stringifyQuery(queryParameters);
+        url = query ? `${url}?${query}` : url;
+
+        if (typeof(body) === 'object' && !(body.constructor.name === 'Buffer')) {
+            headers['Content-Type'] = 'application/json';
+        }
+
+        const fetchParams: RequestInit = {
+            method,
+            mode: 'cors',
+            headers: this.requestHeadersHandler ? this.requestHeadersHandler({...headers}) : headers,
+        };
+
+        if (body) {
+            fetchParams["body"] = JSON.stringify(body);
+        }
+
+        this.interceptors.register();
+
+        let result: Response;
+
+        try {
+            result = await timeout(reqTimeout, fetch(url, fetchParams));
+        } finally {
+            this.interceptors.unregister();
+        }
+
+        return result;
+    }
+
+    private convertParameterCollectionFormat < T > (param: T, collectionFormat: string | undefined): T | string {
+        if (Array.isArray(param) && param.length >= 2) {
+            switch (collectionFormat) {
+                case "csv":
+                    return param.join(",");
+                case "ssv":
+                    return param.join(" ");
+                case "tsv":
+                    return param.join("\t");
+                case "pipes":
+                    return param.join("|");
+                default:
+                    return param;
+            }
+        }
+
+        return param;
+    }
+
+{{#methods}}
+    {{> method}}
+{{/methods}}
+}
+
+export default {{&className}};

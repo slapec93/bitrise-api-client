@@ -1,0 +1,57 @@
+{
+  "name": "@bitrise/api-client",
+  "version": "0.0.1",
+  "description": "Javascript client for bitrise public api",
+  "main": "dist/bitrise-api-client.cjs.js",
+  "module": "dist/bitrise-api-client.esm.js",
+  "browser": "dist/bitrise-api-client.umd.js",
+  "scripts": {
+    "build": "rollup -c",
+    "generate-client": "./generator.js",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "generate-declarations": "tsc --declaration --esModuleInterop --emitDeclarationOnly --declarationDir dist src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitrise-io/bitrise-api-client.git"
+  },
+  "keywords": [
+    "bitrise",
+    "api"
+  ],
+  "author": "Bitrise",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bitrise-io/bitrise-api-client/issues"
+  },
+  "homepage": "https://github.com/bitrise-io/bitrise-api-client#readme",
+  "dependencies": {
+    "browser-or-node": "^1.2.1",
+    "cookie-storage": "^6.0.0",
+    "cross-fetch": "^3.0.4",
+    "fetch-intercept": "^2.3.1"
+  },
+  "devDependencies": {
+    "@types/browser-or-node": "^1.2.0",
+    "@types/jest": "^25.1.2",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^25.1.0",
+    "jest-fetch-mock": "^3.0.1",
+    "jest-spec-reporter": "^1.0.12",
+    "prettier": "^1.19.1",
+    "rollup": "^1.31.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript": "^1.0.1",
+    "swagger-typescript-codegen": "^3.0.3",
+    "ts-jest": "^25.2.0",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.5"
+  }
+}

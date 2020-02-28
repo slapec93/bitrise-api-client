@@ -1,6 +1,6 @@
 {
   "name": "@bitrise/api-client",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Javascript client for bitrise public api",
   "main": "dist/bitrise-api-client.cjs.js",
   "module": "dist/bitrise-api-client.esm.js",

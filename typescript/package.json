@@ -10,6 +10,7 @@
     "generate-client": "./generator.js",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
+    "test:ci": "yarn test && yarn lint",
     "generate-declarations": "tsc --declaration --esModuleInterop --emitDeclarationOnly --declarationDir dist src/index.ts"
   },
   "repository": {

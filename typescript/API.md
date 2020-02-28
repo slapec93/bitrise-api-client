@@ -20,4 +20,4 @@ const apps = await client.apps_list({ ... });
 ```
 Type bindings are exported with the package, if you are using typescript you can get intellisense support for existing endpoints.
 
-Otherwise check [swagger](../swgger.json) description for available endpoint names.
+Otherwise check [swagger](../swagger.json) description for available endpoint names.
